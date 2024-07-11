@@ -1,19 +1,158 @@
-<div class="prison-container" >
-    <div class="card"  >
-        
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4 g-3 mb-9 ">
-            <ng-container *ngFor="let prison of prisons">
-                <app-prison-card
-                  [CategoryName]="prison.CategoryName"
-                  [TotalCapacity]="prison.TotalCapacity"
-                  [AccessedCells]="prison.AccessedCells"
-                  [AvailableCells]="prison.AvailableCells"
-                  [Progress]="prison.Progress"
-                  [ArrestDate]="prison.ArrestDate"
-                  [Reason]="prison.Reason"
-                ></app-prison-card>
-              </ng-container>
-        </div>
-      </div>
+<div class="dashboard">
+  <div class="add-button d-flex mb-3">
+    <!-- <button class="btn btn-primary me-1 mb-1" type="button">+ Add Prison</button> -->
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      + Add Prison
+    </button>
+  </div>
+
+  <div class="card-container d-flex flex-wrap gap-7 justify-content-evenly">
+    <ng-container *ngFor="let prison of prisons">
+      <app-prison-card
+        class="col-4"
+        [CategoryName]="prison.CategoryName"
+        [TotalCapacity]="prison.TotalCapacity"
+        [AccessedCells]="prison.AccessedCells"
+        [AvailableCells]="prison.AvailableCells"
+        [Progress]="prison.Progress"
+        [ArrestDate]="prison.ArrestDate"
+        [Reason]="prison.Reason"
+      ></app-prison-card>
+    </ng-container>
+  </div>
 </div>
 
+<hr />
+
+<!-- <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch basic modal</button> -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content max-width">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ADD NEW PRISON</h5>
+        <button
+          class="btn btn-close p-1"
+          type="button"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body col-12">
+        <form>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-name">Name</label>
+            <input
+              class="form-control"
+              id="basic-form-name"
+              type="text"
+              placeholder="Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-email"
+              >Email address</label
+            >
+            <input
+              class="form-control"
+              id="basic-form-email"
+              type="email"
+              placeholder="name@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-password">Password</label>
+            <input
+              class="form-control"
+              id="basic-form-password"
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-dob">Date of Birth</label>
+            <input class="form-control" id="basic-form-dob" type="date" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-gender">Gender</label>
+            <select
+              class="form-select"
+              id="basic-form-gender"
+              aria-label="Default select example"
+            >
+              <option selected="selected">Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                id="flexRadioDefault1"
+                type="radio"
+                name="flexRadioDefault"
+              />
+              <label class="form-check-label mb-0" for="flexRadioDefault1"
+                >Personal Account</label
+              >
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                id="flexRadioDefault2"
+                type="radio"
+                name="flexRadioDefault"
+                checked="checked"
+              />
+              <label class="form-check-label mb-0" for="flexRadioDefault2"
+                >Business Account</label
+              >
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            <input class="form-control" type="file" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="basic-form-textarea"
+              >Description</label
+            >
+            <textarea
+              class="form-control"
+              id="basic-form-textarea"
+              rows="3"
+              placeholder="Description"
+            ></textarea>
+          </div>
+          <div class="mb-3 form-check">
+            <input
+              class="form-check-input"
+              id="basic-form-checkbox"
+              type="checkbox"
+            />
+            <label class="form-check-label" for="basic-form-checkbox"
+              >Remember me</label
+            >
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button">Okay</button
+        ><button
+          class="btn btn-outline-primary"
+          type="button"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

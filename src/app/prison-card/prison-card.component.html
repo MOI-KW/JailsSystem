@@ -1,7 +1,7 @@
-<div class="childcard-body">
-  <p>
-    <b style="color: brown">CategoryName: {{ CategoryName }}</b>
-  </p>
+<div class="card p-3">
+  <h1>
+    <b style="color: brown">{{ CategoryName }}</b>
+  </h1>
   <p>TotalCapacity: {{ TotalCapacity }}</p>
   <p>AccessedCells: {{ AccessedCells }}</p>
   <p>AvailableCells: {{ AvailableCells }}</p>
@@ -19,4 +19,5 @@
   <br />
   <p>ArrestDate: {{ ArrestDate }}</p>
   <p>Reason: {{ Reason }}</p>
+  <button class="btn btn-primary me-1 mb-1" type="button" (click)="onView()">View</button>
 </div>

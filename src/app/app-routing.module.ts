@@ -6,6 +6,8 @@ import { AuthGuard } from './Guards/auth-guard/auth.guard';
 import { HomeComponent } from './Forms/home/home.component';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { PrisonCardComponent } from './prison-card/prison-card.component';
+import { PrisonDataComponent } from './prison-data/prison-data.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'prisondata', component: PrisonDataComponent,canActivate: [AuthGuard] },
   {
     path: 'sub-Menu/:ID',
     component: SubMenuComponent,

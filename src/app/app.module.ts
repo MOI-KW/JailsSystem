@@ -21,6 +21,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrisonCardComponent } from './prison-card/prison-card.component';
+import { PrisonDataComponent } from './prison-data/prison-data.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PrisonCardComponent } from './prison-card/prison-card.component';
     SubMenuComponent,
     DashboardComponent,
     PrisonCardComponent,
+    PrisonDataComponent,
 
   ],
   imports: [

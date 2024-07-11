@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prison-card',
@@ -15,9 +16,14 @@ export class PrisonCardComponent implements OnInit {
   @Input() ArrestDate!: string;
   @Input() Reason!: string;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  onView(){
+    console.log("Vweiw Clicked")
+    this.router.navigateByUrl('/prisondata')
   }
 
 }

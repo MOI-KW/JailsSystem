@@ -25,6 +25,24 @@ export class DashboardComponent implements OnInit {
       ArrestDate: '17th Nov. 2020',
       Reason: 'Chain Snatch',
     },
+    {
+      CategoryName: 'Womens Prison',
+      TotalCapacity: '150',
+      AccessedCells: '80',
+      AvailableCells: '70',
+      Progress: '70%',
+      ArrestDate: '17th Nov. 2020',
+      Reason: 'Chain Snatch',
+    },
+    {
+      CategoryName: 'A Prison',
+      TotalCapacity: '150',
+      AccessedCells: '80',
+      AvailableCells: '70',
+      Progress: '70%',
+      ArrestDate: '17th Nov. 2020',
+      Reason: 'Chain Snatch',
+    },
    
   ];
 
