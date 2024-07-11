@@ -1,0 +1,19 @@
+<div class="prison-container" >
+    <div class="card"  >
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4 g-3 mb-9 ">
+            <ng-container *ngFor="let prison of prisons">
+                <app-prison-card
+                  [CategoryName]="prison.CategoryName"
+                  [TotalCapacity]="prison.TotalCapacity"
+                  [AccessedCells]="prison.AccessedCells"
+                  [AvailableCells]="prison.AvailableCells"
+                  [Progress]="prison.Progress"
+                  [ArrestDate]="prison.ArrestDate"
+                  [Reason]="prison.Reason"
+                ></app-prison-card>
+              </ng-container>
+        </div>
+      </div>
+</div>
+

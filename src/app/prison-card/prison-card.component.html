@@ -1,0 +1,22 @@
+<div class="childcard-body">
+  <p>
+    <b style="color: brown">CategoryName: {{ CategoryName }}</b>
+  </p>
+  <p>TotalCapacity: {{ TotalCapacity }}</p>
+  <p>AccessedCells: {{ AccessedCells }}</p>
+  <p>AvailableCells: {{ AvailableCells }}</p>
+  <p>Progress: {{ Progress }}</p>
+  <div class="progress mb-3" style="height: 15px">
+    <div
+      class="progress-bar bg-danger"
+      role="progressbar"
+      style="width: 60%"
+      aria-valuenow="25"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    ></div>
+  </div>
+  <br />
+  <p>ArrestDate: {{ ArrestDate }}</p>
+  <p>Reason: {{ Reason }}</p>
+</div>
