@@ -1,0 +1,20 @@
+<div class="row flex-between-center g-0 navAlignCenter">
+  <div>
+    <div class="col-9 ps-lg-2 mb-3" *ngFor="let menu of menus">
+      <div class="card h-lg-100 border" *ngIf='(Roles?.indexOf(menu.Role) > -1)'>
+        <div (click)="goToPage(menu.Role, menu.Link)" class="card-body position-relative">
+          <div class="d-flex">
+            <div class="d-flex align-items-center">
+              <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-primary menu-label">
+                <span [class]="menu.Icon"></span>
+              </div>
+              <h5 class="menu-label">{{ menu.Title }}</h5>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.alert-position {
+    
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: -webkit-fill-available;
+ 
+}
+.alert-height{
+    height: 30px !important;
+}
+p
+{
+    font-size: small !important;
+}
+.alert-dismissible .btn-close 
+{
+    padding: 0.5rem 1rem !important;
+}

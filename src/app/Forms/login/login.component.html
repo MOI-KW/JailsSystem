@@ -1,0 +1,87 @@
+<main class="main loginCls">
+    <div class="container-fluid loginContainer">
+
+        <div class="row min-vh-100 flex-center g-0">
+            <div class="col-lg-6 col-xxl-4 py-3 position-relative scale1">
+                <img class="bg-auth-circle-shape" src="./assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250">
+                <img class="bg-auth-circle-shape-2" src="./assets/img/icons/spot-illustrations/shape-1.png" alt="" width="150">
+
+                <div class="card mb-3 mt-3 overflow-hidden z-index-1 shadow-none">
+                    <div class="card-body p-0">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-12 d-flex flex-center">
+                                <div class="p-4 p-md-5 flex-grow-1" style="padding-bottom: 0px !important;">      
+                                    <div class="row">
+                                        <div class="z-index-1 position-relative">
+                                            <div style="display: flex; justify-content: center;">
+                                                <img class="me-2" src="./assets/images/MOI-logo.svg" alt="" width="110" />
+                                            </div>                                                
+                                            <p class="login-title ff-nkar-b" style="text-align: center !important; margin-top: 8px !important;">وزارة الداخلية</p>
+                                            <p class="login-title text-900" style="text-align: center !important; font-weight: bold !important;">{{AppTitle}}</p>
+                                        </div>
+                                    </div> 
+
+                                    <div style="height: 65px !important;">
+                                        <div class="logAlert" *ngIf="loginErr">
+                                            <div class="alert alert-dismissible alert-danger border-2 d-flex align-items-center logAlert" role="alert">
+                                                <div class="bg-danger me-3 icon-item" style="height: 1.5rem !important; width: 1.5rem !important;">
+                                                    <span class="fa fa-times-circle text-white fs-3" style="font-size: 14px !important;"></span>
+                                                </div>
+                                                <p class="mb-0 flex-1" style="font-weight: 300 !important; font-size: 14px !important;">{{loginErr}}</p>
+                                                <button class="btn-close py-0 mt-3" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form [formGroup]="loginForm" class="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
+                                        <div class="mb-3">
+                                            <div class="input-group form-control floatingContainer mb-3 shadow-none">
+                                                <span class="input-group-text customMode floating-R-Icon p-auto my-3">
+                                                    <span class="text-700 bi-person"></span>
+                                                </span>
+                                                <div class="form-floating mb-3"[class]="dark?'dark':''">
+                                                    <input class="form-control ff-fc m-auto" type="text" formControlName="username" autocomplete="off" aria-label="username" placeholder="رقم المستخدم" [maxLength]="5" (keypress)="checkLen($event)" [appAutoTab]="pwdInput">                                            
+                                                    <label for="floatingInputGroup1 py-2">رقم المستخدم</label>
+                                                </div>                                                                                       
+                                            </div>
+                                            <span *ngIf="username?.invalid && username?.dirty && username?.touched && username?.value ==''" class="invalid-feedback">ادخل رقم المستخدم</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="input-group form-control floatingContainer mb-3 shadow-none">
+                                                <span class="input-group-text customMode floating-R-Icon p-auto my-3">
+                                                    <span class="text-700 bi-lock"></span>
+                                                </span>
+                                                <div class="form-floating mb-3" [class]="dark?'dark':''">
+                                                    <input class="form-control ff-fc m-auto" #pwdInput [class]="fieldTextType?'':'pwd'" formControlName="password" autocomplete="off"  type="text" aria-label="password" autofill="off" placeholder ="كلمة المرور" (keyup)="hideCharacters($event)" [maxLength]="8">
+                                                    <label for="floatingInputGroup1 py-2">كلمة المرور</label>
+                                                </div>                                                                                        
+                                                <span class="input-group-text customMode text-center p-auto cross" (click)="toggleFieldTextType()">
+                                                    <span class="text-700 bi-eye" *ngIf="!fieldTextType"></span>
+                                                    <span class="text-700 bi-eye-slash" *ngIf="fieldTextType"></span>
+                                                </span>
+                                            </div>
+                                            <span *ngIf="password?.invalid && password?.dirty && password?.touched && password?.value ==''" class="invalid-feedback">ادخل كلمة المرور</span>
+                                            <span *ngIf="password?.errors?.['maxlength'] || password?.errors?.['minlength']" class="invalid-feedback">
+                                                8 لا بدالا تزيد عن
+                                            </span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="form-check mb-0"></div>
+                                        </div>
+                                        <div class="mb-3 mt-3 text-center">
+                                            <button class="btn btn-primary d-block m-auto w-100" [disabled]="loginForm.invalid" [class]="isLoading ? 'disabled placeholder' : ''" type="submit" name="submit">تسجيل الدخول
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-0 h-100 imageDiv" >
+                            <img src="./assets/images/Frame.svg" alt="" width="250">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main> 

@@ -1,0 +1,22 @@
+[
+  {
+    "Code": 1,
+    "Message": "Sucessful Execution",
+    "MessageAR": ""
+  },
+  {
+    "Code": 2,
+    "Message": "Please Enter Civil ID Number or Resident National Number",
+    "MessageAR": " ادخل رقم مدني / رقم موحد"
+  },
+  {
+    "Code": 3,
+    "Message": "Input Civil ID information not found",
+    "MessageAR": "الرقم المدني غير صحيح"
+  },
+  {
+    "Code": 4,
+    "Message": "Input Resident National Number information not found",
+    "MessageAR": "رقم الموحد غير صحيح"
+  }
+]

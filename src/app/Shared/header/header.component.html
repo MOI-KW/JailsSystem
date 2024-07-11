@@ -1,0 +1,67 @@
+<div class="navbar navbar-light navbar-top mb-5" id="navHead">
+    <a class="navbar-brand me-1 me-sm-3" (click)="goToHome()">
+        <div class="d-flex align-items-center">
+            <img class="me-2" src="./assets/images/MOI-logo.svg" alt="" width="60" style="cursor: pointer !important;" />
+        </div>
+    </a>
+
+    <ul class="navbar-nav align-items-center d-none d-lg-block">
+        <li class="nav-item">
+        <span class="moiTitle menu-label">وزارة الداخلية</span>
+            <br/>
+            <label class="titleText" (click)="goToHome()">{{AppTitle}}</label>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+        <li class="hello ff-nw">
+            <span class="text-700 bi-person"></span>
+            {{userNo}} - {{userName}}
+            <br />
+            <span class="text-700 bi-building"></span>
+            {{userDept}}
+        </li>
+        <li class="nav-item px-2">
+            <div class="theme-control-toggle fa-icon-wait px-2 d-flex align-items-center">
+                <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" (click)="themeChange()" />
+                <label class="mb-0 theme-control-toggle-label theme-control-toggle-light moon-toggle" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left">
+                    
+                    <span class="fas fa-light fa-moon fs-0 m-auto">
+                    </span>
+                    <!-- <img src="./assets/icons_images/moon-toggle.svg"> -->
+                </label>
+                <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark sun-toggle" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left">
+                    <span class="fas fa-sun fs-0 m-auto" >
+                    </span>
+                </label>
+            </div>
+        </li>
+        <li class="nav-item dropdown ">
+            <a class="nav-link pe-0 d-flex align-items-center"  id="navbarDropdownUser" #navbarDropdownUser href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="avatar m-auto">
+                    <img class="rounded-circle" src="./assets/img/team/avatar.png" alt="" />
+                </div>
+                <div class="avatar m-auto" *ngIf="userService.userPhotoSubject?.value !=''">
+                    <img class="rounded-circle" [src]="userService.userPhotoSubject?.value" alt="" />
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end p-0 " aria-labelledby="navbarDropdownUser" #userDropdown>
+                <div class="bg-white dark__bg-1000 rounded-2 m-auto p-0">
+                    <a class="dropdown-item text-primary py-2 dropdown-bb">
+                        <span *ngIf="userExpiry">
+                            <span class="text-primary bi-calendar-event px-1 py-3 col-1"></span>
+                            <span class="col-11">تاريخ انتهاء الصلاحية</span>
+                            <br />
+                            <span style="font-size: small !important; padding: 1.25rem !important; ">{{userExpiry}}</span>
+                        </span>
+                    </a>
+                    
+                    <a class="dropdown-item py-2 dropdown-bb" (click)="goToChangePassword()" style="cursor: pointer !important;">تغيير كلمة المرور</a>
+                    
+                    <a class="dropdown-item py-2" (click)="goToLogin()" style="cursor: pointer !important;">تسجيل الخروج</a>
+                    
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

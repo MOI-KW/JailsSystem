@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-12 ps-lg-2 mx-auto my-2 " *ngFor="let submenu of selectedMenu.children" >
+        <div class="card h-lg-100 border">
+            <div (click)="goToPage(submenu.Roles,submenu.Link)" class="card-body position-relative">
+                <div class="d-flex" >
+                    <div class="d-flex align-items-center">
+                        <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-primary">
+                            <span [class]="submenu.Icon +'menu-label'"></span>
+                        </div>
+                        <h5 class="menu-label">{{submenu.Title}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

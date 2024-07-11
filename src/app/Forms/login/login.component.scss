@@ -1,0 +1,52 @@
+.card {
+    background-color: var(#121e2d);
+    border: 0px solid var(255, 255, 255, 0.125);
+}
+
+.btn-primary {
+    box-shadow: none !important;
+}
+
+.ff-nkar-b {
+    font-weight: 600 !important;
+    color: #5e6e82 !important;
+}
+
+.pwd {
+    -webkit-text-security: disc !important;
+}
+.loginContainer
+{
+    width: 80% !important; 
+}
+.extraImg
+{
+    min-height: 180px !important;
+}
+.loginForm
+{
+    width: 95% !important;
+    margin:2rem auto !important;
+    margin-top: 0px !important;
+}
+
+.logAlert {
+
+    width: 98% !important;
+    margin:2rem auto !important;
+    margin-top: 0px !important;    
+}
+
+.ff-login-inputs {
+  height: unset !important;
+  line-height: unset !important;
+}
+
+.ff-login-inputs:focus {
+    border-color: var(--falcon-input-focus-border-color) !important;
+    box-shadow: var(--falcon-box-shadow-inset),0 0 0 0.25rem rgba(44,123,229,.25) !important;
+}
+
+.logAlert > .alert {
+    padding: .5rem .5rem !important;
+} 

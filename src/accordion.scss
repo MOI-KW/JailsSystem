@@ -1,0 +1,87 @@
+.NoDataDiv{
+    width: 100% !important;
+    height: 200px !important;
+  }
+  ion-accordion{
+    border-radius: 6px !important ;
+  }
+  .validClass
+  {
+    border-top-left-radius: 8px !important ;
+    border-top-right-radius: 8px !important ;
+    border-bottom-left-radius: 0px !important ;
+    border-bottom-right-radius: 0px !important ;
+    box-shadow: none !important;
+  
+  }
+  .accordion-collapsed{
+    margin-bottom: 10px !important;
+  }
+  
+  .imageChangeColor {
+   filter:brightness(0) invert(1);
+  }
+  .imageChangeColorRED {
+     filter: invert(37%) sepia(91%) saturate(2402%) hue-rotate(335deg) brightness(90%) contrast(106%);
+   }
+  
+  .imageChangeColorYELLOW {
+    filter: invert(60%) sepia(35%) saturate(4325%) hue-rotate(11deg) brightness(110%) contrast(97%);
+  }
+  .cardHeaderIcon{
+    width:10% !important;padding: 5px!important; max-width: 50px !important;
+    margin-left: 1rem !important;
+  }
+  .accordion-button:not(.collapsed) {
+    box-shadow: none !important;
+    border-bottom-left-radius: 0px !important ;
+    border-bottom-right-radius: 0px !important ;
+  }
+  
+  .noDetails {
+  text-align: center;
+  align-items: center;
+    width: 100%!important;
+    height: 100% !important;
+    margin: auto!important;
+    position: relative;
+    padding: 10px !important;
+  }
+  
+  .iconstyle {
+    position: relative !important;
+    padding: auto !important;
+    margin-top: 1px !important;
+    height: 25px !important;
+    max-height: 25px !important;
+}
+  
+  .labelRED {
+    color:#CC1B00 !important;
+  }
+  .labelYELLOW {
+    color: #D6700A !important;
+  }
+  
+  .card{
+  
+    border: 1.5px solid var(--ion-color-RasedGrey) !important;
+  }
+
+  .small-label
+  {
+    font-size: small !important;
+  
+  }
+
+  .Title,
+  .labelValue{
+    font-size: 14px !important;
+  }
+  .Title{
+    color:var(--ion-color-RasedTitle);
+  }
+  // .acc-cont{
+  //   padding-bottom: 6rem !important;
+  // }
+  

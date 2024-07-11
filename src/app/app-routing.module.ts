@@ -1,0 +1,26 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './Forms/login/login.component';
+import { ChangePasswordComponent } from './Forms/login/change-password/change-password.component';
+import { AuthGuard } from './Guards/auth-guard/auth.guard';
+import { HomeComponent } from './Forms/home/home.component';
+import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
+
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+  { path: 'reset-password', component: ChangePasswordComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'sub-Menu/:ID', component: SubMenuComponent, canActivate: [AuthGuard] },
+
+
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: false, scrollPositionRestoration: 'enabled' })],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

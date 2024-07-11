@@ -1,0 +1,27 @@
+[
+{
+  "Code": 1,
+  "Message": "Person can get the GBC"  ,
+  "MessageAR": ""
+},
+{
+  "Code": 3,
+  "Message": "Request has been sent to Fingerprint Department for Approval"   ,
+  "MessageAR": "تم انشاء طلب إصدار شهادة الحالة الجنائية، يرجى الدخول الي برنامج السجل الجنائي لمعالجة الطلب"
+},
+{
+  "Code": 4,
+  "Message":  "Person Cannot get GBC Online.Visit Fingerprint Department"   ,
+  "MessageAR": "لايمكن إصدار شهادة الحالة الجنائية، يرجى تدقيق السجل الجنائي للشخص"
+},
+{
+	"Code":5 ,
+    "Message": "Person not found in MOI" ,
+	"MessageAR": "الرقم المدني غير صحيح"
+},
+{
+	"Code":6 ,
+    "Message":  "Biometric Data not Available, Visit Fingerprint Department"  ,
+	"MessageAR": "لا يوجد بصمة بيومترية"
+}
+]

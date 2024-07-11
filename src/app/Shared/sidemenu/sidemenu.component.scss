@@ -1,0 +1,19 @@
+#parent0:after {
+    border-left: none;
+    border-bottom: none;
+}
+
+.nav-link-text.nkarsm {
+    font-family: 'NotoKufiArabic-VariableFont_wght', 'NotoSansDisplay-VariableFont_wdth,wght' !important;
+    font-weight: 600 !important;
+}
+
+.disabledLink{
+    cursor: default !important;
+}
+.disabledLink:hover{
+    color: var(--falcon-navbar-vertical-default-link-color) !important;
+}
+.activeLink{
+    cursor: pointer !important;
+}

@@ -1,0 +1,41 @@
+.text-900 {
+    font-family: 'NotoKufiArabic-VariableFont_wght', 'NotoSansDisplay-VariableFont_wdth,wght' !important;
+    font-weight: 300 !important;
+    font-size: .9rem !important; 
+}
+
+.hello {
+    font-size: 14px !important;
+    padding: 10px !important;
+}
+
+.ff-nw {
+
+    font-family: 'NotoKufiArabic-VariableFont_wght', 'NotoSansDisplay-VariableFont_wdth,wght' !important;
+    font-weight: 400 !important;
+}
+#navHead
+{
+    border-bottom:  1px solid var(--falcon-border-color) !important;
+}
+
+.moiTitle{
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    margin-bottom: 0 !important;
+}
+
+.titleText{
+    // color: var(--falcon-navbar-light-brand-color) !important; 
+    color:var(--phoenix-primary-darker) !important;
+    font-weight: 600 !important; 
+    font-size: 18px !important;
+}
+.sun-toggle{background-color: rgba(255, 216, 133, 0.50) !important; color: #D6700A !important;}
+.moon-toggle{
+    background-color:rgba(56, 116, 255, 0.70)!important; color: white !important;
+}
+.avatar{
+    height: 50px !important;
+    width: 50px !important;
+}

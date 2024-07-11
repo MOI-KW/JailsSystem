@@ -1,0 +1,99 @@
+.form-floating>.form-control{
+  height: calc(2.875rem + 2px);
+  min-height: calc(2.875rem + 2px);
+  line-height: 1.25;
+
+}
+.form-floating>.form-control.ff-fc:focus~label,
+.form-floating>.form-control.ff-fc:not(:placeholder-shown)~label {
+
+  top: -7px !important;
+  padding: 0px 2px !important;
+  background-color: var(--falcon-input-bg) !important;
+ // height: 40% !important;
+  right: -40px !important;
+  opacity: 1 !important;
+  font-size: 14px !important;  
+  width: fit-content !important;
+
+  // height: calc(2.875rem + 2px) !important;
+  // min-height: calc(2.875rem + 2px) !important;
+  height: 1.5rem !important;
+  min-height: 1rem !important;
+  line-height: 1.25 !important;
+}
+.form-floating.dark>.form-control.ff-fc:focus~label,
+.form-floating.dark>.form-control.ff-fc:not(:placeholder-shown)~label
+{
+  background-color:transparent !important;//white !important;
+}
+.input-group>.form-floating:not(:first-child) {
+
+  width: 70% !important;
+  padding: 0px;
+
+  .form-control.ff-fc {
+    border:none !important;
+    box-shadow: none !important;
+    margin: auto !important;
+    background: transparent!important;
+    color: var(--falcon-body-color) !important;
+  }
+}
+
+.input-group>.form-floating>.form-control.ff-fc {
+
+  border:none !important;
+  box-shadow: none !important;
+  margin: auto !important;
+}
+
+.form-floating>.form-control.ff-fc:focus,
+.form-floating>.form-control.ff-fc:not(:placeholder-shown) {
+  // padding: 0px !important;
+  height:1rem !important;
+}
+
+.form-floating>label {
+  padding: 0.75rem 0.5rem !important;
+  font-size: 12px !important;
+  color: var(--falcon-body-color) !important;
+  width: 100% !important;
+}
+
+.form-floating > .form-select
+{
+  padding-top: 1.25rem !important;
+}
+
+.floatingContainer {
+  padding: 0 !important;
+  height: 60px !important;
+}
+
+.floating-R-Icon {
+  width: auto !important;
+  height: fit-content !important;
+  border: none !important;
+}
+
+.input-group>.form-control.ff-fc {
+  
+  border-radius: 5px !important;
+  border:none !important;
+  box-shadow: none !important;
+  margin: auto !important;
+  height: 50px !important;
+  background-color: transparent !important;
+}
+
+.cross {
+  // margin: 0.7rem auto !important;
+  // padding: 0.7rem 1rem !important;
+  border: none !important ;
+  width: fit-content !important;
+  height: fit-content !important;
+  position: absolute !important;
+  top:10px;
+  left: 0;
+}

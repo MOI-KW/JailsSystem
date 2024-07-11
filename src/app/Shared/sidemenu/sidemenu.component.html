@@ -1,0 +1,59 @@
+<div class="d-flex align-items-center">
+</div>
+<div class="top6 navbar-collapse" id="navbarVerticalCollapse">
+    <div class="navbar-vertical-content scrollbar">
+        <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+            <li *ngFor="let p of appPages; let i = index" class="nav-item mb-1">
+                <a class="sm_link" [class]="p.children ? 'nav-link dropdown-indicator' : 'nav-link'" id="parent{{i}}"
+                    (click)="navigateToPage(p.router)" aria-expanded="false" attr.aria-controls="{{p.title}}"
+                    style="cursor: pointer !important;">
+                    <div class="d-flex align-items-center">
+                        <span class="nav-link-icon">
+                            <span class="{{p.icon}}"></span>
+                        </span>
+                        <span class="nav-link-text nkarsm ps-1 mb-1">{{p.titleAr}}</span>
+                    </div>
+                </a>
+                <ul class="nav collapse show" id="{{p.title}}">
+
+                    <ng-container *ngFor="let child of p.children; let j = index">
+                        <!-- *ngIf="child.Disp == true" -->
+                        <li class="nav-item sidemenu mb-1" *ngIf="showMenu(child.Role)">
+                            <a class="nav-link sm_link" id="{{child.Id}}" [class]="'activeLink'" aria-expanded="false"
+                                (click)="this.navigateToChildPage(child.Id,child.Name, ''); $event.stopPropagation();"
+                                data-bs-toggle="collapse" attr.aria-controls="{{child.title}}">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="{{child.Icon}}"></span>
+                                    </span>
+                                    <span class="nav-link-text nkarsm ps-0"
+                                        style="cursor: pointer !important;">{{child.Title}}</span>
+                                </div>
+                            </a>
+                            <ul class="nav collapse" id="{{child.Name}}">
+
+                                <ng-container *ngFor="let sChild of child.children; let j = index">
+                                    <!-- *ngIf="child.Disp == true" -->
+                                    <li class="nav-item sidemenu mb-1">
+                                        <a class="nav-link sm_link" id="{{sChild.id}}" aria-expanded="false"
+                                            (click)="this.navigateToChildPage(child.Id,child.Name, sChild.Link); $event.stopPropagation();"
+                                            data-bs-toggle="collapse" attr.aria-controls="{{sChild.title}}"
+                                            style="cursor: pointer !important;">
+                                            <div class="d-flex align-items-center">
+                                                <span class="nav-link-icon">
+                                                    <span class="{{sChild.Icon}}"></span>
+                                                </span>
+                                                <span class="nav-link-text nkarsm ps-0"
+                                                    style="cursor: pointer !important;">{{sChild.Title}}</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </li>
+                    </ng-container>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

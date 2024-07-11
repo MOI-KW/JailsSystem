@@ -1,0 +1,45 @@
+<main
+  *ngIf="
+    router.url != '/login' &&
+      router.url != '/' &&
+      router.url != '/reset-password';
+    else loggedIn
+  "
+  class="main"
+  id="top"
+>
+  <!-- 
+
+  <div class="container-fluid p-0">
+    <nav class="navbar navbar-vertical navbar-expand-lg menuNavbar">
+     
+    </nav>
+    <nav class="navbar navbar-top fixed-top navbar-expand m-0 p-0" id="navbarDefault" style="width: 100%;">
+      
+    </nav>
+
+
+    <div class="content">
+    
+    </div>
+  </div> -->
+
+  <div class="container-fluid p-0">
+    <nav class="navbar navbar-top navbar-expand m-0 py-0">
+      <app-header id="appHeader" #appHeader style="width: 100%"></app-header>
+    </nav>
+    <nav class="navbar navbar-vertical navbar-expand-lg menuNavbar w-25 mt-5">
+      <app-sidemenu></app-sidemenu>
+    </nav>
+
+    <div class="content w-75">
+      <router-outlet style="width: 100%"></router-outlet>
+    </div>
+  </div>
+  <nav class="navbar fixed-bottom w-100 p-0">
+    <app-alert class="w-100"></app-alert>
+  </nav>
+</main>
+<ng-template #loggedIn>
+  <router-outlet></router-outlet>
+</ng-template>

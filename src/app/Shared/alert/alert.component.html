@@ -1,0 +1,10 @@
+<div *ngFor="let alert of alerts" [class]="cssClass(alert)" role="alert" class="alert-height">
+    <div [class]="cssIcon(alert)">
+        <!-- <span [class]="cssIcon(alert)">
+        </span>         -->
+    </div>
+    <p class="mb-0 flex-1">
+        {{alert.message}}
+    </p>
+    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
