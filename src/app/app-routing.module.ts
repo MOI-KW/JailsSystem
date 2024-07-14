@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Forms/login/login.component';
 import { ChangePasswordComponent } from './Forms/login/change-password/change-password.component';
 import { AuthGuard } from './Guards/auth-guard/auth.guard';
@@ -8,6 +8,7 @@ import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrisonCardComponent } from './prison-card/prison-card.component';
 import { PrisonDataComponent } from './prison-data/prison-data.component';
+import { DemoComponent } from './demo/demo.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'prisondata', component: PrisonDataComponent,canActivate: [AuthGuard] },
+  { path: 'demo', component: DemoComponent },
+  { path: 'prisondata/:category', component: PrisonDataComponent },
   {
     path: 'sub-Menu/:ID',
     component: SubMenuComponent,
@@ -35,6 +37,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       useHash: false,
       scrollPositionRestoration: 'enabled',
+      preloadingStrategy:PreloadAllModules
     }),
   ],
   exports: [RouterModule],

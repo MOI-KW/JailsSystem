@@ -13,4 +13,19 @@ export class PrisonDataComponent implements OnInit {
   onView(event: Event) {
     console.log(event);
   }
+
+ name = [
+  {
+    PrisonerName:'AZAZAZ',
+    CellName:'Gents-Cell',
+    Age:33,
+    DOB:11-11-2011,
+    ArrestDate:20-20-2020,
+    Reason:'Chain Snatching case'
+
+  }
+ ]
+
+
+
 }

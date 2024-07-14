@@ -22,6 +22,7 @@ import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrisonCardComponent } from './prison-card/prison-card.component';
 import { PrisonDataComponent } from './prison-data/prison-data.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PrisonDataComponent } from './prison-data/prison-data.component';
     DashboardComponent,
     PrisonCardComponent,
     PrisonDataComponent,
+    DemoComponent,
 
   ],
   imports: [
