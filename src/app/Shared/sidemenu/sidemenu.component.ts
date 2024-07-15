@@ -44,7 +44,18 @@ export class SidemenuComponent implements OnInit {
         router: '/home',
         children: mainmenu.menuList,
         Role: ''
-      }
+      },
+      {
+        title: 'mainmenu',
+        // titleAr: 'القائمة الرئيسية',
+        titleAr:'demo',
+        icon: 'bi-house-door-fill',
+        displayMenu: true,
+        router: '/demo',
+        children: mainmenu.menuList,
+        Role: ''
+      },
+
     ];
 
     const script = this.renderer.createElement('script');

@@ -3901,11 +3901,11 @@ progress {
 }
 
 .table-hover > tbody > tr:hover > * {
-  /* --falcon-table-accent-bg: var(--falcon-table-hover-bg);
-  color: var(--falcon-table-hover-color); */
+  --falcon-table-accent-bg: var(--falcon-table-hover-bg);
+  color: var(--falcon-table-hover-color);
 
-  --falcon-table-accent-bg: var(--falcon-gray-100);
-  color: var(--falcon-gray-100);
+  /* --falcon-table-accent-bg: var(--falcon-gray-100);
+  color: var(--falcon-gray-100); */
 }
 
 .table-primary {

@@ -48,6 +48,36 @@ export class DashboardComponent implements OnInit {
       ArrestDate: '17th Nov. 2020',
       Reason: 'Chain Snatch',
     },
+    {
+      CategoryName: 'C-Prison',
+      TotalCapacity: '150',
+      AccessedCells: '80',
+      AvailableCells: '70',
+      Progress: 99,
+      OverallPrisoners: '107',
+      ArrestDate: '17th Nov. 2020',
+      Reason: 'Chain Snatch',
+    },
+    {
+      CategoryName: 'D-Prison',
+      TotalCapacity: '150',
+      AccessedCells: '80',
+      AvailableCells: '70',
+      Progress: 99,
+      OverallPrisoners: '107',
+      ArrestDate: '17th Nov. 2020',
+      Reason: 'Chain Snatch',
+    },
+    {
+      CategoryName: 'E-Prison',
+      TotalCapacity: '150',
+      AccessedCells: '80',
+      AvailableCells: '70',
+      Progress: 99,
+      OverallPrisoners: '107',
+      ArrestDate: '17th Nov. 2020',
+      Reason: 'Chain Snatch',
+    },
   ];
 
   constructor(private router: Router) {}
