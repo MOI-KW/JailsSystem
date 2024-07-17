@@ -15,7 +15,42 @@ export class MiddlewareService {
     private router: Router,
     private http: HttpClient,
     private CookieService: CookieService
-  ) { }
+  ) {}
+
+  baseUrl: string = environment.baseURL;
+
+  callJudgementStatInJail(url, body) {
+   
+    return this.http
+      .post<any>(`${environment.baseURL}` + url, body, {
+        headers: { 'Content-Type': 'application/json' },
+        //  observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(
+        map((result: any) => {
+          if (result && result[0]?.message) {
+            return result;
+          }
+        })
+      );
+  }
+
+  callJudgementListInJail(url, form) {
+    return this.http
+      .post<any>(environment.baseURL + url, form, {
+        headers: { 'Content-Type': 'application/json' },
+        //  observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(
+        map((result: any) => {
+          if (result && result[0]?.message) {
+            return result;
+          }
+        })
+      );
+  }
 
   callSahlNotification(form) {
     return this.http
@@ -35,34 +70,36 @@ export class MiddlewareService {
 
   callGetMiddleware(path) {
     return this.http.get(path).pipe(
-      map((response: any) => {
-        if (response?.data) {
-          return response?.data
-        } else {
-
+      map(
+        (response: any) => {
+          if (response?.data) {
+            return response?.data;
+          } else {
+            return '';
+          }
+        },
+        catchError((err, caught) => {
+          this.alertService.error('حدث خطأ');
+          console.log(err);
           return '';
-        }
-      }, catchError((err, caught) => {
-        this.alertService.error('حدث خطأ');
-        console.log(err)
-        return '';
-      }))
+        })
+      )
     );
-
   }
   callPostMiddleware(url: string, form: any) {
-    let path = `${environment.baseURL}` + url
+    let path = `${environment.baseURL}` + url;
     return this.http.post(path, form).pipe(
-      map((response: any) => {
-
-        return response
-      }, catchError((err, caught) => {
-        this.alertService.error('حدث خطأ');
-        console.log(err)
-        return '';
-      }))
+      map(
+        (response: any) => {
+          return response;
+        },
+        catchError((err, caught) => {
+          this.alertService.error('حدث خطأ');
+          console.log(err);
+          return '';
+        })
+      )
     );
-
   }
 
   callMiddleware(url: string, form: any) {
@@ -80,7 +117,7 @@ export class MiddlewareService {
             // console.log(result)
             return result;
           } else {
-            this.alertService.error("حدث خطأ");
+            this.alertService.error('حدث خطأ');
             return null;
           }
         })
