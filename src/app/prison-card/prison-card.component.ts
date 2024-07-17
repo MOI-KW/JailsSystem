@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {pData} from '../prisondata'
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./prison-card.component.scss']
 })
 export class PrisonCardComponent implements OnInit {
+
+  prisons:any =[];
 
   // @Input() CategoryName!: string;
   // @Input() TotalCapacity!: string;
@@ -19,7 +22,7 @@ export class PrisonCardComponent implements OnInit {
   // cardBorderColorClass: string = 'custom-border-color';
   // applyCustomBorder:boolean = true;
 
-
+ 
   prisonsOne = [
     {
       CategoryName: 'Gents-Prison',
@@ -181,6 +184,9 @@ export class PrisonCardComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+    
+    // this.prisons = pData;
+ 
   }
 
   calculateProgressBarWidth(progress: number): number {

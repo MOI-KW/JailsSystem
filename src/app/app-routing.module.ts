@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'demo', component: PrisonCardComponent },
+  { path: 'prisoncard', component: PrisonCardComponent },
+  { path: 'demo', component: DemoComponent },
   { path: 'prisondata/:category', component: PrisonDataComponent },
   {
     path: 'sub-Menu/:ID',
