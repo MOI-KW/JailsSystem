@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   resPrisonersData: any[] = [];
   groupedData: any[] = [];
   groupSectionData: any[] = [];
+
   totalCount: any = 0;
   isCollapsed: boolean[] = [];
 
@@ -174,28 +175,49 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  getCount(input: any) {
+    return Object.keys(input);
+  }
+
   groupData(jailId: any, data: any) {
-    // debugger;
-    const grouped = data.reduce((acc, current) => {
+    const groupedSection = data.reduce((acc, current) => {
       const sectionNumber = current.RowsJailSentence.SectionNumber;
+      const wardNumber = current.RowsJailSentence.WardNumber;
       if (!acc[sectionNumber]) {
         acc[sectionNumber] = {
           sectionNumber: sectionNumber,
+          wards: { [wardNumber]: 1 },
           totalCount: 1, // Initialize count
           // Add any other properties you want to aggregate
           // totalCount: [current], // If you want to collect all objects with the same SectionNumber
         };
       } else {
+        if (!acc[sectionNumber].wards[wardNumber]) {
+          acc[sectionNumber].wards[wardNumber] = 1; // First occurrence of this ward
+          // acc[sectionNumber].totalCount++;
+        } else {
+          acc[sectionNumber].wards[wardNumber]++;
+        }
         acc[sectionNumber].totalCount++;
+        // Update other properties accordingly
+        // }
+        // acc[sectionNumber].totalCount++;
+
+        // if (!acc[sectionNumber].wards.includes(wardNumber)) {
+        //   acc[sectionNumber].wards.push(wardNumber);
+        // }
+        // acc[sectionNumber].totalCount++;
         // acc[sectionNumber].totalCount.push(current); // If you want to collect all objects with the same SectionNumber
         // Update other properties accordingly
       }
+      console.log(acc);
+
       return acc;
     }, {});
 
     // Convert object back to array
     // this.groupedData = Object.values(grouped);
-    this.groupedData.push({ [jailId]: Object.values(grouped) });
+    this.groupedData.push({ [jailId]: Object.values(groupedSection) });
     console.log(this.groupedData, 'ddddddddddddddddd');
   }
 
@@ -204,7 +226,20 @@ export class DashboardComponent implements OnInit {
     return progress;
   }
 
-  getGroupData(jailId: number) {
+  goToWardGroup(id: any, count: any) {
+    console.log(id, '@@@@@@@@@@@@@@@@', count);
+    // this.data.sendData(count);
+    // const queryParams = {
+    //   sectionNumber: count.sectionNumber,
+    //   id: id,
+    // };
+    // console.log('gfggf', queryParams);
+    // this.data.nextCount(count);
+
+    // this.router.navigate(['prison-ward'], { queryParams: queryParams });
+  }
+
+  getSectionGroupData(jailId: number) {
     // for (let index = 0; index < this.groupedData.length; index++) {
     //     if(this.)
 
@@ -223,8 +258,8 @@ export class DashboardComponent implements OnInit {
     // this.groupedData[prison?.RowsPublicOrganisation?.Number]
   }
 
-  getSections(data: any) {
-    console.log('sectionsdata', data);
-    return data;
-  }
+  // getSections(data: any) {
+  //   console.log('sectionsdata', data);
+  //   return data;
+  // }
 }
