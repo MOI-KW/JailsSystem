@@ -141,20 +141,20 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleCollapse(index: number, jailId: number): void {
-    console.log(index, jailId);
+    // console.log(index, jailId);
     this.isCollapsed[index] = !this.isCollapsed[index];
     // this.getPrisonerData(jailId);
     // this.groupData();
-    const data = this.groupedData.find((obj: any) => {
+    const toggleData = this.groupedData.find((obj: any) => {
       const keys = Object.keys(obj);
       return Number(keys[0]) === jailId;
     });
-    console.log({ data });
-    data == undefined ? this.groupSection(jailId) : '';
+    console.log({ toggleData });
+    toggleData == undefined ? this.groupSection(jailId) : '';
   }
 
   async groupSection(jailId: number) {
-    console.log('groupSectionvia id', jailId);
+    // console.log('groupSectionvia id', jailId);
     let body = {
       ImportPublicOrganisation: {
         Number: jailId,
@@ -176,6 +176,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getCount(input: any) {
+    console.log('countwards', input);
     return Object.keys(input);
   }
 
@@ -187,9 +188,7 @@ export class DashboardComponent implements OnInit {
         acc[sectionNumber] = {
           sectionNumber: sectionNumber,
           wards: { [wardNumber]: 1 },
-          totalCount: 1, // Initialize count
-          // Add any other properties you want to aggregate
-          // totalCount: [current], // If you want to collect all objects with the same SectionNumber
+          totalCount: 1,
         };
       } else {
         if (!acc[sectionNumber].wards[wardNumber]) {
@@ -199,24 +198,15 @@ export class DashboardComponent implements OnInit {
           acc[sectionNumber].wards[wardNumber]++;
         }
         acc[sectionNumber].totalCount++;
-        // Update other properties accordingly
-        // }
-        // acc[sectionNumber].totalCount++;
-
-        // if (!acc[sectionNumber].wards.includes(wardNumber)) {
-        //   acc[sectionNumber].wards.push(wardNumber);
-        // }
-        // acc[sectionNumber].totalCount++;
-        // acc[sectionNumber].totalCount.push(current); // If you want to collect all objects with the same SectionNumber
-        // Update other properties accordingly
       }
-      console.log(acc);
+      // console.log(acc,"accum");
+      // console.log(sectionNumber, 'sectionNumber');
+      // console.log(wardNumber, 'wardNumber');
 
       return acc;
     }, {});
 
     // Convert object back to array
-    // this.groupedData = Object.values(grouped);
     this.groupedData.push({ [jailId]: Object.values(groupedSection) });
     console.log(this.groupedData, 'ddddddddddddddddd');
   }
@@ -224,19 +214,6 @@ export class DashboardComponent implements OnInit {
   calculateProgressBarWidth(progress: number): number {
     // this.router.navigate(['prisondata', 'Kuwait']);
     return progress;
-  }
-
-  goToWardGroup(id: any, count: any) {
-    console.log(id, '@@@@@@@@@@@@@@@@', count);
-    // this.data.sendData(count);
-    // const queryParams = {
-    //   sectionNumber: count.sectionNumber,
-    //   id: id,
-    // };
-    // console.log('gfggf', queryParams);
-    // this.data.nextCount(count);
-
-    // this.router.navigate(['prison-ward'], { queryParams: queryParams });
   }
 
   getSectionGroupData(jailId: number) {
@@ -258,8 +235,16 @@ export class DashboardComponent implements OnInit {
     // this.groupedData[prison?.RowsPublicOrganisation?.Number]
   }
 
-  // getSections(data: any) {
-  //   console.log('sectionsdata', data);
-  //   return data;
-  // }
+  showPrisonerList(sectionData: any, jailId: any, wardNo: any) {
+    
+    const prisonersList = this.groupSectionData.filter(
+      (item: any) =>
+        item?.RowsJailSentence?.SectionNumber == sectionData?.sectionNumber &&
+        item?.RowsJailSentence?.WardNumber == wardNo
+    );
+    console.log(prisonersList, 'prisonerList');
+    this.router.navigate(['prisondata'], {
+      state: { data: prisonersList },
+    });
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prison-data',
@@ -6,26 +7,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prison-data.component.scss'],
 })
 export class PrisonDataComponent implements OnInit {
-  constructor() {}
+  data = [];
+  tableData = [];
+  constructor(private router: Router) {
+    const getNavigationData = this.router.getCurrentNavigation();
+    if (getNavigationData?.extras.state) {
+      this.tableData = getNavigationData?.extras.state['data'];
+    }
 
-  ngOnInit(): void {}
-
-  onView(event: Event) {
-    console.log(event);
+    console.log(getNavigationData);
   }
 
- name = [
-  {
-    PrisonerName:'AZAZAZ',
-    CellName:'Gents-Cell',
-    Age:33,
-    DOB:11-11-2011,
-    ArrestDate:20-20-2020,
-    Reason:'Chain Snatching case'
-
+  ngOnInit(): void {
+    console.log(this.tableData, 'oninin');
   }
- ]
 
+  onView(event: any) {
+    debugger;
 
+    this.router.navigate(['prisoner-details'], {
+      state: {
+        data: {
+          selectedPrisonerData: event,
+          prisonerData: this.tableData,
+        },
+      },
+    });
+  }
 
+ 
 }

@@ -28,6 +28,7 @@
               <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
                 {{ prison?.RowsPublicOrganisation?.Number }}
               </h3>
+
             </div>
             <div class="view-btn d-flex justify-content-evenly">
               <!-- Button to toggle collapse -->
@@ -42,43 +43,57 @@
                 <div class="d-flex bg-200 mb-3 flex-row">
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-6"
+
+                      <div class="col-4"
                         *ngFor="let count of getSectionGroupData(prison?.RowsPublicOrganisation?.Number); let i = index">
-                        <div class="p-2 bg-300 border border-400"
-                          (click)="goToWardGroup(prison?.RowsPublicOrganisation?.Number,count)">
-                          <div class="card h-100">
-                            <div class="card-body">
-                              <div class="d-flex align-items-center">
+                        <div class="card-body p-2 bg-300 border border-400">
+                          <div class="p-2 bg-200 border border-400">
+                            <div class="card h-100">
+
+                              <div class="d-flex align-items-center p-1">
                                 <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                                  {{count | json}}
+
                                   Section Number: {{count?.sectionNumber}}
                                 </h4>
+
                               </div>
-                              <div class="d-flex align-items-center">
+                              <div class="d-flex align-items-center p-1">
                                 <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
                                   Total Prisoners: {{count?.totalCount}}
                                 </h3>
                               </div>
+                              <!-- <div class="progress mb-3 w-75 ms-1" style="height:20px">
+                                <div class="progress-bar bg-warning" role="progressbar"
+                                  [style.width]="calculateProgressBarWidth(count?.totalCount) + '%'"
+                                  [attr.aria-valuenow]="count?.totalCount" aria-valuemin="0" aria-valuemax="500">
+                                  {{count?.totalCount}}%
+                                </div>
+                              </div> -->
                             </div>
                           </div>
-                          <div class="row ">
-                            <div class="card h-100" *ngFor="let data of getCount(count.wards)">
-                              <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                  <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                                    Ward Number: {{ data }}
+                          <div class="d-flex bg-200 mb-3 flex-row">
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-4" *ngFor="let data of getCount(count.wards)">
+                                  <div class="card h-100 bg-info" (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
+                                    <div class="card-body border p-1 rounded">
+                                      <div class="d-flex align-items-center">
+                                        <h4 class="mb-2 line-clamp-1 lh-sm flex-1 ">
+                                          Ward No: {{ data }}
 
-                                  </h4>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                  <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                                    Total Prisoners: {{ count.wards[data] }}
-                                  </h3>
+                                        </h4>
+                                      </div>
+                                      <div class="d-flex align-items-center">
+                                        <h3 class="mb-2 line-clamp-1 lh-sm flex-1 ">
+                                          Total Prisoners: {{ count.wards[data] }}
+                                        </h3>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>

@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrisonCardComponent } from './prison-card/prison-card.component';
 import { PrisonDataComponent } from './prison-data/prison-data.component';
 import { DemoComponent } from './demo/demo.component';
+import { PrisonerDetailComponent } from './Services/prisoner-detail/prisoner-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   // { path: 'dashboard', component: DashboardComponent },
   { path: 'prisoncard', component: PrisonCardComponent },
   // { path: 'demo', component: DemoComponent },
-  { path: 'prisondata/:category', component: PrisonDataComponent },
+  { path: 'prisondata', component: PrisonDataComponent },
+  { path: 'prisoner-details', component: PrisonerDetailComponent },
   {
     path: 'sub-Menu/:ID',
     component: SubMenuComponent,
