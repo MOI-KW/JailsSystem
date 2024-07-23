@@ -1,6 +1,9 @@
+<div class="back-btn">
+  <button class="btn btn-secondary me-1 mb-1 btn-lg" type="button" (click)="goBack()">Back</button>
+</div>
 <div class="table-responsive scrollbar">
   <table class="table table-hover table-striped overflow-hidden">
-    <thead>
+    <thead class="bg-300 border border-400">
       <tr>
         <th scope="col">CivilId</th>
         <th scope="col">Name</th>
@@ -8,29 +11,31 @@
         <th scope="col">Description</th>
         <th scope="col">Nationality</th>
         <th scope="col">Cell</th>
+        <th class="text-end" scope="col"></th>
 
       </tr>
     </thead>
-    
 
-      <tr class="align-middle" *ngFor="let prisoner of tableData">
 
-        <td class="text-nowrap">
-          <div class="d-flex align-items-center">
-            <!-- <div class="avatar avatar-xl">
+    <tr class="align-middle " *ngFor="let prisoner of tableData">
+
+      <td class="text-nowrap">
+        <div class="d-flex align-items-center">
+          <!-- <div class="avatar avatar-xl">
               <img class="rounded-circle" src="../../assets/images/MOI-logo-dark.svg" alt="" />
             </div> -->
-            <div class="ms-2">{{prisoner.RowsJeWork.CivilId}}</div>
-          </div>
-        </td>
-        <td   class="text-nowrap">{{prisoner?.RowsJeWork?.ConcatArabicName}}</td>
-        <td class="text-nowrap">{{prisoner?.RowsCaseType?.Code}}</td>
-        <td class="text-nowrap">{{prisoner?.RowsCaseType?.Description}}</td>
-        <td class="text-nowrap"> {{prisoner?.RowsNationality?.ArabicDescription}}</td>
-        <td class="text-nowrap">{{prisoner?.RowsJeWork?.CivilId}}</td>
-        <div class="text-nowrap" (click)="onView(prisoner)">
-          <td class="text-nowrap"><i class="bi bi-eye"></i></td>
+          <div class="ms-2">{{prisoner.RowsJeWork.CivilId}}</div>
         </div>
-      </tr>
+      </td>
+      <td class="text-nowrap">{{prisoner?.RowsJeWork?.ConcatArabicName}}</td>
+      <td class="text-nowrap">{{prisoner?.RowsCaseType?.Code}}</td>
+      <td class="text-nowrap">{{prisoner?.RowsCaseType?.Description}}</td>
+      <td class="text-nowrap"> {{prisoner?.RowsNationality?.ArabicDescription}}</td>
+      <td class="text-nowrap">{{prisoner?.RowsJeWork?.CivilId}}</td>
+      <div class="text-nowrap" (click)="onView(prisoner)">
+        <td class="text-nowrap"><i class="bi bi-eye"></i></td>
+      </div>
+    </tr>
+
   </table>
 </div>

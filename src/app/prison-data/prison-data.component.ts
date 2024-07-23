@@ -10,6 +10,7 @@ export class PrisonDataComponent implements OnInit {
   data = [];
   tableData = [];
   constructor(private router: Router) {
+    console.log('prisonerData constructor called');
     const getNavigationData = this.router.getCurrentNavigation();
     if (getNavigationData?.extras.state) {
       this.tableData = getNavigationData?.extras.state['data'];
@@ -34,6 +35,7 @@ export class PrisonDataComponent implements OnInit {
       },
     });
   }
-
- 
+  goBack() {
+    this.router.navigateByUrl('home');
+  }
 }

@@ -3,25 +3,41 @@
         <div class="card-body position-relative">
             <div class="row">
                 <div class="col-lg-12">
+                    <h3>Prisoner Data</h3>
+                    <hr>
                     <div class="card-body d-flex flex-column">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h3>Prisoner Data</h3>
+                               
                                 <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">CivilId
-                                    </label><input class="form-control" type="text" /></div>
+                                    </label><input class="form-control" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsJeWork.CivilId" />
+                                </div>
                                 <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Name
-                                    </label><input class="form-control" type="text" /></div>
+                                    </label><input class="form-control" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsJeWork.ConcatArabicName" />
+                                </div>
                                 <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">CaseNumber
-                                    </label><input class="form-control" type="text" /></div>
+                                    </label><input class="form-control" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsCaseType.Code" />
+                                </div>
                                 <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Description
-                                    </label><input class="form-control" type="text" /></div>
+                                    </label><input class="form-control" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsCaseType.Description" />
+                                </div>
                                 <div class="mb-3"><label class="form-label" for="exampleFormControlInput1">Nationality
-                                    </label><input class="form-control" type="text" /></div>
+                                    </label><input class="form-control" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsNationality.ArabicDescription" />
+                                </div>
                                 <div class="mb-3"><label class="form-label"
                                         for="exampleFormControlInput1">Cell</label><input class="form-control"
-                                        id="exampleFormControlInput1" type="text" />
+                                        id="exampleFormControlInput1" type="text"
+                                        [(ngModel)]="selectedPrisonerData?.selectedPrisonerData?.RowsJailSentence.StartDate" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="back-btn">
+                            <button class="btn btn-secondary me-1 mb-1 btn-lg" type="button" (click)="goBack()">Back</button>
                         </div>
                     </div>
                 </div>
