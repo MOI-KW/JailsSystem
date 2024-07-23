@@ -1,0 +1,39 @@
+.assignmentstart {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.studentDashboard {
+  border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.studentDashboardCard {
+  padding: 0;
+  width: 100%;
+}
+
+.studentDashboardHead {
+  background-color: #ebeff2;
+  border-bottom: 1px solid lightgray;
+  border-bottom-right-radius: 0%;
+  border-bottom-left-radius: 0%;
+}
+
+.studentDashboardtd {
+  width: 25px;
+}
+
+.examdetailView {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.mainDashboard {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+}

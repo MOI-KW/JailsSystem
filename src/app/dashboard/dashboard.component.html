@@ -3,7 +3,7 @@
 
   <div class="content">
 
-    <div class="row gx-6 gy-3 mb-4 align-items-center">
+    <!-- <div class="row gx-6 gy-3 mb-4 align-items-center">
       <div class="col-auto">
         <h2 class="mb-0">
           PRISON CATEGORIES<span class="fw-normal text-body-tertiary ms-3">(32)</span>
@@ -12,30 +12,39 @@
       <div class="col-auto">
         <a class="btn btn-secondary btn-sm px-5" href="#"><i class="fa-solid fa-plus me-2"></i>Add new prison</a>
       </div>
-    </div>
+    </div> -->
 
     <div class="row g-3">
       <div class="col-12" *ngFor="let prison of resJailData; let i = index">
-        <div class="card h-100">
+        <div class="card h-100" (click)="toggleCollapse(i,prison?.RowsPublicOrganisation?.Number)">
           <div class="card-body">
-            <div class="d-flex align-items-center">
-              <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                {{ prison?.RowsPublicOrganisation?.Name }}
+            <div class="row">
+              <div class="col-10">
+                <div class="d-flex align-items-center">
+                  <h4 class="mb-2 line-clamp-1 lh-sm flex-1 me-5 p-2">
+                    {{ prison?.RowsPublicOrganisation?.Name }}
 
-              </h4>
-            </div>
-            <div class="d-flex align-items-center">
-              <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                {{ prison?.RowsPublicOrganisation?.Number }}
-              </h3>
+                  </h4>
+                </div>
+                <!-- <div class="d-flex align-items-center">
+                  <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5 p-2">
+                    {{ prison?.RowsPublicOrganisation?.Number }}
+                  </h3>
 
+                </div> -->
+              </div>
+              <div class="col-2">
+                <div class="view-btn d-flex justify-content-end">
+                  <!-- Button to toggle collapse -->
+                  <button class="btn">
+                    <span class="bi bi-three-dots fs-1"></span>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="view-btn d-flex justify-content-evenly">
-              <!-- Button to toggle collapse -->
-              <button class="btn" (click)="toggleCollapse(i,prison?.RowsPublicOrganisation?.Number)">
-                <span class="bi bi-arrow-bar-down fs-3"></span>
-              </button>
-            </div>
+
+
+
             <!-- Unique collapse section for each prison -->
             <div class="collapse" [id]="'collapseExample_' + i" [ngClass]="{'show': isCollapsed[i]}"
               *ngIf="getSectionGroupData(prison?.RowsPublicOrganisation?.Number).length > 0">
@@ -75,7 +84,8 @@
                             <div class="col-12">
                               <div class="row">
                                 <div class="col-4" *ngFor="let data of getCount(count.wards)">
-                                  <div class="card h-100 bg-info" (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
+                                  <div class="card h-100 bg-info"
+                                    (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
                                     <div class="card-body border p-1 rounded">
                                       <div class="d-flex align-items-center">
                                         <h4 class="mb-2 line-clamp-1 lh-sm flex-1 ">
