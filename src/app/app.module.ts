@@ -23,7 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PrisonCardComponent } from './prison-card/prison-card.component';
 import { PrisonDataComponent } from './prison-data/prison-data.component';
 import { DemoComponent } from './demo/demo.component';
-import { PrisonerDetailComponent } from './Services/prisoner-detail/prisoner-detail.component';
+import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,6 @@ import { PrisonerDetailComponent } from './Services/prisoner-detail/prisoner-det
     PrisonDataComponent,
     DemoComponent,
     PrisonerDetailComponent,
-
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),
@@ -51,16 +50,9 @@ import { PrisonerDetailComponent } from './Services/prisoner-detail/prisoner-det
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [
-    DatePipe,
-    JwtInterceptorProviders,
-    HttpErrorInterceptorProviders
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [DatePipe, JwtInterceptorProviders, HttpErrorInterceptorProviders],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

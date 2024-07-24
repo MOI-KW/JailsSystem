@@ -16,6 +16,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
 export class PrisonDataComponent implements OnInit {
   data = [];
   tableData = [];
+  filterTableData = [];
 
   isLoading = false;
   tblHeadArr: any[string] = [
@@ -43,13 +44,14 @@ export class PrisonDataComponent implements OnInit {
     this.tableData = JSON.parse(
       localStorage.getItem('selectedData')
     )?.tableData;
-    debugger;
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.tableData);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.filterTableData = this.tableData;
   }
 
   ngAfterViewInit() {
@@ -59,9 +61,22 @@ export class PrisonDataComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.dataSource.filter = filterValue.trim().toLowerCase();
+  // }
+
+  searchStudent(value: any) {
+    debugger;
+    const filteredData = this.filterTableData.filter((e) => {
+      return e?.RowsJeWork?.CivilId?.toString()
+        .toUpperCase()
+        .includes(value.target.value.toString().toUpperCase());
+    });
+    console.log(filteredData);
+    this.dataSource = new MatTableDataSource(filteredData);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   onView(event: any) {

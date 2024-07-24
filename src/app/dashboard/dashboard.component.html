@@ -48,74 +48,66 @@
             <!-- Unique collapse section for each prison -->
             <div class="collapse" [id]="'collapseExample_' + i" [ngClass]="{'show': isCollapsed[i]}"
               *ngIf="getSectionGroupData(prison?.RowsPublicOrganisation?.Number).length > 0">
-              <div class="border p-card rounded">
-                <div class="d-flex bg-200 flex-row">
-                  <div class="col-12">
-                    <div class="row">
+              <div class="d-flex flex-row m-auto">
+                <div class="row w-100">
 
-                      <div class="col-4"
-                        *ngFor="let count of getSectionGroupData(prison?.RowsPublicOrganisation?.Number); let i = index">
-                        <div class="card-body p-2 bg-300 border border-400">
-                          <div class="p-2 bg-200 border border-400">
-                            <div class="card h-100 alert alert-primary">
+                  <div class="col-4 border-0" style="background-color: transparent;"
+                    *ngFor="let count of getSectionGroupData(prison?.RowsPublicOrganisation?.Number); let i = index">
+                    <div class="card-body p-0 h-100 ">
+                      <div class=" card h-100 alert alert-primary">
+                        <div class="card-header">
+                          <label class=" text-primary float-start">
+                            قطاع {{count?.sectionNumber}}
+                          </label>
+                          <label class="text-primary float-end">
+                            عدد السجناء {{count?.totalCount}}
+                          </label>
 
-                              <div class="d-flex align-items-center p-1">
-                                <h4 class=" text-primary mb-2 line-clamp-1 lh-sm flex-1 me-5">
 
-                                  Section Number: {{count?.sectionNumber}}
-                                </h4>
+                        </div>
+                        <div class="card-body w-100 px-0">
+                          <div class="d-flex mb-3 flex-row">
+                            <div class="row w-100 m-auto" style="background-color: transparent !important;">
+                              <div class="col-4 p-0" *ngFor="let data of getCount(count.wards)">
+                                <div class="p-1 border border-0">
+                                  <div class="card wardCard"
+                                    (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
+                                    <div class="card-body border p-1 rounded alert alert-success">
 
-                              </div>
-                              <div class="d-flex align-items-center p-1">
-                                <h3 class="text-primary mb-2 line-clamp-1 lh-sm flex-1 me-5">
-                                  Total Prisoners: {{count?.totalCount}}
-                                </h3>
-                              </div>
-                              <!-- <div class="progress mb-3 w-75 ms-1" style="height:20px">
-                                <div class="progress-bar bg-warning" role="progressbar"
-                                  [style.width]="calculateProgressBarWidth(count?.totalCount) + '%'"
-                                  [attr.aria-valuenow]="count?.totalCount" aria-valuemin="0" aria-valuemax="500">
-                                  {{count?.totalCount}}%
-                                </div>
-                              </div> -->
-                            </div>
-                          </div>
-                          <div class="d-flex bg-200 mb-3 flex-row">
-                            <div class="col-12">
-                              <div class="row">
-                                <div class="col-4" *ngFor="let data of getCount(count.wards)">
-                                  <div class="p-2 bg-200 border border-400">
-                                    <div class="card h-100"
-                                      (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
-                                      <div class="card-body border p-1 rounded alert alert-success">
-                                        <div class="d-flex align-items-center flex-grow-1">
-                                          <h4 class="mb-2 line-clamp-1 flex-1 ">
-                                            Ward No: {{ data }}
+                                      <label class="mb-2 line-clamp-1 flex-1 alert-heading fw-bold">
+                                        جناح {{ data }}
+                                      </label>
 
-                                          </h4>
-                                        </div>
-                                        <div class="d-flex align-items-center flex-grow-1">
-                                          <h3 class="mb-2 line-clamp-1 lh-sm flex-1 ">
-                                            Total Prisoners: {{ count.wards[data] }}
-                                          </h3>
-                                        </div>
-                                      </div>
+                                      <br />
+
+                                      <label class="mb-2 line-clamp-1 lh-sm flex-1 ">
+                                        عدد السجناء {{ count.wards[data] }}
+                                      </label>
+
                                     </div>
                                   </div>
-
                                 </div>
+
                               </div>
                             </div>
                           </div>
                         </div>
+
+                        <!-- <div class="progress mb-3 w-75 ms-1" style="height:20px">
+                          <div class="progress-bar bg-warning" role="progressbar"
+                            [style.width]="calculateProgressBarWidth(count?.totalCount) + '%'"
+                            [attr.aria-valuenow]="count?.totalCount" aria-valuemin="0" aria-valuemax="500">
+                            {{count?.totalCount}}%
+                          </div>
+                        </div> -->
                       </div>
+
                     </div>
-
                   </div>
-
-
-
                 </div>
+
+
+
               </div>
             </div>
           </div>

@@ -19,6 +19,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSortModule,
     NgSelectModule,
     MatFormFieldModule,
+    MatInputModule
+    
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -69,7 +72,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GetAgePipe,
     MatPaginator,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
     
 
   ],

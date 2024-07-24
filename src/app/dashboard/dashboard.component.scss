@@ -1,3 +1,14 @@
 ::ng-deep .modal-content.max-width {
   width: 100% !important;
 }
+
+.wardCard {
+  margin: auto !important;
+  text-align: center !important;
+  display: flex;
+  align-items: center !important;
+  background-color: transparent !important;
+  .card-body {
+    width: 100% !important;
+  }
+}
