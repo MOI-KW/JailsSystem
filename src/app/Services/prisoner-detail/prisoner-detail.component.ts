@@ -11,23 +11,15 @@ export class PrisonerDetailComponent implements OnInit {
   prisonerData: any[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute) {
-    console.log('prisonerDetails constructor called');
-    const navigationData = this.router.getCurrentNavigation();
+    this.selectedPrisonerData = JSON.parse(
+      localStorage.getItem('selectedData')
+    )?.selectedPrisonerData;
     debugger;
-    if (navigationData?.extras?.state) {
-      this.selectedPrisonerData = navigationData?.extras?.state['data'];
-    }
-    console.log('single', this.selectedPrisonerData);
-    console.log('single', this.selectedPrisonerData.selectedPrisonerData);
   }
 
   ngOnInit(): void {}
 
   goBack() {
-    this.router.navigate(['prisondata'], {
-      state: {
-        data: this.selectedPrisonerData.prisonerData,
-      },
-    });
+    this.router.navigate(["prisondata"])
   }
 }

@@ -236,15 +236,15 @@ export class DashboardComponent implements OnInit {
   }
 
   showPrisonerList(sectionData: any, jailId: any, wardNo: any) {
-    
     const prisonersList = this.groupSectionData.filter(
       (item: any) =>
         item?.RowsJailSentence?.SectionNumber == sectionData?.sectionNumber &&
         item?.RowsJailSentence?.WardNumber == wardNo
     );
-    console.log(prisonersList, 'prisonerList');
-    this.router.navigate(['prisondata'], {
-      state: { data: prisonersList },
-    });
+    localStorage.setItem(
+      'selectedData',
+      JSON.stringify({ tableData: prisonersList })
+    );
+    this.router.navigate(['prisondata']);
   }
 }

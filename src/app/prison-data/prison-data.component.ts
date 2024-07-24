@@ -39,26 +39,17 @@ export class PrisonDataComponent implements OnInit {
 
   activeModalRef: any;
   constructor(private router: Router) {
-    console.log('prisonerData constructor called');
-    const getNavigationData = this.router.getCurrentNavigation();
-    if (getNavigationData?.extras.state) {
-      this.tableData = getNavigationData?.extras.state['data'];
-      console.log(this.tableData, 'tableData');
-      this.dataSource = new MatTableDataSource(this.tableData);
-      this.dataSource.sort = this.sort;
-      //  this.dataSource.paginator = this.paginator;
-    }
-
-    console.log(this.dataSource, 'this.dataSource');
+    // console.log(this.dataSource, 'this.dataSource');
+    this.tableData = JSON.parse(
+      localStorage.getItem('selectedData')
+    )?.tableData;
+    debugger;
   }
 
   ngOnInit(): void {
-    console.log(this.tableData, 'oninin');
-    // this.dataSource = new MatTableDataSource(this.tableData);
-    //     this.dataSource.sort = this.sort;
-    //     this.dataSource.paginator = this.paginator;
-    //     console.log(this.dataSource, 'dataSource');
-    //     console.log(this.dataSource.filteredData, 'filteredData');
+    this.dataSource = new MatTableDataSource(this.tableData);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
@@ -74,11 +65,18 @@ export class PrisonDataComponent implements OnInit {
   }
 
   onView(event: any) {
+    localStorage.setItem(
+      'selectedData',
+      JSON.stringify({
+        selectedPrisonerData: event,
+        tableData: this.tableData,
+      })
+    );
     this.router.navigate(['prisoner-details'], {
       state: {
         data: {
           selectedPrisonerData: event,
-          prisonerData: this.tableData,
+          tableData: this.tableData,
         },
       },
     });

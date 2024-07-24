@@ -1,8 +1,13 @@
 <div class="card theme-wizard mb-3 border shadow-none mainCard">
   <div class="card-body p-0 m-0">
-    <div class="back-btn d-flex justify-content-end mr-2 mt-2">
-      <button class="btn btn-sm btn-primary btn-sm ms-2" type="button" (click)="goBack()">Back</button>
+    <div class="back-btn d-flex justify-content-end mr-2">
+      <!-- <button class="btn btn-sm btn-primary btn-sm ms-2" type="button" (click)="goBack()">Back</button> -->
+
+      <button class="btn btn-primary" type="button" style="float: left !important;" (click)="goBack()">
+
+        Back <span class="bi-arrow-left" data-fa-transform="shrink-3"></span></button>
     </div>
+
     <div id="prisonersTable">
 
       <div class="table-responsive scrollbar">
