@@ -1,5 +1,4 @@
-<main
-  *ngIf="
+<main *ngIf="
     router.url != '/login' &&
       router.url != '/' &&
       router.url != '/reset-password';
@@ -29,7 +28,7 @@
       <app-sidemenu></app-sidemenu>
     </nav>
 
-    <div class="content w-90 p-3">
+    <div class="content w-90 py-1 px-5">
       <router-outlet style="width: 100%"></router-outlet>
     </div>
   </div>
