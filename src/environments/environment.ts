@@ -19,8 +19,6 @@ export const environment = {
   // digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
   // sahlURL: 'https://app.moi.gov.kw/sahl/notification',
 
-
-
   loginURL: '/moi/login',
   refreshTokenURL: '/moi/token',
   changePassword: '/moi/changePassword',
@@ -31,8 +29,11 @@ export const environment = {
   biometric_photo: '/moi/FP011/DisplayPersonPhoto', //non-kuwaiti
   nationality_photo: '/moi/SH011/InquirePersonPhoto',
 
+  //mib
+  jailIdrl: '/moi/JE008/JudgementStatInJail',
+  prisonerData: '/moi/JE009/JudgementListInJail',
 
-  AppTitle: "نظام السجون",
-  system_name: 'SECFILECHK',
+  AppTitle: 'نظام السجون',
+  system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',
 };

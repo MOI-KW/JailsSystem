@@ -1,0 +1,39 @@
+.back-btn {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+.prisonDashboard {
+  border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prisonDashboardCard {
+  padding: 0;
+  width: 100%;
+}
+
+.prisonDashboardHead {
+  background-color: #ebeff2;
+  border-bottom: 1px solid lightgray;
+  border-bottom-right-radius: 0%;
+  border-bottom-left-radius: 0%;
+}
+
+.prisonDashboardtd {
+  width: 30% !important;
+}
+
+.examdetailView {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.mainDashboard {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+}

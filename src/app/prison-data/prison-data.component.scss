@@ -1,0 +1,22 @@
+.input-group {
+    display: flex;
+    align-items: right;
+    width: 100%;
+    max-width: 300px; /* Adjust as per your design */
+    margin: 0 auto; /* Centers the input group */
+   
+  }
+  
+ 
+  
+  .input-group input {
+    border: 1px solid #ced4da; /* Example border style */
+    padding: 10px; /* Adjust padding to match icon size and spacing */
+    width: 100%;
+    outline: none; /* Optional: Remove default focus outline */
+  }
+  
+  .input-group input:focus {
+    border-color: #80bdff; /* Example focus style */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Example focus shadow */
+  }

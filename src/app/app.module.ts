@@ -19,6 +19,11 @@ import { HttpErrorInterceptorProviders } from './Helpers/http-error.interceptor'
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PrisonCardComponent } from './prison-card/prison-card.component';
+import { PrisonDataComponent } from './prison-data/prison-data.component';
+import { DemoComponent } from './demo/demo.component';
+import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,11 @@ import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
     NoRightClickDirective,
     AutoTabDirective,
     SubMenuComponent,
-
+    DashboardComponent,
+    PrisonCardComponent,
+    PrisonDataComponent,
+    DemoComponent,
+    PrisonerDetailComponent,
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),
@@ -41,16 +50,9 @@ import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [
-    DatePipe,
-    JwtInterceptorProviders,
-    HttpErrorInterceptorProviders
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [DatePipe, JwtInterceptorProviders, HttpErrorInterceptorProviders],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}
