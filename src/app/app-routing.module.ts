@@ -21,8 +21,6 @@ const routes: Routes = [
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   // { path: 'dashboard', component: DashboardComponent },
-  // { path: 'prisoncard', component: PrisonCardComponent },
-  // { path: 'demo', component: DemoComponent },
   { path: 'prisondata', component: PrisonDataComponent },
   { path: 'prisoner-details', component: PrisonerDetailComponent },
   {

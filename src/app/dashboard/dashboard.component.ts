@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getJailData();
-    // this.getPrisonerData();
+    
   }
 
   async getJailData() {
@@ -141,10 +141,7 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleCollapse(index: number, jailId: number): void {
-    // console.log(index, jailId);
     this.isCollapsed[index] = !this.isCollapsed[index];
-    // this.getPrisonerData(jailId);
-    // this.groupData();
     const toggleData = this.groupedData.find((obj: any) => {
       const keys = Object.keys(obj);
       return Number(keys[0]) === jailId;
@@ -154,7 +151,6 @@ export class DashboardComponent implements OnInit {
   }
 
   async groupSection(jailId: number) {
-    // console.log('groupSectionvia id', jailId);
     let body = {
       ImportPublicOrganisation: {
         Number: jailId,
@@ -176,7 +172,6 @@ export class DashboardComponent implements OnInit {
   }
 
   getCount(input: any) {
-    console.log('countwards', input);
     return Object.keys(input);
   }
 
@@ -192,16 +187,12 @@ export class DashboardComponent implements OnInit {
         };
       } else {
         if (!acc[sectionNumber].wards[wardNumber]) {
-          acc[sectionNumber].wards[wardNumber] = 1; // First occurrence of this ward
-          // acc[sectionNumber].totalCount++;
+          acc[sectionNumber].wards[wardNumber] = 1;
         } else {
           acc[sectionNumber].wards[wardNumber]++;
         }
         acc[sectionNumber].totalCount++;
       }
-      // console.log(acc,"accum");
-      // console.log(sectionNumber, 'sectionNumber');
-      // console.log(wardNumber, 'wardNumber');
 
       return acc;
     }, {});
@@ -211,16 +202,8 @@ export class DashboardComponent implements OnInit {
     console.log(this.groupedData, 'ddddddddddddddddd');
   }
 
-  calculateProgressBarWidth(progress: number): number {
-    // this.router.navigate(['prisondata', 'Kuwait']);
-    return progress;
-  }
 
   getSectionGroupData(jailId: number) {
-    // for (let index = 0; index < this.groupedData.length; index++) {
-    //     if(this.)
-
-    // }
     const foundObject = this.groupedData.find((obj: any) => {
       const keys = Object.keys(obj);
       return Number(keys[0]) === jailId;
@@ -229,10 +212,8 @@ export class DashboardComponent implements OnInit {
     if (foundObject) {
       return foundObject[jailId];
     } else {
-      // If no object with the given Id is found, return an empty array or handle as needed
       return [];
     }
-    // this.groupedData[prison?.RowsPublicOrganisation?.Number]
   }
 
   showPrisonerList(sectionData: any, jailId: any, wardNo: any) {

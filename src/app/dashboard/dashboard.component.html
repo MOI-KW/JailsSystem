@@ -1,18 +1,6 @@
-<!--  DEMO-->
 <div class="dashboard">
-
   <div class="content">
 
-    <!-- <div class="row gx-6 gy-3 mb-4 align-items-center">
-      <div class="col-auto">
-        <h2 class="mb-0">
-          PRISON CATEGORIES<span class="fw-normal text-body-tertiary ms-3">(32)</span>
-        </h2>
-      </div>
-      <div class="col-auto">
-        <a class="btn btn-secondary btn-sm px-5" href="#"><i class="fa-solid fa-plus me-2"></i>Add new prison</a>
-      </div>
-    </div> -->
 
     <div class="row g-3">
       <div class="col-12" *ngFor="let prison of resJailData; let i = index">
@@ -26,12 +14,6 @@
 
                   </h4>
                 </div>
-                <!-- <div class="d-flex align-items-center">
-                  <h3 class="mb-2 line-clamp-1 lh-sm flex-1 me-5 p-2">
-                    {{ prison?.RowsPublicOrganisation?.Number }}
-                  </h3>
-
-                </div> -->
               </div>
               <div class="col-2">
                 <div class="view-btn d-flex justify-content-end">
@@ -42,9 +24,6 @@
                 </div>
               </div>
             </div>
-
-
-
             <!-- Unique collapse section for each prison -->
             <div class="collapse" [id]="'collapseExample_' + i" [ngClass]="{'show': isCollapsed[i]}"
               *ngIf="getSectionGroupData(prison?.RowsPublicOrganisation?.Number).length > 0">
@@ -92,40 +71,22 @@
                             </div>
                           </div>
                         </div>
-
-                        <!-- <div class="progress mb-3 w-75 ms-1" style="height:20px">
-                          <div class="progress-bar bg-warning" role="progressbar"
-                            [style.width]="calculateProgressBarWidth(count?.totalCount) + '%'"
-                            [attr.aria-valuenow]="count?.totalCount" aria-valuemin="0" aria-valuemax="500">
-                            {{count?.totalCount}}%
-                          </div>
-                        </div> -->
                       </div>
-
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
-
     <footer class="footer position-absolute">
       <h1></h1>
     </footer>
   </div>
 </div>
-
 <hr />
-
-<!-- <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Launch basic modal</button> -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content max-width">

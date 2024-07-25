@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatFormField } from '@angular/material/form-field';
 import { MatTableDataSource } from '@angular/material/table';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableConstants } from 'src/app/Globals/datatable';
-import { MatFormFieldControl } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-prison-data',
@@ -27,7 +25,7 @@ export class PrisonDataComponent implements OnInit {
     'Nationality',
     'Cell',
     'View',
-  ]; //CreatedDate
+  ]; 
 
   dataSource!: MatTableDataSource<any>;
 
@@ -40,7 +38,6 @@ export class PrisonDataComponent implements OnInit {
 
   activeModalRef: any;
   constructor(private router: Router) {
-    // console.log(this.dataSource, 'this.dataSource');
     this.tableData = JSON.parse(
       localStorage.getItem('selectedData')
     )?.tableData;
@@ -60,12 +57,6 @@ export class PrisonDataComponent implements OnInit {
     }
     this.dataSource.paginator = this.paginator;
   }
-
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.dataSource.filter = filterValue.trim().toLowerCase();
-  // }
-
   searchStudent(value: any) {
     debugger;
     const filteredData = this.filterTableData.filter((e) => {
