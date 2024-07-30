@@ -20,10 +20,10 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PrisonCardComponent } from './prison-card/prison-card.component';
-import { PrisonDataComponent } from './prison-data/prison-data.component';
 import { DemoComponent } from './demo/demo.component';
-import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.component';
+import { ChartDashboardComponent } from './Forms/chart-dashboard/chart-dashboard.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { JailDetailsComponent } from './Forms/jail-details/jail-details.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +36,9 @@ import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.compo
     AutoTabDirective,
     SubMenuComponent,
     DashboardComponent,
-    PrisonCardComponent,
-    PrisonDataComponent,
     DemoComponent,
-    PrisonerDetailComponent,
+    ChartDashboardComponent,
+    JailDetailsComponent,
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),
@@ -51,8 +50,11 @@ import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.compo
     SharedModule,
     FormsModule,
     HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [DatePipe, JwtInterceptorProviders, HttpErrorInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

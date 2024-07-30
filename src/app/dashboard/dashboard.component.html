@@ -30,7 +30,7 @@
               <div class="d-flex flex-row m-auto">
                 <div class="row w-100">
 
-                  <div class="col-4 border-0" style="background-color: transparent;"
+                  <div class="col-4 border-0 my-3" style="background-color: transparent;"
                     *ngFor="let count of getSectionGroupData(prison?.RowsPublicOrganisation?.Number); let i = index">
                     <div class="card-body p-0 h-100 ">
                       <div class=" card h-100 alert alert-primary">
@@ -51,7 +51,7 @@
                                 <div class="p-1 border border-0">
                                   <div class="card wardCard"
                                     (click)="showPrisonerList(count,prison?.RowsPublicOrganisation?.Number,data)">
-                                    <div class="card-body border p-1 rounded alert alert-success">
+                                    <div class="card-body border p-1 rounded alert alert-primary">
 
                                       <label class="mb-2 line-clamp-1 flex-1 alert-heading fw-bold">
                                         جناح {{ data }}

@@ -17,78 +17,6 @@ export class DashboardComponent implements OnInit {
   totalCount: any = 0;
   isCollapsed: boolean[] = [];
 
-  prisons = [
-    {
-      CategoryName: 'Gents-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '100',
-      AvailableCells: '50',
-      Progress: 70,
-      OverallPrisoners: '287',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'Womens-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 50,
-      OverallPrisoners: '387',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'A-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 90,
-      OverallPrisoners: '187',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'B-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 40,
-      OverallPrisoners: '107',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'C-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 99,
-      OverallPrisoners: '107',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'D-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 99,
-      OverallPrisoners: '107',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-    {
-      CategoryName: 'E-Prison',
-      TotalCapacity: '150',
-      AccessedCells: '80',
-      AvailableCells: '70',
-      Progress: 99,
-      OverallPrisoners: '107',
-      ArrestDate: '17th Nov. 2020',
-      Reason: 'Chain Snatch',
-    },
-  ];
 
   constructor(
     private router: Router,
@@ -99,13 +27,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getJailData();
-    
+
   }
 
   async getJailData() {
     let body = {};
     this.middleWareService
-      .callPostMiddleware(`${environment.jailIdrl}`, body)
+      .callMiddleware(`${environment.jailIdrl}`, body)
       .subscribe({
         next: (res: any) => {
           console.log('jailIdchecked', res.Array.row);
@@ -126,7 +54,7 @@ export class DashboardComponent implements OnInit {
     };
 
     this.middleWareService
-      .callPostMiddleware(`${environment.prisonerData}`, body)
+      .callMiddleware(`${environment.prisonerData}`, body)
       .subscribe({
         next: (res: any) => {
           console.log('PrisonerDatachecked', res.Array.row);
@@ -158,7 +86,7 @@ export class DashboardComponent implements OnInit {
     };
 
     this.middleWareService
-      .callPostMiddleware(`${environment.prisonerData}`, body)
+      .callMiddleware(`${environment.prisonerData}`, body)
       .subscribe({
         next: (res: any) => {
           console.log('groupSectionvia ID fetched Checked', res.Array);

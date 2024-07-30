@@ -32,7 +32,7 @@ export const environment = {
   nationality_photo: '/moi/SH011/InquirePersonPhoto',
 
 
-  AppTitle: "نظام السجون",
+  AppTitle: "لوحة بيانات السجون",
   system_name: 'SECFILECHK',
   clearCookies: '/moi/clear-all-cookies',
 };

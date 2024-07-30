@@ -7,13 +7,13 @@ export const environment = {
 
   /* ***** MIDDLEWARE URLS ***** */
 
-  //test
+  // //test
   clientPrefix: 'ZIT',
   baseURL: 'https://apptest.moi.gov.kw',
   digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
   sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
 
-  // //production
+  //production
   // clientPrefix: 'ZCS',
   // baseURL: 'https://app.moi.gov.kw',
   // digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
@@ -33,7 +33,7 @@ export const environment = {
   jailIdrl: '/moi/JE008/JudgementStatInJail',
   prisonerData: '/moi/JE009/JudgementListInJail',
 
-  AppTitle: 'نظام السجون',
-  system_name: 'JAILDASHBORD',
+  AppTitle: 'لوحة بيانات السجون',
+  system_name: 'SECFILECHK',
   clearCookies: '/moi/clear-all-cookies',
 };

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,17 +15,19 @@ export class PrisonDataComponent implements OnInit {
   data = [];
   tableData = [];
   filterTableData = [];
+  @Input() selectedData: any
+  showPrisonerCard = false
 
   isLoading = false;
   tblHeadArr: any[string] = [
     'CivilId',
     'Name',
-    'CaseNumber',
-    'Description',
+    // 'CaseNumber',
+    'Crime',
     'Nationality',
     'Cell',
     'View',
-  ]; 
+  ];
 
   dataSource!: MatTableDataSource<any>;
 
@@ -34,16 +36,19 @@ export class PrisonDataComponent implements OnInit {
 
   itemPerPage = DataTableConstants.ItemPerPage;
   pageSize = DataTableConstants.PageSize;
-  pageSizeOptions: number[] = [5, 10, 25, 50];
-
+  pageSizeOptions: number[] = [10, 25, 50];
+  selectedPrisoner: any
   activeModalRef: any;
-  constructor(private router: Router) {
-    this.tableData = JSON.parse(
-      localStorage.getItem('selectedData')
-    )?.tableData;
+  constructor(private router: Router, private changeDetector: ChangeDetectorRef) {
+    // this.tableData = JSON.parse(
+    //   localStorage.getItem('selectedData')
+    // )?.tableData;
+
   }
 
   ngOnInit(): void {
+    console.log("selected", this.selectedData)
+    this.tableData = this.selectedData
     this.dataSource = new MatTableDataSource(this.tableData);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -71,21 +76,28 @@ export class PrisonDataComponent implements OnInit {
   }
 
   onView(event: any) {
-    localStorage.setItem(
-      'selectedData',
-      JSON.stringify({
-        selectedPrisonerData: event,
-        tableData: this.tableData,
-      })
-    );
-    this.router.navigate(['prisoner-details'], {
-      state: {
-        data: {
-          selectedPrisonerData: event,
-          tableData: this.tableData,
-        },
-      },
-    });
+    this.showPrisonerCard = false
+    // localStorage.setItem(
+    //   'selectedData',
+    //   JSON.stringify({
+    //     selectedPrisonerData: event,
+    //     tableData: this.tableData,
+    //   })
+    // );
+    // this.router.navigate(['prisoner-details'], {
+    //   state: {
+    //     data: {
+    //       selectedPrisonerData: event,
+    //       tableData: this.tableData,
+    //     },
+    //   },
+    // });
+    setTimeout(() => {
+      this.selectedPrisoner = event
+      this.showPrisonerCard = true
+    }, 500)
+
+    this.changeDetector.detectChanges()
   }
   goBack() {
     this.router.navigateByUrl('home');

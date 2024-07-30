@@ -20,6 +20,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { PrisonDataComponent } from '../Forms/prison-data/prison-data.component';
+import { PrisonCardComponent } from '../Forms/prison-card/prison-card.component';
+import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detail.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { MatInputModule } from '@angular/material/input';
     PercPipe,
     DatetimeFormatPipe,
     RasedDatePipe,
-    GetAgePipe
+    GetAgePipe,
+    PrisonDataComponent,
+    PrisonCardComponent,
+    PrisonerDetailComponent
   ],
   imports: [
     FormsModule,
@@ -47,8 +53,8 @@ import { MatInputModule } from '@angular/material/input';
     NgSelectModule,
     MatFormFieldModule,
     MatInputModule
-    
-    
+
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -73,8 +79,11 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginator,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
-    
+    MatInputModule,
+    PrisonDataComponent,
+    PrisonCardComponent,
+    PrisonerDetailComponent
+
 
   ],
 })

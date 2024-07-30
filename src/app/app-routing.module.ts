@@ -6,10 +6,11 @@ import { AuthGuard } from './Guards/auth-guard/auth.guard';
 import { HomeComponent } from './Forms/home/home.component';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PrisonCardComponent } from './prison-card/prison-card.component';
-import { PrisonDataComponent } from './prison-data/prison-data.component';
+import { PrisonCardComponent } from './Forms/prison-card/prison-card.component';
+import { PrisonDataComponent } from './Forms/prison-data/prison-data.component';
 import { DemoComponent } from './demo/demo.component';
-import { PrisonerDetailComponent } from './prisoner-detail/prisoner-detail.component';
+import { PrisonerDetailComponent } from './Forms/prisoner-detail/prisoner-detail.component';
+import { ChartDashboardComponent } from './Forms/chart-dashboard/chart-dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,8 +20,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'reset-password', component: ChangePasswordComponent },
-  { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
-  // { path: 'dashboard', component: DashboardComponent },
+  { path: 'home', component: ChartDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'prisondata', component: PrisonDataComponent },
   { path: 'prisoner-details', component: PrisonerDetailComponent },
   {
@@ -43,4 +44,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

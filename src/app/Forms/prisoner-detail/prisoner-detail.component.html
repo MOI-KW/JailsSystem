@@ -1,16 +1,9 @@
-<div class="card h-100 w-50 prisonDashboard col-10 my-2">
-    <div class="card-body prisonDashboardCard row">
-        <div class="card mb-1 prisonDashboardHead">
-            <div class="card-header ">
-                <div class="row flex-between-center">
-                    <div class="col-sm-auto d-flex align-items-center">
-                        <h3 class="text-primary">بيانات السجين</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-
+<div class="card border h-100  shadow-none">
+    <div class="card-header  border-bottom bg-body">
+        بيانات السجين
+    </div>
+    <div class="card-body d-flex">
+        <div class="infoDiv" style="width: 75% !important">
             <table class="table fs--1 mb-0 overflow-hidden">
                 <tbody class="col-12">
                     <tr>
@@ -22,6 +15,18 @@
                         <td class="text-black prisonDashboardtd">رقم المرجع</td>
                         <td class="text-primary">
                             {{ selectedPrisonerData?.RowsJeWork.Number }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-black prisonDashboardtd">الإسم</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.RowsJeWork.ConcatArabicName }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-black prisonDashboardtd">التهمة</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.RowsCrimeType?.Description }}
                         </td>
                     </tr>
                     <tr>
@@ -66,43 +71,46 @@
                             {{ selectedPrisonerData?.RowsJailSentence.StartDate | datetimeFormat }}
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="text-black prisonDashboardtd">تاريخ الانتهاء المتوقع</td>
-                        <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.ExpectedEndDate | datetimeFormat
-                            }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">سنوات المدة</td>
+                        <td class="text-black prisonDashboardtd">المدة</td>
                         <td class="text-primary">
                             {{ selectedPrisonerData?.RowsJailSentence.DurationYears
-                            }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">أشهر المدة</td>
-                        <td class="text-primary">
+                            }} سنة -
                             {{ selectedPrisonerData?.RowsJailSentence.DurationMonths
-                            }}
+                            }} شهر -
+                            {{ selectedPrisonerData?.RowsJailSentence.DurationDays
+                            }} يوم
+
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="text-black prisonDashboardtd">المدة أيام</td>
+                        <td class="text-black prisonDashboardtd">تاريخ الخروج المتوقع</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.DurationDays
+                            {{ selectedPrisonerData?.RowsJailSentence.ExpectedEndDate | datetimeFormat
                             }}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-
         </div>
-
+        <!-- photo  -->
+        <div class="mt-3" style="
+          width: 25% !important;
+          text-align: center !important;
+          padding-top: 0.5rem !important;
+        ">
+            <div class="row h-50 m-auto imgDiv" *ngIf="personPhoto != null && personPhoto != ''">
+                <img class="position-relative img-profile p-0" [src]="personPhoto" />
+            </div>
+        </div>
     </div>
+
 </div>
-<div class="back-btn d-flex  m-2">
+
+<!-- <div class="back-btn d-flex  m-2">
     <button class="btn btn-primary float-start" type="button" (click)="goBack()">
         رجوع</button>
-</div>
+</div> -->

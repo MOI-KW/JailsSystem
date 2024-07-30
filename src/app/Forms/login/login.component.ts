@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   ) {
     if (this.CookieService.get('theme') == 'dark') this.dark = true;
     else this.dark = false;
-    this.AppTitle =environment.AppTitle
+    this.AppTitle = environment.AppTitle
   }
   AppTitle
   ngOnInit(): void {
@@ -244,5 +244,5 @@ export class LoginComponent implements OnInit {
     return FormFunctions.digitsOnly(event);
   }
 
-  hideCharacters(e: any) {}
+  hideCharacters(e: any) { }
 }
