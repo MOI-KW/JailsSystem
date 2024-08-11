@@ -33,6 +33,6 @@ export const environment = {
 
 
   AppTitle: "لوحة بيانات السجون",
-  system_name: 'SECFILECHK',
+  system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',
 };

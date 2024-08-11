@@ -1,31 +1,65 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
 <div class="card border my-5  shadow-none" *ngIf="showDetails">
-    <div class="card-header  border-bottom bg-body">
+    <div class="card-header  border-bottom bg-body" style="font-size: 30px !important; height: fit-content !important;">
         {{jailName}}
     </div>
-    <div class="card-body  ">
-        <div class="row m-0 p-0 w-100">
-            <div class="col-4 my-4" *ngFor="let section of sectionList; let i = index">
-                <div class="card  border  shadow-none h-100 ">
+    <div class="card-body d-flex ">
+        <div class="row m-0 p-0 w-75 ">
+            <div class="my-4" *ngFor="let section of sectionList; let i = index">
+                <div class="card border-0   shadow-none h-100  w-100">
                     <div class="card-body">
-                        <div class="d-flex align-items-center">
+                        <!-- <div class="d-flex align-items-center">
                             <h4 class="mb-2 me-5">{{getJailName(section)}}</h4>
-                        </div>
+                        </div> -->
                         <!-- <span class="badge badge-falcon fs-10 mb-4 badge-falcon-success">completed</span> -->
-                        <div class="d-flex align-items-center mb-2">
-                            <i class="bi bi-people-fill  fs-13 me-2"></i>
-                            <p class="fontSemiBold mb-0 text-truncate  fs-14">العدد الحالي
-                                <span class=" fs-14">{{jailInfromation[section].totalCount}}</span>
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <i class="bi bi-speedometer  fs-13 me-2"></i>
-                            <p class="fontSemiBold mb-0 text-truncate lh-1  fs-14">الطاقة الاستعابية <span
-                                    class="ms-1 text-body-emphasis fs-14">{{getJailCapacity(section)}}</span></p>
+                        <div class="row m-auto mb-4" style="align-items: center !important">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-people-fill me-4 smallnum" style="font-size: 30px !important;"></i>
+                                    <p class="fontExtraBold mb-0 text-truncate" style="font-size: 25px !important;">
+                                        العدد
+                                        الحالي
+                                        <span class="fontBlack ms-4" style="font-size: 30px !important;"
+                                            [style]="'color:'+getPrograssColor(jailInfromation[section].totalCount,getJailCapacity(section))">{{jailInfromation[section].totalCount}}</span>
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="col-6 ">
+                                <div class="d-flex w-100 align-items-center" style="text-align: end !important">
+                                    <p class="fontExtraBold mb-0 text-truncate lh-1 w-100"
+                                        style="font-size: 25px !important;">
+                                        <i class="bi bi-speedometer  me-4 smallnum"
+                                            style="font-size: 30px !important;"></i>
+                                        الطاقة الاستعابية <span class="ms-4  text-primary fontBlack"
+                                            style="font-size: 30px !important;">{{getJailCapacity(section)}}</span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <!-- <div class="col-2 pl-4 d-flex text-end">
+                                <p class=" font-bold my-auto ">
+                                    {{getPercentage(jailInfromation[section].totalCount,getJailCapacity(section))
+                                    +'%'}}</p>
+                                <div class="my-auto"
+                                    [style]="'--falcon-circle-progress-bar:'+getPercentage(jailInfromation[section].totalCount,getJailCapacity(section))">
+                                    <svg class="circle-progress-svg" width="100" height="50" viewBox="0 0 120 120">
+                                        <circle class="progress-bar-rail" cx="60" cy="60" r="54" fill="none"
+                                            stroke-linecap="round" stroke-width="12">
+                                        </circle>
+                                        <circle class="progress-bar-top" cx="60" cy="60" r="54" fill="none"
+                                            stroke-linecap="round"
+                                            [attr.stroke]="getPrograssColor(jailInfromation[section].totalCount,getJailCapacity(section))"
+                                            stroke-width="12"></circle>
+                                    </svg>
+                                </div>
+
+                            </div> -->
                         </div>
 
-                        <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example"
+
+                        <!-- <div class="progress bg-200 w-100 rounded-pill" role="progressbar" aria-label="Basic example"
                             style="height:15px">
                             <div class="progress-bar rounded-pill animated-progress-bar"
                                 [class]="getPrograssClass(jailInfromation[section].totalCount,getJailCapacity(section))"
@@ -37,45 +71,55 @@
                             <p class="mb-2 ">
                                 {{getPercentage(jailInfromation[section].totalCount,getJailCapacity(section))
                                 +'%'}}</p>
-                        </div>
+                        </div> -->
 
                         <!-- -------------------------------------------------------------------- -->
-                        <div class="col-6 m-0 p-0 text-center"
-                            *ngFor="let ward of getCount(jailInfromation[section].wards)">
-                            <div class="card border m-3  shadow-none h-100"
-                                (click)="showPrisonerList(jailInfromation[section].sectionNumber,ward)">
+                        <div class="row w-100 m-auto">
+                            <div class="col-3 m-0 mb-3 p-0 text-center"
+                                *ngFor="let ward of getCount(jailInfromation[section].wards)">
+                                <div class="card border m-3  shadow-none h-100"
+                                    (click)="showPrisonerList(jailInfromation[section].sectionNumber,ward)">
 
-                                <div class="card-header  border-bottom bg-body fs-13">
-                                    {{getWardName(section,ward)}}
-                                </div>
-                                <div class="card-body p-3">
-                                    <label class="fontBold mb-3 fs-14">
-                                        {{getWardDescription(section,ward)}}
-                                    </label>
-                                    <div class="row d-flex">
-                                        <div class="col-6">
-                                            <label
-                                                class="w-50 text-start fontBold">{{jailInfromation[section].wards[ward]}}</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <label
-                                                class="w-50 text-end fontBold">{{getWardCapacity(section,ward)}}</label>
-                                        </div>
+                                    <div class="card-header  border-bottom bg-body" style="font-size: 18px !important;">
+                                        {{getWardName(section,ward)}}
                                     </div>
-                                    <div class="progress bg-200 w-100 rounded-pill" role="progressbar"
-                                        aria-label="Basic example" style="height:15px">
-                                        <div class="progress-bar rounded-pill animated-progress-bar"
-                                            [class]="getPrograssClass(jailInfromation[section].wards[ward],getWardCapacity(section,ward))"
-                                            [style]="getPrograssbarStyle(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
-                                            {{getPercentage(jailInfromation[section].wards[ward],getWardCapacity(section,ward))
-                                            +'%'}}
+                                    <div class="card-body p-3">
+                                        <div class="fontBold mb-3"
+                                            style="font-size: 20px !important; white-space:pre-wrap">
+                                            {{getWardDescription(section,ward)}}
                                         </div>
+
+
+                                    </div>
+                                    <div class="card-footer pb-3">
+                                        <div class="row d-flex">
+                                            <div class="col-6">
+                                                <label
+                                                    class="w-50 text-start fontBold smallnum">{{jailInfromation[section].wards[ward]}}</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label
+                                                    class="w-50 text-end fontBold smallnum">{{getWardCapacity(section,ward)}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="progress bg-200 w-100 rounded-pill" role="progressbar"
+                                            aria-label="Basic example" style="height:30px">
+                                            <div class="progress-bar rounded-pill animated-progress-bar"
+                                                style="font-size: 20px !important;"
+                                                [class]="getPrograssClass(jailInfromation[section].wards[ward],getWardCapacity(section,ward))"
+                                                [style]="getPrograssbarStyle(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
+                                            </div>
+                                        </div>
+                                        <label class="w-100 text-center fontBold mt-4" style="font-size: 30px;"
+                                            [style]="'color:'+getPrograssColor(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
+                                            {{getPercentage(jailInfromation[section].wards[ward],getWardCapacity(section,ward))
+                                            +'%'}}</label>
                                     </div>
                                 </div>
 
                             </div>
-
                         </div>
+
 
                         <!-- -------------------------------------------------------------------- -->
 
@@ -87,8 +131,22 @@
                 </div>
             </div>
         </div>
+        <div class="w-25 border-dashed-righ m-auto pt-5 ">
+            <div class="d-flex align-items-center ">
+
+                <p class="fontExtraBold  text-truncate m-auto" style="font-size: 25px !important;">
+                    توزيع السجناء على الأجنحة
+                </p>
+            </div>
+            <div class="e-chart-wrapper w-100 h-100 m-0 p-0">
+                <div echarts [options]="sectionsChartOptions" style="min-height: 600px;" data-echart-responsive="true">
+                </div>
+            </div>
+        </div>
 
     </div>
+
+
 </div>
 
 

@@ -38,12 +38,17 @@ export class JailDetailsComponent implements OnInit {
           this.jailInfromation = this.jailService.groupData(res)
           //the list of all sections from  tha api 
           this.sectionList = Object.keys(this.jailInfromation)
+          console.log(this.jailInfromation)
           this.sectionList.forEach(element => {
             count.push({ value: this.jailInfromation[element].totalCount, name: this.getJailName(element) })
-            //count.push(this.jailInfromation[element].totalCount)
           });
 
-          this.showBarChart(count)
+          let Wardsdata = []
+          Object.entries(this.jailInfromation[this.jailID].wards).forEach(element => {
+            Wardsdata.push({ value: element[1], name: this.getWardName(this.jailID, element[0]) })
+          });
+
+          this.showBarChart(Wardsdata)
           this.changeDetector.detectChanges()
 
         }
@@ -137,6 +142,24 @@ export class JailDetailsComponent implements OnInit {
     }
     else if (Number(percentage) > 75) {
       percentage_class = "bg-danger"
+    }
+    return percentage_class
+  }
+
+  getPrograssColor(value, totalValue) {
+    let percentage = this.getPercentage(value, totalValue)
+    let percentage_class = ""
+    if (Number(percentage) <= 25) {
+      percentage_class = "bg-defult"
+    }
+    else if (Number(percentage) > 25 && Number(percentage) <= 50) {
+      percentage_class = "#25B003"
+    }
+    else if (Number(percentage) > 50 && Number(percentage) <= 75) {
+      percentage_class = "#f5803e"
+    }
+    else if (Number(percentage) > 75) {
+      percentage_class = "#EC1F00"
     }
     return percentage_class
   }

@@ -12,8 +12,11 @@ export class JailService {
   constructor(private middleWareService: MiddlewareService, private alertService: AlertService) { }
   getJailDetails(jailId: number) {
     let body = {
+      ImportJailSections: {
+        SectionNumber: jailId
+      },
       ImportPublicOrganisation: {
-        Number: jailId,
+        Number: "",
       },
     };
 
@@ -57,6 +60,7 @@ export class JailService {
 
       return acc;
     }, {});
+    console.log("groupedSection", groupedSection)
     return groupedSection
     // Convert object back to array
     //this.groupedData.push({ [jailId]: Object.values(groupedSection) });

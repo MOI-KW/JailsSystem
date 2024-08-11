@@ -121,7 +121,7 @@ export class ChartDashboardComponent implements OnInit {
         console.log('jailIdchecked', res.Array.row);
         this.settable(res.Array.row)
         res?.Array?.row?.forEach(element => {
-          let E = { id: element.RowsPublicOrganisation?.Number, value: element.RowsIefSupplied?.Count, name: element.RowsPublicOrganisation?.Name }
+          let E = { id: element.RowsJailSections?.SectionNumber, value: element.RowsIefSupplied?.Count, name: element.RowsJailSections?.SectionDescription }
           this.resJailData.push(E)
         })
         console.log("resJailData", this.resJailData)

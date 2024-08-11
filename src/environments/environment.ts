@@ -7,7 +7,7 @@ export const environment = {
 
   /* ***** MIDDLEWARE URLS ***** */
 
-  // //test
+  //test
   clientPrefix: 'ZIT',
   baseURL: 'https://apptest.moi.gov.kw',
   digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
@@ -34,6 +34,6 @@ export const environment = {
   prisonerData: '/moi/JE009/JudgementListInJail',
 
   AppTitle: 'لوحة بيانات السجون',
-  system_name: 'SECFILECHK',
+  system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',
 };
