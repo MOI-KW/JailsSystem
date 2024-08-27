@@ -79,7 +79,6 @@ export class PrisonDataComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
   searchStudent(value: any) {
-    debugger;
     const filteredData = this.filterTableData.filter((e) => {
       return e?.RowsJeWork?.CivilId?.toString()
         .toUpperCase()

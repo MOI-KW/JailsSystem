@@ -9,9 +9,9 @@ import { JailService } from 'src/app/Services/JailData/jail.service';
 })
 export class PrisonerDetailComponent implements OnInit {
   @Input() selectedPrisonerData: any;
-  @Input() PrisonerByCivilId:any;
-  paramCivilIdNo:any;
-  prisonerByParam:any;
+  @Input() PrisonerByCivilId: any;
+  paramCivilIdNo: any;
+  prisonerByParam: any;
   prisonerData: any[] = [];
   displayData: { key: string; value: any }[] = [];
 
@@ -26,20 +26,20 @@ export class PrisonerDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    
-    if(history?.state?.data){
+
+
+    if (history?.state?.data) {
       this.PrisonerByCivilId = history?.state?.data;
     } else {
       this.route.queryParamMap.subscribe(params => {
         const idParam = params.get('id');
         this.paramCivilIdNo = idParam ? +idParam : null;
-        
+
         this.getPrisonerDetailsById(String(this.paramCivilIdNo))
       });
     }
-    
-    
+
+
     this.personPhoto = ''
     if (this.selectedPrisonerData?.RowsJeWork.Number && this.selectedPrisonerData?.RowsJeWork.Number != '0') {
       this.jailService
@@ -53,28 +53,27 @@ export class PrisonerDetailComponent implements OnInit {
     this.changeDetector.detectChanges()
   }
 
-  getPrisonerDetailsById(civilID:any){
-    debugger
+  getPrisonerDetailsById(civilID: any) {
     this.jailService.getPersonJailInfo("1", civilID).subscribe(result => {
       if (result) {
-       
+
         this.prisonerByParam = result;
         const selectedFieldById = {
-          CivilId:result?.ExportPersonDetails?.PersonNo,
-          Name:result?.ExportPersonDetails?.PersonNameAr,
+          CivilId: result?.ExportPersonDetails?.PersonNo,
+          Name: result?.ExportPersonDetails?.PersonNameAr,
           Nationality: result?.ExportPersonDetails?.PersonNationality,
-          JailData:result?.ExportGroupJail?.row[0]
+          JailData: result?.ExportGroupJail?.row[0]
 
         }
-        
+
         this.PrisonerByCivilId = selectedFieldById;
-        
-        
+
+
       } else {
         alert("Error inside the Server")
       }
-    },error => {
-      console.log("Error in Server while Hitting DetailsAPI",error);
+    }, error => {
+      console.log("Error in Server while Hitting DetailsAPI", error);
     })
   }
 
