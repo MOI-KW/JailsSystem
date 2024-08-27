@@ -18,12 +18,7 @@
             <div id="prisonersTable" class="table-responsive scrollbar w-100">
                 <table mat-table [dataSource]="dataSource" [multiTemplateDataRows]="true" matSort
                     class="table overflow-hidden table-hover fs--1 " style="margin: 0 !important;">
-                    <ng-container matColumnDef="jailNumber" hidden>
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-200 text-900 p-2">م</th>
-                        <td mat-cell *matCellDef="let element" class="p-12 py-12">
-                            {{element?.jailNumber }}
-                        </td>
-                    </ng-container>
+
                     <ng-container matColumnDef="sNo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-200 text-900 p-2">م</th>
                         <td mat-cell *matCellDef="let element" class="p-12 py-12"
@@ -107,7 +102,7 @@
 
             </div>
         </div>
-        <div class=" border-dashed-right" style="width: 40%;">
+        <div class=" border-dashed-right" style="width: 40%;" *ngIf="JaildisplayList?.length >0">
             <div class="e-chart-wrapper w-100 h-100">
                 <div echarts [options]="pieChartOptions" style="min-height: 600px;" data-echart-responsive="true"
                     (chartClick)="chartClicked($event)"></div>
@@ -116,9 +111,23 @@
 
     </div>
 </div>
+<div class="card border my-5  shadow-none" *ngIf="showDetails">
+    <div class="card-header  border-bottom bg-body" style="font-size: 30px !important; height: fit-content !important;">
+        {{selectedjailName}}
+    </div>
+    <div class="card-body d-flex w-100">
+        <mat-tab-group class="my-3 w-100" *ngIf="showDetails">
+            <mat-tab label="المحكومين">
+                <app-jail-details class="w-100 my-5" [jailID]="selectedjailID"
+                    [jailName]="selectedjailName"></app-jail-details>
+            </mat-tab>
+            <mat-tab label="الموقوفين"> <app-custody-details class="w-100 my-5" [jailID]="selectedjailID"
+                    [jailName]="selectedjailName"></app-custody-details> </mat-tab>
+        </mat-tab-group>
+
+    </div>
+</div>
 
 
 
 <!-- <div echarts [options]="barChartOptions" style="min-height: 600px;" data-echart-responsive="true"></div> -->
-<app-jail-details class="w-100 my-5" [jailID]="selectedjailID" [jailName]="selectedjailName"
-    *ngIf="showDetails"></app-jail-details>

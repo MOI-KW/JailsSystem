@@ -24,6 +24,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { JailDetailsComponent } from './Forms/jail-details/jail-details.component';
 import { SearchByCivilIDComponent } from './Forms/search-by-civil-id/search-by-civil-id.component';
 import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.component';
+import { CustodyDetailsComponent } from './Forms/custody-details/custody-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.com
     JailDetailsComponent,
     SearchByCivilIDComponent,
     SearchByNameComponent,
+    CustodyDetailsComponent
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),

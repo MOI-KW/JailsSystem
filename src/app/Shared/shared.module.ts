@@ -23,6 +23,9 @@ import { MatInputModule } from '@angular/material/input';
 import { PrisonDataComponent } from '../Forms/prison-data/prison-data.component';
 import { PrisonCardComponent } from '../Forms/prison-card/prison-card.component';
 import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detail.component';
+import { MatTabsModule } from '@angular/material/tabs';
+
+import { PrintPrisonerDetailsComponent } from '../Forms/print-prisoner-details/print-prisoner-details.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detai
     GetAgePipe,
     PrisonDataComponent,
     PrisonCardComponent,
-    PrisonerDetailComponent
+    PrisonerDetailComponent,
+    PrintPrisonerDetailsComponent
   ],
   imports: [
     FormsModule,
@@ -52,8 +56,8 @@ import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detai
     MatSortModule,
     NgSelectModule,
     MatFormFieldModule,
-    MatInputModule
-
+    MatInputModule,
+    MatTabsModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -82,7 +86,9 @@ import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detai
     MatInputModule,
     PrisonDataComponent,
     PrisonCardComponent,
-    PrisonerDetailComponent
+    PrisonerDetailComponent,
+    MatTabsModule,
+    PrintPrisonerDetailsComponent
 
 
   ],

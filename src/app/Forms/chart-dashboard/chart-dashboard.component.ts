@@ -22,7 +22,6 @@ export class ChartDashboardComponent implements OnInit {
   constructor(private middleWareService: MiddlewareService, private changeDetector: ChangeDetectorRef, private jailService: JailService) { }
   tblHeadArr: any[string] = [
     'sNo',
-    'jailNumber',
     'jailName',
     'prisonersCount',
     'custodyCount',
@@ -113,12 +112,6 @@ export class ChartDashboardComponent implements OnInit {
       })
 
 
-      // res?.Array?.row?.forEach(element => {
-      //   let E = { id: element.RowsJailSections?.SectionNumber, value: element.RowsIefSupplied?.Count, name: element.RowsJailSections?.SectionDescription }
-      //   this.resJailData.push(E)
-      // })
-      // console.log("resJailData", this.resJailData)
-      // this.setPieChartOptions(this.resJailData)
     }, (err) => { console.log('err', err) }, () => { this.isLoading = false });
   }
 
@@ -282,7 +275,7 @@ export class ChartDashboardComponent implements OnInit {
       let displayData: any = {}
       displayData.sNo = i + 1
       displayData.jailNumber = details?.RowsJailSections?.SectionNumber
-      displayData.jailName = details?.RowsJailSections?.SectionDescription
+      displayData.jailName = jailsDetails.get(details?.RowsJailSections?.SectionNumber.toString())?.j_name
       displayData.prisonersCount = details?.RowsIefSupplied?.Count
       let custodyD = custodyData.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
       displayData.custodyCount = custodyD ? custodyD.CustodyCount : 0
@@ -296,5 +289,17 @@ export class ChartDashboardComponent implements OnInit {
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.setChart()
+
+  }
+
+  setChart() {
+
+    this.JaildisplayList?.forEach(element => {
+      let E = { id: element?.jailNumber, value: element.total_count, name: element.jailName }
+      this.resJailData.push(E)
+    })
+    console.log("resJailData", this.resJailData)
+    this.setPieChartOptions(this.resJailData)
   }
 }

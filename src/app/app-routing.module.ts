@@ -9,6 +9,7 @@ import { PrisonerDetailComponent } from './Forms/prisoner-detail/prisoner-detail
 import { ChartDashboardComponent } from './Forms/chart-dashboard/chart-dashboard.component';
 import { SearchByCivilIDComponent } from './Forms/search-by-civil-id/search-by-civil-id.component';
 import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.component';
+import { PrintPrisonerDetailsComponent } from './Forms/print-prisoner-details/print-prisoner-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'home', component: ChartDashboardComponent, canActivate: [AuthGuard] },
   { path: 'prisondata', component: PrisonDataComponent },
   { path: 'prisoner-details', component: PrisonerDetailComponent },
+  { path: 'printPerson', component: PrintPrisonerDetailsComponent },
   { path: 'searchByCivilID', component: SearchByCivilIDComponent, canActivate: [AuthGuard] },
   { path: 'searchByName', component: SearchByNameComponent, canActivate: [AuthGuard] },
   {
