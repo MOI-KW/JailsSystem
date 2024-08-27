@@ -226,4 +226,11 @@ export class JailService {
           }
         }))
   }
+
+  getNationalitiesList() {
+    let form = {
+      command: "DISPLAY",
+    };
+    return this.middleWareService.callMiddleware(environment.nationalitiesList, form).pipe();
+  }
 }

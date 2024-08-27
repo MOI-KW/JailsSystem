@@ -28,6 +28,7 @@ export const environment = {
   photo: '/moi/PE013/Pe013GetLatestPassportImage',
   biometric_photo: '/moi/FP011/DisplayPersonPhoto', //non-kuwaiti
   nationality_photo: '/moi/SH011/InquirePersonPhoto',
+  nationalitiesList: "/moi/GQAY/GqayListNationalitySvr",
 
   //mib
   jailIdrl: '/moi/JE008/JudgementStatInJail',

@@ -103,6 +103,29 @@
                     </span>
 
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4" formGroupName="ImportNationality">
+                    <div class="form-floating mb-3">
+                        <select class="form-select form-control form-control-sm" id="Code"
+                            aria-label="Default select example" style="max-width: none !important;"
+                            [class.invalid]="SearchByNameForm.get('ImportNationality').get('Code').errors && (SearchByNameForm.touched || SearchByNameForm.dirty)"
+                            formControlName="Code">
+                            <option *ngFor="let option of nationalities" [value]="option.GrpOutNationality.Code"
+                                (change)="onNationalityChange(option.GrpOutNationality.ArabicDescription,option.GrpOutNationality.Code)">
+                                {{option.GrpOutNationality.ArabicDescription}}
+                            </option>
+                        </select>
+                        <label for="Code">الجنسية</label>
+                    </div>
+                </div>
+                <div class="row form-group"
+                    *ngIf="SearchByNameForm.get('ImportNationality').get('Code').errors && (SearchByNameForm.touched || SearchByNameForm.dirty)">
+                    <span class="invalid-feedback d-block">
+                        Ar- Nationality is required
+                    </span>
+                </div>
                 <div class="row w-100 my-3">
                     <div class="col-5">
                         <button class="btn btn-primary shadow-none btn-sw"
@@ -122,3 +145,9 @@
         </form>
     </div>
 </div>
+
+
+<ng-container *ngIf="showList">
+    <app-dynamic-table [individualReq]="tableData" [columns]="defaultHeader" [displayedColumns]="customHeader"
+        (selectedRow)="onFetchedRow($event)"></app-dynamic-table>
+</ng-container>
