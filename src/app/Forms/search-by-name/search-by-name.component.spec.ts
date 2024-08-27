@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DemoComponent } from './demo.component';
+import { SearchByNameComponent } from './search-by-name.component';
 
-describe('DemoComponent', () => {
-  let component: DemoComponent;
-  let fixture: ComponentFixture<DemoComponent>;
+describe('SearchByNameComponent', () => {
+  let component: SearchByNameComponent;
+  let fixture: ComponentFixture<SearchByNameComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DemoComponent ]
+      declarations: [ SearchByNameComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DemoComponent);
+    fixture = TestBed.createComponent(SearchByNameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

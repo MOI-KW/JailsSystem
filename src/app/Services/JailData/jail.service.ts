@@ -8,8 +8,85 @@ import { BehaviorSubject, map } from 'rxjs';
   providedIn: 'root'
 })
 export class JailService {
+  getlistbyName(SearchByNameForm) {
+    return this.middleWareService.callMiddleware(environment.searchByName, SearchByNameForm).pipe(map(
+      (result) => {
+        if (result != null && result.attributes?.exitStateType == "3") {
+          return result
+        }
+      }
+    ));
+  }
+
   public groupedData: any[] = [];
   constructor(private middleWareService: MiddlewareService, private alertService: AlertService) { }
+
+  getCustodyDetails() {
+    let body = {
+      command: "GET"
+    }
+
+    return this.middleWareService
+      .callMiddleware(`${environment.custodyStatsInPrison}`, body)
+      .pipe(map((res: any) => {
+        if (res) {
+          if (res.ExportReturnMessage?.Code == 1) {
+            let custodyList = res.ExportGroupStats?.row.map(jail => {
+              let x: any = {}
+              x.jailNumber = jail.ExportGrpJailSections?.SectionNumber
+              x.CustodyCount = jail.ExportGrpCountIefSupplied?.Count
+              return x
+
+            })
+            return custodyList;
+          }
+          else {
+            this.alertService.error(res.ExportReturnMessage?.MessageEn)
+            return null
+          }
+        }
+        else {
+          this.alertService.error("حدث خطأ")
+          return null
+        }
+      }));
+  }
+
+  getCustodyListDetails(jailId: number) {
+    let body = {
+      ImportJailSections: {
+        SectionNumber: jailId
+      }
+    };
+
+    return this.middleWareService
+      .callMiddleware(`${environment.custodyListInPrison}`, body)
+      .pipe(map((res: any) => {
+        if (res) {
+          if (res.ExportReturnMessage?.Code == 1) {
+            return res.ExportGroup.row;
+          }
+          else {
+            this.alertService.error(res.ExportReturnMessage?.MessageEn)
+            return null
+          }
+        }
+        else {
+          this.alertService.error("حدث خطأ")
+          return null
+        }
+      }));
+  }
+  //======================================================================================================================================================
+
+  getJailData() {
+    let body = {};
+    return this.middleWareService
+      .callMiddleware(`${environment.jailIdrl}`, body).pipe()
+
+  }
+
+
   getJailDetails(jailId: number) {
     let body = {
       ImportJailSections: {
@@ -65,7 +142,32 @@ export class JailService {
     // Convert object back to array
     //this.groupedData.push({ [jailId]: Object.values(groupedSection) });
   }
+  groupCustodyData(data: any) {
+    const groupedSection = data.reduce((acc, current) => {
+      const sectionNumber = current.ExportGrpCustody.SectionNumber;
+      const wardNumber = current.ExportGrpCustody.WardSectionNumber;
+      if (!acc[sectionNumber]) {
+        acc[sectionNumber] = {
+          sectionNumber: sectionNumber,
+          wards: { [wardNumber]: 1 },
+          totalCount: 1,
+        };
+      } else {
+        if (!acc[sectionNumber].wards[wardNumber]) {
+          acc[sectionNumber].wards[wardNumber] = 1;
+        } else {
+          acc[sectionNumber].wards[wardNumber]++;
+        }
+        acc[sectionNumber].totalCount++;
+      }
 
+      return acc;
+    }, {});
+    console.log("groupedSection", groupedSection)
+    return groupedSection
+    // Convert object back to array
+    //this.groupedData.push({ [jailId]: Object.values(groupedSection) });
+  }
 
   public getBiometricPhoto(personNumber) {
     //console.log('get Passport Photo');
@@ -99,5 +201,29 @@ export class JailService {
         expiredList.push(x)
     })
     console.log(jailID, expiredList)
+  }
+  //================================================================
+  getPersonJailInfo(personType, CivilIdNumber) {
+    let body = {
+      ImportPersonDetails: {
+        PersonType: personType,
+        PersonNo: CivilIdNumber
+      }
+    }
+
+    return this.middleWareService
+      .callMiddleware(environment.getPersonJailInfo, body)
+      .pipe(
+        map((result: any) => {
+          if (result) {
+            if (result?.ExportReturnMessage?.Code == 1) {
+              return result
+            }
+            else {
+              this.alertService.error(result?.ExportReturnMessage?.MessageAr)
+            }
+
+          }
+        }))
   }
 }

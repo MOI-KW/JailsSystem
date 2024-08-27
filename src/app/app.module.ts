@@ -19,11 +19,11 @@ import { HttpErrorInterceptorProviders } from './Helpers/http-error.interceptor'
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DemoComponent } from './demo/demo.component';
 import { ChartDashboardComponent } from './Forms/chart-dashboard/chart-dashboard.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { JailDetailsComponent } from './Forms/jail-details/jail-details.component';
+import { SearchByCivilIDComponent } from './Forms/search-by-civil-id/search-by-civil-id.component';
+import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +35,10 @@ import { JailDetailsComponent } from './Forms/jail-details/jail-details.componen
     NoRightClickDirective,
     AutoTabDirective,
     SubMenuComponent,
-    DashboardComponent,
-    DemoComponent,
     ChartDashboardComponent,
     JailDetailsComponent,
+    SearchByCivilIDComponent,
+    SearchByNameComponent,
   ],
   imports: [
     NgIdleKeepaliveModule.forRoot(),

@@ -3,14 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Forms/login/login.component';
 import { ChangePasswordComponent } from './Forms/login/change-password/change-password.component';
 import { AuthGuard } from './Guards/auth-guard/auth.guard';
-import { HomeComponent } from './Forms/home/home.component';
 import { SubMenuComponent } from './Forms/sub-menu/sub-menu.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PrisonCardComponent } from './Forms/prison-card/prison-card.component';
 import { PrisonDataComponent } from './Forms/prison-data/prison-data.component';
-import { DemoComponent } from './demo/demo.component';
 import { PrisonerDetailComponent } from './Forms/prisoner-detail/prisoner-detail.component';
 import { ChartDashboardComponent } from './Forms/chart-dashboard/chart-dashboard.component';
+import { SearchByCivilIDComponent } from './Forms/search-by-civil-id/search-by-civil-id.component';
+import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,9 +19,10 @@ const routes: Routes = [
   },
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: ChartDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'prisondata', component: PrisonDataComponent },
   { path: 'prisoner-details', component: PrisonerDetailComponent },
+  { path: 'searchByCivilID', component: SearchByCivilIDComponent, canActivate: [AuthGuard] },
+  { path: 'searchByName', component: SearchByNameComponent, canActivate: [AuthGuard] },
   {
     path: 'sub-Menu/:ID',
     component: SubMenuComponent,

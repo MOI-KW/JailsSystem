@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-9">
+        <div class="card theme-wizard mb-3 border shadow-none">
+
+            <div class="card-header p-4 border-bottom bg-body">
+                <div class="row g-3 justify-content-between align-items-center">
+                    <div class="col-12 col-md">
+                        <h4 class="mb-0" data-anchor="data-anchor" id="alerts-with-icon">
+                            بحث بالرقم المدني
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body py-3">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-floating my-3">
+                            <input class="form-control form-control-sm shadow-none" id="CivilIdNumber" type="text"
+                                [(ngModel)]="CivilIdNumber" autocomplete="off" [minLength]="12" [maxLength]="12"
+                                autofocus (keypress)="digitsOnly($event)" placeholder="الرقم المدني"
+                                (keyup.enter)="search()"
+                                [class.invalid]="CivilIdNumber?.length!=12 && CivilIdNumber !=''" />
+                            <label for="CivilIdNumber">الرقم المدني</label>
+                            <span class="input-group-text   m-auto p-auto cross" id="basic-addon1"
+                                *ngIf="CivilIdNumber !=''">
+                                <i class="bi bi-x-circle" (click)="clearData()">
+                                </i>
+                            </span>
+
+                        </div>
+                        <label class="input_counter arabicRegular">
+                            {{CivilIdNumber?.length}} /12
+                        </label>
+                    </div>
+                </div>
+                <div class="row w-100 my-3">
+                    <div class="col-5">
+                        <button class="btn btn-primary shadow-none btn-sw" [disabled]="CivilIdNumber?.length <12"
+                            type="button" (click)="search()">
+                            بحث
+                        </button>
+                    </div>
+                    <div class="col-5 ">
+                        <button class="btn btn-outline-primary shadow-none btn-sw mx-3" type="button"
+                            (click)="goBack()">
+                            رجوع</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

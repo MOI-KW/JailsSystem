@@ -1,0 +1,124 @@
+<app-loader *ngIf="isLoading"></app-loader>
+
+<div class="card theme-wizard mb-3 border shadow-none">
+
+    <div class="card-header p-4 border-bottom bg-body">
+        <div class="row g-3 justify-content-between align-items-center">
+            <div class="col-12 col-md">
+                <h4 class="mb-0" data-anchor="data-anchor" id="alerts-with-icon">
+                    بحث بالإسم
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-body py-3">
+        <form [formGroup]="SearchByNameForm" class="m-0 p-0" (keyup.enter)="search()">
+            <div class="row" formGroupName="ImportPersonEntry">
+                <div class="col-4">
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control form-control-sm" formControlName="Arabic1stName" type="text"
+                            placeholder=" الإسم الأول" (keypress)="arabicValidation($event)" />
+                        <label>الإسم الأول </label>
+                        <span class="input-group-text  p-auto cross showPasswordIcon"
+                            *ngIf="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic1stName'].value != ''">
+                            <i class="bi bi-x-circle"
+                                (click)="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic1stName'].setValue ('')">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" formGroupName="ImportPersonEntry">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input class="form-control form-control-sm" formControlName="Arabic2ndName" type="text"
+                            placeholder="الإسم الثاني" (keypress)="arabicValidation($event)" />
+                        <label>الإسم الثاني </label>
+                        <span class="input-group-text  p-auto cross showPasswordIcon">
+                            <i class="bi bi-x-circle"
+                                *ngIf="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic2ndName'].value != ''"
+                                (click)="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic2ndName'].setValue ('')">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" formGroupName="ImportPersonEntry">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input class="form-control form-control-sm" formControlName="Arabic3rdName" type="text"
+                            placeholder=" الإسم الثالث" (keypress)="arabicValidation($event)" />
+                        <label>الإسم الثالث </label>
+                        <span class="input-group-text  p-auto cross showPasswordIcon">
+                            <i class="bi bi-x-circle"
+                                *ngIf=" SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic3rdName'].value != ''"
+                                (click)="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic3rdName'].setValue ('')">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" formGroupName="ImportPersonEntry">
+                <div class="col-4">
+                    <div class="form-floating mb-3">
+                        <input class="form-control form-control-sm" formControlName="Arabic4thName" type="text"
+                            placeholder=" الإسم الرابع" (keypress)="arabicValidation($event)" />
+                        <label>الإسم الرابع </label>
+                        <span class="input-group-text  p-auto cross showPasswordIcon">
+                            <i class="bi bi-x-circle"
+                                *ngIf=" SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic4thName'].value != ''"
+                                (click)="SearchByNameForm.controls['ImportPersonEntry']['controls']['Arabic4thName'].setValue ('')">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-floating mb-3" formGroupName="ImportPersonEntry">
+                        <input class="form-control form-control-sm" formControlName="ArabicFamilyName"
+                            (keypress)="arabicValidation($event)" type="text" placeholder=" العائلة" />
+                        <label>العائلة </label>
+                        <span class="input-group-text  p-auto cross showPasswordIcon">
+                            <i class="bi bi-x-circle"
+                                *ngIf="SearchByNameForm.controls['ImportPersonEntry']['controls']['ArabicFamilyName'].value != ''"
+                                (click)="SearchByNameForm.controls['ImportPersonEntry']['controls']['ArabicFamilyName'].setValue ('')">
+                            </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="row form-group mb-3 "
+                    *ngIf="SearchByNameForm.invalid && (SearchByNameForm.touched || SearchByNameForm.dirty)">
+                    <span class="invalid-feedback d-block">
+                        يجب ادخال الاسم الاول وعلى الاقل اسمين
+                    </span>
+
+                </div>
+                <div class="row w-100 my-3">
+                    <div class="col-5">
+                        <button class="btn btn-primary shadow-none btn-sw"
+                            [disabled]="SearchByNameForm.invalid && (SearchByNameForm.touched || SearchByNameForm.dirty)"
+                            type="button" (click)="search()">
+                            بحث
+                        </button>
+                    </div>
+                    <div class="col-5 ">
+                        <button class="btn btn-outline-primary shadow-none btn-sw mx-3" type="button"
+                            (click)="goBack()">
+                            رجوع</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -33,6 +33,12 @@ export const environment = {
   jailIdrl: '/moi/JE008/JudgementStatInJail',
   prisonerData: '/moi/JE009/JudgementListInJail',
 
+
+  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
+  custodyListInPrison: "/moi/JP003/Jp003CustodyListInPrison",
+  getPersonJailInfo: "/moi/JP001/Jp001GetPersonJailInfo",
+  searchByName: "/moi/GQBC/GqbcSearchByName",
+
   AppTitle: 'لوحة بيانات السجون',
   system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',

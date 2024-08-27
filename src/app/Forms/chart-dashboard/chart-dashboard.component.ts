@@ -2,13 +2,12 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Utils } from 'angular-bootstrap-md/lib/free/utils';
 import { EChartsOption } from 'echarts';
 import { DataTableConstants } from 'src/app/Globals/datatable';
 import { jailsDetails } from 'src/app/Models/Jails';
 import { JailService } from 'src/app/Services/JailData/jail.service';
 import { MiddlewareService } from 'src/app/Services/middleware.service';
-import { environment } from 'src/environments/environment';
+
 
 
 declare const utils: any;
@@ -22,7 +21,11 @@ export class ChartDashboardComponent implements OnInit {
 
   constructor(private middleWareService: MiddlewareService, private changeDetector: ChangeDetectorRef, private jailService: JailService) { }
   tblHeadArr: any[string] = [
+    'sNo',
+    'jailNumber',
     'jailName',
+    'prisonersCount',
+    'custodyCount',
     'total_count',
     'capacity',
     'percent',
@@ -30,6 +33,7 @@ export class ChartDashboardComponent implements OnInit {
   ];
 
   dataSource!: MatTableDataSource<any>;
+  JaildisplayList = []
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -93,18 +97,34 @@ export class ChartDashboardComponent implements OnInit {
   };
 
   ngOnInit(): void {
-
-    this.getJailData()
+    this.showtable()
   }
-  filterTableData = []
-  settable(tableData) {
-    console.log("tableData", tableData)
-    this.dataSource = new MatTableDataSource(tableData);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
 
-    this.filterTableData = tableData;
+  showtable() {
+    let custodyList = []
+    this.jailService.getJailData().subscribe(res => {
+      console.log('jailIdchecked', res.Array.row);
+      this.jailService.getCustodyDetails().subscribe(custodyResult => {
+        console.log(custodyResult)
+        custodyList = custodyResult
+      }, () => { }, () => {
+        this.settable(res.Array.row, custodyList)
+
+      })
+
+
+      // res?.Array?.row?.forEach(element => {
+      //   let E = { id: element.RowsJailSections?.SectionNumber, value: element.RowsIefSupplied?.Count, name: element.RowsJailSections?.SectionDescription }
+      //   this.resJailData.push(E)
+      // })
+      // console.log("resJailData", this.resJailData)
+      // this.setPieChartOptions(this.resJailData)
+    }, (err) => { console.log('err', err) }, () => { this.isLoading = false });
   }
+
+
+
+
   ngAfterViewInit() {
     if (this.dataSource?.paginator) {
       this.dataSource.paginator = this.paginator;
@@ -112,22 +132,7 @@ export class ChartDashboardComponent implements OnInit {
 
   }
   resJailData = []
-  async getJailData() {
 
-    let body = {};
-    this.middleWareService
-      .callMiddleware(`${environment.jailIdrl}`, body)
-      .subscribe(res => {
-        console.log('jailIdchecked', res.Array.row);
-        this.settable(res.Array.row)
-        res?.Array?.row?.forEach(element => {
-          let E = { id: element.RowsJailSections?.SectionNumber, value: element.RowsIefSupplied?.Count, name: element.RowsJailSections?.SectionDescription }
-          this.resJailData.push(E)
-        })
-        console.log("resJailData", this.resJailData)
-        this.setPieChartOptions(this.resJailData)
-      }, (err) => { console.log('err', err) }, () => { this.isLoading = false });
-  }
 
   setPieChartOptions(data: any = []) {
     this.pieChartOptions = {
@@ -234,7 +239,7 @@ export class ChartDashboardComponent implements OnInit {
   }
 
   getJailCapacity(jail_code) {
-    let jail = jailsDetails.get(jail_code.toString())
+    let jail = jailsDetails.get(jail_code?.toString())
     if (jail) return jail.capacity
     else return 0
 
@@ -266,5 +271,30 @@ export class ChartDashboardComponent implements OnInit {
     totalValue = totalValue != 0 ? totalValue : 1
     return ((value / totalValue) * 100).toFixed(2)
 
+  }
+
+
+
+  settable(jailData, custodyData) {
+    console.log("settable", custodyData)
+    this.JaildisplayList = jailData.map((details: any, i) => {
+
+      let displayData: any = {}
+      displayData.sNo = i + 1
+      displayData.jailNumber = details?.RowsJailSections?.SectionNumber
+      displayData.jailName = details?.RowsJailSections?.SectionDescription
+      displayData.prisonersCount = details?.RowsIefSupplied?.Count
+      let custodyD = custodyData.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
+      displayData.custodyCount = custodyD ? custodyD.CustodyCount : 0
+      displayData.total_count = displayData.prisonersCount + displayData.custodyCount
+
+      return displayData
+    })
+
+    console.log("JaildisplayList", this.JaildisplayList)
+    this.dataSource = new MatTableDataSource(this.JaildisplayList);
+
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 }

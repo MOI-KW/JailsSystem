@@ -32,6 +32,11 @@ export const environment = {
   nationality_photo: '/moi/SH011/InquirePersonPhoto',
 
 
+
+  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
+  custodyListInPrison: "/moi/JP003/Jp003CustodyListInPrison",
+  searchByName: "/moi/GQBC/GqbcSearchByName",
+
   AppTitle: "لوحة بيانات السجون",
   system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',
