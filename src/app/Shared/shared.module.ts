@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { PrisonDataComponent } from '../Forms/prison-data/prison-data.component';
 import { PrisonCardComponent } from '../Forms/prison-card/prison-card.component';
 import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detail.component';
+import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detai
     GetAgePipe,
     PrisonDataComponent,
     PrisonCardComponent,
-    PrisonerDetailComponent
+    PrisonerDetailComponent,
+    DynamicTableComponent
   ],
   imports: [
     FormsModule,
@@ -82,7 +84,8 @@ import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detai
     MatInputModule,
     PrisonDataComponent,
     PrisonCardComponent,
-    PrisonerDetailComponent
+    PrisonerDetailComponent,
+    DynamicTableComponent
 
 
   ],
