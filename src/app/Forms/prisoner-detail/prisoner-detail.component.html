@@ -6,89 +6,100 @@
         <div class="infoDiv" style="width: 75% !important">
             <table class="table fs--1 mb-0 overflow-hidden">
                 <tbody class="col-12">
+
                     <tr>
-                        <td class="text-black prisonDashboardtd">الرقم المدني</td>
-                        <td class="text-primary">{{ selectedPrisonerData?.RowsJeWork.CivilId
-                            }}</td>
+                        <td class="text-black prisonDashboardtd">CivilId.AR</td>
+                        <td class="text-primary">{{ PrisonerByCivilId?.CivilId}}</td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">رقم المرجع</td>
+                        <td class="text-black prisonDashboardtd">Name.AR</td>
+                        <td class="text-primary">{{ PrisonerByCivilId?.Name}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-black prisonDashboardtd">Nationality.AR</td>
+                        <td class="text-primary">{{ PrisonerByCivilId?.Nationality}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-black prisonDashboardtd">JailID.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJeWork.Number }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailPublicOrganisation?.Number }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">الإسم</td>
+                        <td class="text-black prisonDashboardtd">CaseNumber.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJeWork.ConcatArabicName }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpCase?.CaseNumber }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">التهمة</td>
+                        <td class="text-black prisonDashboardtd">CaseName.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsCrimeType?.Description }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpCasePublicOrganisation?.Name }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-black prisonDashboardtd">Year of Case.AR</td>
+                        <td class="text-primary">
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpCase?.CaseYearIdent }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">رقم القضية</td>
+                        <td class="text-black prisonDashboardtd">Case Description.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsCase.CaseNumber }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpCaseType?.Description }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-black prisonDashboardtd">JailPublicOrganisation Name.AR</td>
+                        <td class="text-primary">
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpCasePublicOrganisation?.Name }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">تفاصيل القضية</td>
+                        <td class="text-black prisonDashboardtd">SectionNumber.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsCaseType.Description }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.SectionNumber }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">سجن</td>
+                        <td class="text-black prisonDashboardtd">Ward Number.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailPublicOrganisation.Name }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpWardJailSections?.SectionNumber }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">رقم القطاع </td>
+                        <td class="text-black prisonDashboardtd">Ward Description.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.SectionNumber }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpWardJailSections?.SectionDescription }}
                         </td>
                     </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">رقم الجناح</td>
-                        <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.WardSectionNumber }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">الجنسية</td>
-                        <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsNationality.ArabicDescription }}
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="text-black prisonDashboardtd">تاريخ السجن</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.StartDate | datetimeFormat }}
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.StartDate | datetimeFormat }}
                         </td>
                     </tr>
 
                     <tr>
                         <td class="text-black prisonDashboardtd">المدة</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.DurationYears
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationYears
                             }} سنة -
-                            {{ selectedPrisonerData?.RowsJailSentence.DurationMonths
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationMonths
                             }} شهر -
-                            {{ selectedPrisonerData?.RowsJailSentence.DurationDays
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationDays
                             }} يوم
 
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="text-black prisonDashboardtd">تاريخ الخروج المتوقع</td>
+                        <td class="text-black prisonDashboardtd">ExpectedEndDate.AR</td>
                         <td class="text-primary">
-                            {{ selectedPrisonerData?.RowsJailSentence.ExpectedEndDate | datetimeFormat
+                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.ExpectedEndDate | datetimeFormat
                             }}
                         </td>
                     </tr>
@@ -110,7 +121,7 @@
 
 </div>
 
-<!-- <div class="back-btn d-flex  m-2">
+<div class="back-btn d-flex  m-2">
     <button class="btn btn-primary float-start" type="button" (click)="goBack()">
         رجوع</button>
-</div> -->
+</div>
