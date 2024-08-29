@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormFunctions } from 'src/app/Globals/form';
 import { JailService } from 'src/app/Services/JailData/jail.service';
@@ -16,44 +16,39 @@ export class SearchByCivilIDComponent implements OnInit {
     private alertService: AlertService,
     private location: Location,
     private jailService: JailService,
-    private router:Router
+    private ChangeDetector: ChangeDetectorRef
   ) { }
   ngOnInit(): void { }
   isLoading = false;
   CivilIdNumber = '';
   showPrisonerCard = false;
-  selectedPrisoner = {};
+  selectedPrisoner = null;
 
-  prisonerByCivilIdObj:any = {};
+  prisonerByCivilIdObj: any = {};
 
   clearData() {
     this.CivilIdNumber = '';
     this.showPrisonerCard = false;
-    this.selectedPrisoner = {};
+    this.selectedPrisoner = null;
     this.prisonerByCivilIdObj = {};
     this.alertService.hideAlerts();
   }
 
   search() {
-    this.jailService.getPersonJailInfo("1", this.CivilIdNumber).subscribe(result => {
-      if (result) {      
-        this.selectedPrisoner = result;
-        const selectedFieldById = {
-          CivilId:result?.ExportPersonDetails?.PersonNo,
-          Name:result?.ExportPersonDetails?.PersonNameAr,
-          Nationality: result?.ExportPersonDetails?.PersonNationality,
-          JailData:result?.ExportGroupJail?.row[0]
 
-        }
-        this.router.navigate(['/prisoner-details' ], { state: { data: selectedFieldById },queryParams:{id:selectedFieldById.CivilId} });
-        this.showPrisonerCard = true;
-      } else {
-        alert("Error inside the Server")
+    this.jailService.getPersonJailInfo("1", this.CivilIdNumber).subscribe(result => {
+      if (result) {
+        this.selectedPrisoner = result
+        this.jailService.getBiometricPhoto(this.selectedPrisoner.personType, this.selectedPrisoner.nationalNumber).subscribe(resultPhoto => {
+          this.selectedPrisoner.Photo = resultPhoto
+          this.showPrisonerCard = true;
+        })
+
+        this.ChangeDetector.detectChanges()
       }
-    },error => {
-      console.log("Error in Server while Hitting DetailsAPI");
     })
   }
+
 
 
   digitsOnly(event: { charCode: any }) {

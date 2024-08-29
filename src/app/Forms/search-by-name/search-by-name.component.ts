@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MOIprisoner } from 'src/app/Models/prisenorDetails';
 import { JailService } from 'src/app/Services/JailData/jail.service';
 
 @Component({
@@ -11,17 +12,19 @@ import { JailService } from 'src/app/Services/JailData/jail.service';
 })
 export class SearchByNameComponent implements OnInit {
 
-  constructor(private _fb: FormBuilder, private jailService: JailService, private location: Location, private router: Router) { }
+  constructor(private _fb: FormBuilder, private jailService: JailService,
+    private location: Location, private ChangeDetector: ChangeDetectorRef) { }
   isLoading = false;
   isSubmited = false;
   PersonListResult;
 
 
   nationalities: any[] = [];
-  customHeader: any[string] = ['Sl.No.AR', 'ArabicFullName.AR', 'CivilId.AR', 'Gender.AR', 'Nationality.AR', 'Status.AR', 'Action.AR'];
-  defaultHeader: any[string] = ['No', 'ArabicFullName', 'CivilId', 'Sex', 'ArabicDescription', 'Status', 'Action'];
+  customHeader: any[string] = ['م', 'الرقم المدني', 'الاسم', 'النوع', 'الجنسية', 'الحالة', ''];
+  defaultHeader: any[string] = ['No', 'CivilId', 'ArabicFullName', 'Sex', 'ArabicDescription', 'Status', 'Action'];
   tableData: any[] = [];
   showList = false
+  selectedPerson: MOIprisoner = null
 
 
   SearchByNameForm = this._fb.group({
@@ -71,7 +74,7 @@ export class SearchByNameComponent implements OnInit {
       })
         ? null
         : ({
-          atLeastTwo: "At least two fields has to be provided.",
+          atLeastTwo: "يجب ادخال اسمين على الاقل",
         } as ValidationErrors);
     };
   }
@@ -93,6 +96,8 @@ export class SearchByNameComponent implements OnInit {
       }));
       mappedResponse ? this.tableData = mappedResponse : [];
       this.tableData.length ? this.showList = true : this.showList = false;
+
+
     });
   }
   regex = /^[\u0621-\u064A\u0660-\u0669 ]+$/;
@@ -130,19 +135,18 @@ export class SearchByNameComponent implements OnInit {
   }
 
   onFetchedRow(eventData: any) {
+    this.selectedPerson = null
     this.getPersonJailInfo(eventData?.PersonType, eventData?.CivilId);
   }
-
+  showPrisonerCard = false;
   getPersonJailInfo(personType, CivilIdNumber) {
+
     this.jailService.getPersonJailInfo(personType, CivilIdNumber).subscribe(result => {
+
       if (result) {
-        const selectedFieldById = {
-          CivilId: result?.ExportPersonDetails?.PersonNo,
-          Name: result?.ExportPersonDetails?.PersonNameAr,
-          Nationality: result?.ExportPersonDetails?.PersonNationality,
-          JailData: result?.ExportGroupJail?.row[0]
-        }
-        this.router.navigate(['/prisoner-details'], { queryParams: { id: selectedFieldById.CivilId } });
+        this.selectedPerson = result
+        this.showPrisonerCard = true;
+        this.ChangeDetector.detectChanges()
       }
     })
   }

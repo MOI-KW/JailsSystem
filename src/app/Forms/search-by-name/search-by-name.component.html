@@ -96,13 +96,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="row form-group mb-3 "
-                    *ngIf="SearchByNameForm.invalid && (SearchByNameForm.touched || SearchByNameForm.dirty)">
-                    <span class="invalid-feedback d-block">
-                        يجب ادخال الاسم الاول وعلى الاقل اسمين
-                    </span>
 
-                </div>
             </div>
 
             <div class="row">
@@ -123,8 +117,15 @@
                 <div class="row form-group"
                     *ngIf="SearchByNameForm.get('ImportNationality').get('Code').errors && (SearchByNameForm.touched || SearchByNameForm.dirty)">
                     <span class="invalid-feedback d-block">
-                        Ar- Nationality is required
+                        اختار الجنسية
                     </span>
+                </div>
+                <div class="row form-group mb-3 "
+                    *ngIf="SearchByNameForm.invalid && (SearchByNameForm.touched || SearchByNameForm.dirty)">
+                    <span class="invalid-feedback d-block">
+                        يجب ادخال الاسم الاول وعلى الاقل اسمين
+                    </span>
+
                 </div>
                 <div class="row w-100 my-3">
                     <div class="col-5">
@@ -146,8 +147,12 @@
     </div>
 </div>
 
-
-<ng-container *ngIf="showList">
-    <app-dynamic-table [individualReq]="tableData" [columns]="defaultHeader" [displayedColumns]="customHeader"
-        (selectedRow)="onFetchedRow($event)"></app-dynamic-table>
-</ng-container>
+<div class="d-flex p-3">
+    <div class="w-50 p-0 me-0 ml-3" *ngIf="showList">
+        <app-dynamic-table [individualReq]="tableData" [columns]="defaultHeader" [displayedColumns]="customHeader"
+            (selectedRow)="onFetchedRow($event)"></app-dynamic-table>
+    </div>
+    <div class="w-50 p-0 my-5 mx-0" *ngIf="showPrisonerCard">
+        <app-prisoner-detail [selectedPrisonerData]="selectedPerson"></app-prisoner-detail>
+    </div>
+</div>

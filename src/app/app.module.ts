@@ -25,6 +25,7 @@ import { JailDetailsComponent } from './Forms/jail-details/jail-details.componen
 import { SearchByCivilIDComponent } from './Forms/search-by-civil-id/search-by-civil-id.component';
 import { SearchByNameComponent } from './Forms/search-by-name/search-by-name.component';
 import { CustodyDetailsComponent } from './Forms/custody-details/custody-details.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CustodyDetailsComponent } from './Forms/custody-details/custody-details
     HttpClientModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    NgxPrintModule
   ],
   providers: [DatePipe, JwtInterceptorProviders, HttpErrorInterceptorProviders],
   bootstrap: [AppComponent],

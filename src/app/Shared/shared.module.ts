@@ -25,6 +25,7 @@ import { PrisonCardComponent } from '../Forms/prison-card/prison-card.component'
 import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detail.component';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxPrintModule } from 'ngx-print';
 
 import { PrintPrisonerDetailsComponent } from '../Forms/print-prisoner-details/print-prisoner-details.component';
 
@@ -59,7 +60,9 @@ import { PrintPrisonerDetailsComponent } from '../Forms/print-prisoner-details/p
     NgSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxPrintModule
+
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -15,11 +15,11 @@ export class MiddlewareService {
     private router: Router,
     private http: HttpClient,
     private CookieService: CookieService
-  ) {}
+  ) { }
 
   baseUrl: string = environment.baseURL;
 
-  
+
 
 
   callSahlNotification(form) {
@@ -57,7 +57,7 @@ export class MiddlewareService {
     );
   }
   callPostMiddleware(url: string, form: any) {
-    
+
     let path = `${environment.baseURL}` + url;
     return this.http.post(path, form).pipe(
       map(

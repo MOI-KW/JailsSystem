@@ -102,9 +102,7 @@ export class ChartDashboardComponent implements OnInit {
   showtable() {
     let custodyList = []
     this.jailService.getJailData().subscribe(res => {
-      console.log('jailIdchecked', res.Array.row);
       this.jailService.getCustodyDetails().subscribe(custodyResult => {
-        console.log(custodyResult)
         custodyList = custodyResult
       }, () => { }, () => {
         this.settable(res.Array.row, custodyList)
@@ -143,17 +141,6 @@ export class ChartDashboardComponent implements OnInit {
 
         }
       },
-      // legend: {
-      //   orient: 'vertical',
-      //   left: 'right',
-      //   padding: 10,
-      //   itemGap: 15,
-      //   textStyle: {
-      //     fontSize: '16',
-      //     fontFamily: "NotoKufiArabic-VariableFont_wght",
-      //     fontWeight: 600
-      //   }
-      // },
       series: [
         {
           name: 'السجون',
@@ -266,29 +253,36 @@ export class ChartDashboardComponent implements OnInit {
 
   }
 
-
+  total_prisonersCount = 0
+  total_custodyCount = 0
+  total_total_count = 0
 
   settable(jailData, custodyData) {
-    console.log("settable", custodyData)
     this.JaildisplayList = jailData.map((details: any, i) => {
 
       let displayData: any = {}
-      displayData.sNo = i + 1
+      displayData.sNo = jailsDetails.get(details?.RowsJailSections?.SectionNumber.toString())?.seqNo
       displayData.jailNumber = details?.RowsJailSections?.SectionNumber
       displayData.jailName = jailsDetails.get(details?.RowsJailSections?.SectionNumber.toString())?.j_name
       displayData.prisonersCount = details?.RowsIefSupplied?.Count
-      let custodyD = custodyData.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
+      let custodyD = custodyData?.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
       displayData.custodyCount = custodyD ? custodyD.CustodyCount : 0
       displayData.total_count = displayData.prisonersCount + displayData.custodyCount
 
       return displayData
     })
+    let data = this.JaildisplayList?.sort((a, b) => {
+      return compare(a.sNo, b.sNo, true);
+    });
 
-    console.log("JaildisplayList", this.JaildisplayList)
-    this.dataSource = new MatTableDataSource(this.JaildisplayList);
+    this.dataSource = new MatTableDataSource(data)
 
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+
+    this.total_prisonersCount = this.JaildisplayList.reduce((prev, next) => prev + next.prisonersCount, 0)
+    this.total_custodyCount = this.JaildisplayList.reduce((prev, next) => prev + next.custodyCount, 0)
+    this.total_total_count = this.JaildisplayList.reduce((prev, next) => prev + next.total_count, 0)
     this.setChart()
 
   }
@@ -299,7 +293,12 @@ export class ChartDashboardComponent implements OnInit {
       let E = { id: element?.jailNumber, value: element.total_count, name: element.jailName }
       this.resJailData.push(E)
     })
-    console.log("resJailData", this.resJailData)
     this.setPieChartOptions(this.resJailData)
+
+    this.JaildisplayList
   }
+
+}
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

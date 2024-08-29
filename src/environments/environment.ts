@@ -8,16 +8,16 @@ export const environment = {
   /* ***** MIDDLEWARE URLS ***** */
 
   //test
-  clientPrefix: 'ZIT',
-  baseURL: 'https://apptest.moi.gov.kw',
-  digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
-  sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
+  // clientPrefix: 'ZIT',
+  // baseURL: 'https://apptest.moi.gov.kw',
+  // digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
+  // sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
 
   //production
-  // clientPrefix: 'ZCS',
-  // baseURL: 'https://app.moi.gov.kw',
-  // digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
-  // sahlURL: 'https://app.moi.gov.kw/sahl/notification',
+  clientPrefix: 'ZCS',
+  baseURL: 'https://app.moi.gov.kw',
+  digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
+  sahlURL: 'https://app.moi.gov.kw/sahl/notification',
 
   loginURL: '/moi/login',
   refreshTokenURL: '/moi/token',
@@ -35,9 +35,12 @@ export const environment = {
   prisonerData: '/moi/JE009/JudgementListInJail',
 
 
-  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
+
+  GetPersonCustodyInfo: "/moi/JP004/Jp004GetPersonCustodyInfo",
   custodyListInPrison: "/moi/JP003/Jp003CustodyListInPrison",
+  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
   getPersonJailInfo: "/moi/JP001/Jp001GetPersonJailInfo",
+
   searchByName: "/moi/GQBC/GqbcSearchByName",
 
   AppTitle: 'لوحة بيانات السجون',

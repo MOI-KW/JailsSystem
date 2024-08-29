@@ -26,14 +26,14 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm = this._fb.group(
     {
       // userid : [this.CookieService.get('clientId')], 
-      password : ['', [ Validators.required ]],
-      newpassword : ['', [ Validators.required, Validators.maxLength(8), Validators.minLength(4), Validators.pattern('^[a-zA-Z\u0600-\u06FF]{4}[a-zA-Z0-9\u0600-\u06FF@#$]{0,4}$') ]],
-      confirmpassword : ['', [ Validators.required, Validators.maxLength(8), Validators.minLength(4) ]]
+      password: ['', [Validators.required]],
+      newpassword: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(4), Validators.pattern('^[a-zA-Z\u0600-\u06FF]{4}[a-zA-Z0-9\u0600-\u06FF@#$]{0,4}$')]],
+      confirmpassword: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(4)]]
     }, {
-      validator: matchPasswords()
-    }
+    validator: matchPasswords()
+  }
   );
-  
+
   constructor(
     private _fb: FormBuilder,
     private loginService: LoginService,
@@ -43,19 +43,19 @@ export class ChangePasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
   }
-  
+
   ngAfterViewChecked() {
 
-    if (this.CookieService.get('theme') == "dark") this.dark = true; 
+    if (this.CookieService.get('theme') == "dark") this.dark = true;
     else this.dark = false;
   }
 
   get userid() { return this.changePasswordForm.get('userid'); }
   get password() { return this.changePasswordForm.get('password'); }
-  get newpassword() { return this.changePasswordForm.get('newpassword'); } 
-  get confirmpassword() { return this.changePasswordForm.get('confirmpassword'); } 
+  get newpassword() { return this.changePasswordForm.get('newpassword'); }
+  get confirmpassword() { return this.changePasswordForm.get('confirmpassword'); }
 
   changePassword() {
     this.pwdChanged = true;
@@ -73,7 +73,7 @@ export class ChangePasswordComponent implements OnInit {
           let myItem = this.CookieService.get('theme') ? this.CookieService.get('theme') : 'light';
           localStorage.clear();
           this.CookieService.deleteAll();
-          this.CookieService.set('theme',myItem!);
+          this.CookieService.set('theme', myItem!);
           this.router.navigate(['login']);
         }, 5000);
 
@@ -81,14 +81,14 @@ export class ChangePasswordComponent implements OnInit {
       }
       else {
         this.alertService.error(res["resultAr"]);
-      }      
+      }
     }, (error: HttpErrorResponse) => {
       this.changePasswordForm.reset();
       this.changePasswordForm.get('userid')?.setValue(this.CookieService.get('clientId'))
       this.alertService.error("خطأ في تغيير كلمة المرور");
       this.pwdChanged = false;
     });
-  }  
+  }
 
 
   toggleFieldTextType(field: string = "") {
@@ -101,5 +101,5 @@ export class ChangePasswordComponent implements OnInit {
 
       default: break;
     }
-  } 
+  }
 }

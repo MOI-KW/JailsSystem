@@ -42,6 +42,23 @@ export class DynamicTableComponent implements OnInit {
   ngOnInit(): void { }
 
   ngAfterViewInit() {
+    const paginatorIntl = this.paginator._intl;
+    paginatorIntl.nextPageLabel = 'التالي';
+    paginatorIntl.previousPageLabel = 'السابقة';
+    paginatorIntl.firstPageLabel = 'الأولى';
+    paginatorIntl.lastPageLabel = 'الأخيرة';
+    paginatorIntl.itemsPerPageLabel = '';
+    paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number): string => {
+      if (length === 0 || pageSize === 0) {
+        return "0 (" + length + ")";
+      }
+      length = Math.max(length, 0);
+      const startIndex = page * pageSize > length ? (Math.ceil(length / pageSize) - 1) * pageSize : page * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, length);
+      return (startIndex + 1) + " - " + endIndex + " (" + length + ") ";
+    };
+
+
     this.dataSource = new MatTableDataSource(this.individualReq);
     this.dataSource.paginator = this.paginator;
     this.filterTableData = this.individualReq;

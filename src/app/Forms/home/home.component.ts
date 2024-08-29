@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
     const rolesString: string | null = this.CookieService.get('Roles');
     if (rolesString) {
       this.Roles = JSON.parse(rolesString);
-      console.log("Roles", this.Roles)
     }
 
     this.menus = mainmenu.menuList;
@@ -58,8 +57,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToPage(submenuRoles, path) {
-    console.log("submenuRoles", submenuRoles)
-    console.log("path", path)
     if (this.Roles?.indexOf(submenuRoles) > -1) {
       this.router.navigate([path]);
     } else {

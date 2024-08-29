@@ -1,29 +1,38 @@
 export const jailsDetails = new Map<string, any>([['3278', {
-    j_name: "المركزي 1",
+    seqNo: 1,
+    j_name: " السجن المركزي 1",
     capacity: 1405,
 }],
 ['3279', {
-    j_name: "المركزي 2",
+    seqNo: 2,
+    j_name: "السجن المركزي 2",
     capacity: 704
 }], ['3281', {
-    j_name: "المركزي 3",
+    seqNo: 3,
+    j_name: "السجن المركزي 3",
     capacity: 165
 }], ['3280', {
-    j_name: "المركزي 4",
+    seqNo: 4,
+    j_name: " السجن المركزي 4",
     capacity: 180
 }], ['6755', { //4003
+    seqNo: 5,
     j_name: "قسم الإرشاد والتأهيل",
     capacity: 270
 }], ['6756', { //4004
-    j_name: "سجن العمومي 1",
+    seqNo: 6,
+    j_name: "السجن العمومي 1",
     capacity: 528
 }], ['6754', {//4002
-    j_name: "سجن العمومي 2",
+    seqNo: 7,
+    j_name: "السجن العمومي 2",
     capacity: 130
 }], ['6757', { //4005
-    j_name: "سجن العمومي 3",
+    seqNo: 8,
+    j_name: "السجن العمومي 3",
     capacity: 132
 }], ['2426', {
+    seqNo: 9,
     j_name: "سجن النساء",
     capacity: 250
 }]])

@@ -49,6 +49,9 @@
             </div>
 
         </div>
+
+        <ng-container *ngIf="showPrisonerCard">
+            <app-prisoner-detail [selectedPrisonerData]="selectedPrisoner"></app-prisoner-detail>
+        </ng-container>
     </div>
 </div>
-<!-- <app-prisoner-detail [PrisonerByCivilId]="this.prisonerByCivilIdObj"></app-prisoner-detail> -->

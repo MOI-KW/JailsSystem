@@ -195,7 +195,6 @@ export class PrisonCardComponent implements OnInit {
   }
 
   onView(category: string) {
-    console.log(category);
     this.router.navigate(['prisondata', category]);
   }
 

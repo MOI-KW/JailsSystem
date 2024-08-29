@@ -6,3 +6,45 @@ label {
     font-size: medium !important;
     color: #5E6E82 !important;
 }
+
+::ng-deep .mat-tab-body-content {
+    height: auto !important;
+}
+
+
+::ng-deep .mat-tab-labels {
+    justify-content: space-evenly !important;
+}
+
+::ng-deep .mat-tab-label-content {
+    color: var(--phoenix-primary-darker) !important;
+    ;
+    font-weight: bold !important;
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: var(--phoenix-primary-darker) !important;
+    ;
+}
+
+::ng-deep .mat-tab-label {
+    width: 100% !important;
+    font-size: 25px !important;
+}
+
+::ng-deep .mat-tab-label-content {
+    color: black;
+}
+
+
+::ng-deep .mat-tab-label-active {
+    color: var(--phoenix-primary);
+    background-color: #edf2f9;
+    ;
+    border-color: #d8e2ef #d8e2ef #151f2c;
+}
+
+::ng-deep .mat-tab-label-active .mat-tab-label-content {
+    color: var(--phoenix-primary-darker) !important;
+    ;
+}

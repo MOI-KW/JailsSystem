@@ -38008,3 +38008,43 @@ table.table>tbody>tr:last-child {
 .bg-900 {
   background-color: #d8e2ef !important;
 }
+
+.prisonDashboardtd {
+  width: 100px;
+}
+
+@page {
+  size: auto !important;
+  margin: 0mm !important;
+  counter-increment: page;
+  counter-reset: page 1;
+
+
+}
+
+td {
+  color: black !important;
+}
+
+.headerCol {
+  font-size: 10px !important;
+}
+
+#pageFooter {
+  position: absolute;
+  bottom: 1rem;
+  left: 2rem;
+  font-size: 10px !important;
+}
+
+#pageFooter:after {
+  counter-increment: page;
+  content: counter(page);
+
+
+}
+
+div.card-header {
+  padding: 1rem !important;
+  height: 55px !important;
+}

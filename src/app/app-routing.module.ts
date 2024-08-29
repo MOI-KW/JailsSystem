@@ -20,9 +20,7 @@ const routes: Routes = [
   },
   { path: 'reset-password', component: ChangePasswordComponent },
   { path: 'home', component: ChartDashboardComponent, canActivate: [AuthGuard] },
-  { path: 'prisondata', component: PrisonDataComponent },
-  { path: 'prisoner-details', component: PrisonerDetailComponent },
-  { path: 'printPerson', component: PrintPrisonerDetailsComponent },
+  { path: 'prisondata', component: PrisonDataComponent, canActivate: [AuthGuard] },
   { path: 'searchByCivilID', component: SearchByCivilIDComponent, canActivate: [AuthGuard] },
   { path: 'searchByName', component: SearchByNameComponent, canActivate: [AuthGuard] },
   {

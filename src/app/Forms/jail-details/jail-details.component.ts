@@ -38,7 +38,6 @@ export class JailDetailsComponent implements OnInit {
           this.jailInfromation = this.jailService.groupData(res)
           //the list of all sections from  tha api 
           this.sectionList = Object.keys(this.jailInfromation)
-          console.log(this.jailInfromation)
           this.sectionList.forEach(element => {
             count.push({ value: this.jailInfromation[element].totalCount, name: this.getJailName(element) })
           });
@@ -119,7 +118,6 @@ export class JailDetailsComponent implements OnInit {
 
     );
     this.changeDetector.detectChanges()
-    console.log(this.filteredList)
     this.showList = true
   }
 
@@ -189,13 +187,7 @@ export class JailDetailsComponent implements OnInit {
       return 0
   }
   getWardName(j_code, w_code) {
-    let wardsList: Array<any> = jails_wards.get(j_code.toString())
-    if (wardsList) {
-      let w = wardsList.find((obj: any) => { return obj.ward_code == w_code })
-      return w ? w.ward_name : "البيانات غير متوفرة"
-    }
-    else
-      return "البيانات غير متوفرة"
+    return this.jailService.getWardName(j_code, w_code)
   }
   getWardDescription(j_code, w_code) {
     let wardsList: Array<any> = jails_wards.get(j_code.toString())

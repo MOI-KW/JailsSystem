@@ -37,7 +37,6 @@ export class CustodyDetailsComponent implements OnInit {
           this.jailInfromation = this.jailService.groupCustodyData(res)
           //the list of all sections from  tha api 
           this.sectionList = Object.keys(this.jailInfromation)
-          console.log(this.jailInfromation)
           this.sectionList.forEach(element => {
             count.push({ value: this.jailInfromation[element].totalCount, name: this.getJailName(element) })
           });
@@ -113,12 +112,11 @@ export class CustodyDetailsComponent implements OnInit {
     this.showList = false
     this.filteredList = await this.prisonersList.filter(
       (item: any) =>
-        item?.RowsJailSentence?.SectionNumber.toString() === sectionNumber.toString() &&
-        item?.RowsJailSentence?.WardSectionNumber.toString() === wardNo.toString()
+        item?.ExportGrpCustody?.SectionNumber.toString() === sectionNumber.toString() &&
+        item?.ExportGrpCustody?.WardSectionNumber.toString() === wardNo.toString()
 
     );
     this.changeDetector.detectChanges()
-    console.log(this.filteredList)
     this.showList = true
   }
 

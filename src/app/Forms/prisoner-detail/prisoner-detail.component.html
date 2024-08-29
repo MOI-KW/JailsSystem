@@ -1,4 +1,4 @@
-<div class="card border h-100  shadow-none">
+<div class="card border shadow-none">
     <div class="card-header  border-bottom bg-body">
         بيانات السجين
     </div>
@@ -6,101 +6,104 @@
         <div class="infoDiv" style="width: 75% !important">
             <table class="table fs--1 mb-0 overflow-hidden">
                 <tbody class="col-12">
-
                     <tr>
-                        <td class="text-black prisonDashboardtd">CivilId.AR</td>
-                        <td class="text-primary">{{ PrisonerByCivilId?.CivilId}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">Name.AR</td>
-                        <td class="text-primary">{{ PrisonerByCivilId?.Name}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">Nationality.AR</td>
-                        <td class="text-primary">{{ PrisonerByCivilId?.Nationality}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">JailID.AR</td>
+                        <td class="text-black prisonDashboardtd">الإسم</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailPublicOrganisation?.Number }}
+                            {{ selectedPrisonerData?.Name }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">CaseNumber.AR</td>
+                        <td class="text-black prisonDashboardtd">الرقم المدني</td>
+                        <td class="text-primary">{{ selectedPrisonerData?.civilID}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-black prisonDashboardtd">رقم المرجع</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpCase?.CaseNumber }}
+                            {{ selectedPrisonerData?.nationalNumber }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">CaseName.AR</td>
+                        <td class="text-black prisonDashboardtd">الجنسية</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpCasePublicOrganisation?.Name }}
+                            {{ selectedPrisonerData?.nationality }}
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="text-black prisonDashboardtd">Year of Case.AR</td>
+                        <td class="text-black prisonDashboardtd">التهمة</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpCase?.CaseYearIdent }}
+                            {{ selectedPrisonerData?.crimeDesciption}}
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-black prisonDashboardtd">Case Description.AR</td>
+                        <td class="text-black prisonDashboardtd">القضية</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpCaseType?.Description }}
+                            {{ selectedPrisonerData?.caseNumber }} - {{selectedPrisonerData?.caseYearIdent}} - {{
+                            selectedPrisonerData?.caseTypeDescription }}
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="text-black prisonDashboardtd">JailPublicOrganisation Name.AR</td>
+                        <td class="text-black prisonDashboardtd">سجن</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpCasePublicOrganisation?.Name }}
+                            {{ selectedPrisonerData?.jailName }}
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="text-black prisonDashboardtd">SectionNumber.AR</td>
+                        <td class="text-black prisonDashboardtd"> الجناح</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.SectionNumber }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">Ward Number.AR</td>
-                        <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpWardJailSections?.SectionNumber }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-black prisonDashboardtd">Ward Description.AR</td>
-                        <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpWardJailSections?.SectionDescription }}
+                            {{ selectedPrisonerData?.wardName}}
                         </td>
                     </tr>
 
                     <tr>
                         <td class="text-black prisonDashboardtd">تاريخ السجن</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.StartDate | datetimeFormat }}
+                            {{ selectedPrisonerData?.startDate | datetimeFormat }}
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr *ngIf="selectedPrisonerData?.DurationYears && selectedPrisonerData?.DurationYears !=''">
                         <td class="text-black prisonDashboardtd">المدة</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationYears
-                            }} سنة -
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationMonths
-                            }} شهر -
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.DurationDays
-                            }} يوم
+                            {{ selectedPrisonerData?.DurationYears}} سنة -
+                            {{ selectedPrisonerData?.DurationMonths}} شهر -
+                            {{ selectedPrisonerData?.DurationDays}} يوم
 
                         </td>
                     </tr>
-
-                    <tr>
-                        <td class="text-black prisonDashboardtd">ExpectedEndDate.AR</td>
+                    <tr *ngIf="selectedPrisonerData?.SuspensionYears && selectedPrisonerData?.SuspensionYears !=''">
+                        <td class="text-black prisonDashboardtd">مدة الحجز</td>
                         <td class="text-primary">
-                            {{ PrisonerByCivilId?.JailData?.ExportGrpJailSentence?.ExpectedEndDate | datetimeFormat
-                            }}
+                            {{ selectedPrisonerData?.SuspensionYears}} سنة -
+                            {{ selectedPrisonerData?.SuspensionMonths}} شهر -
+                            {{ selectedPrisonerData?.SuspensionDays}} يوم
+
+                        </td>
+                    </tr>
+                    <tr *ngIf="selectedPrisonerData?.expectedEndDate && selectedPrisonerData?.expectedEndDate !=''">
+                        <td class="text-black prisonDashboardtd">تاريخ الخروج المتوقع</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.expectedEndDate | datetimeFormat}}
+                        </td>
+                    </tr>
+                    <tr *ngIf="selectedPrisonerData?.Period && selectedPrisonerData?.Period !=''">
+                        <td class="text-black prisonDashboardtd">مدة</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.Period }}
+                        </td>
+                    </tr>
+                    <tr *ngIf="selectedPrisonerData?.ReasonHeld && selectedPrisonerData?.ReasonHeld !=''">
+                        <td class="text-black prisonDashboardtd">سبب الحجز</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.ReasonHeld}}
+                        </td>
+                    </tr>
+                    <tr *ngIf="selectedPrisonerData?.ReasonReleased && selectedPrisonerData?.ReasonReleased !=''">
+                        <td class="text-black prisonDashboardtd">سبب الافراج</td>
+                        <td class="text-primary">
+                            {{ selectedPrisonerData?.ReasonReleased}}
                         </td>
                     </tr>
                 </tbody>
@@ -113,15 +116,22 @@
           text-align: center !important;
           padding-top: 0.5rem !important;
         ">
-            <div class="row h-50 m-auto imgDiv" *ngIf="personPhoto != null && personPhoto != ''">
-                <img class="position-relative img-profile p-0" [src]="personPhoto" />
+            <div class="row h-50 m-auto imgDiv"
+                *ngIf="selectedPrisonerData?.Photo != null && selectedPrisonerData?.Photo  != ''">
+                <img class="position-relative img-profile p-0" [src]="selectedPrisonerData?.Photo " />
             </div>
         </div>
     </div>
-
 </div>
 
-<div class="back-btn d-flex  m-2">
-    <button class="btn btn-primary float-start" type="button" (click)="goBack()">
-        رجوع</button>
+<div class="row my-5 mx-3">
+    <div class="col-6">
+        <button class="btn btn-primary shadow-none m-auto mx-3" printSectionId="printSection" printTitle='بيانات السجين'
+            styleSheetFile="./assets/css/printStyle.scss" ngxPrint>
+            طباعة الكشف
+        </button>
+        <app-print-prisoner-details id="printSection" [useExistingCss]="true" [selectedPrisoner]="selectedPrisonerData"
+            hidden>
+        </app-print-prisoner-details>
+    </div>
 </div>

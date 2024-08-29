@@ -1,126 +1,154 @@
-<div class="border px-3"
-    style="background-color: white !important; direction: rtl !important; -webkit-print-color-adjust:exact ">
-    <div class="d-flex">
-        <div style="
+<div style="direction: rtl !important;">
+    <div class=" card shadow-none border-none d-flex flex-row  p-3 m-3 justify-content-between">
+        <div class="col-2 col-sm-auto d-flex align-items-center justify-content-start pe-0  ms-4 print-ff-ntkar">
+            <img id="logoImg" class="me-2" src="./assets/images/MOI-logo.svg" alt="" width="60" />
+        </div>
+        <div class="col-5">
+            <div class="text-truncate fontRegular text-center">وزارة الداخلية</div>
+            <div class="text-black fontSemiBold print-ff-ntkar text-center">الإدارة العامة للمؤسسات الإصلاحية</div>
+        </div>
+        <div class="col-5">
+
+        </div>
+    </div>
+
+    <div class="p-3 m-3"
+        style="background-color: white !important; direction: rtl !important; -webkit-print-color-adjust:exact ">
+        <div class="d-flex mb-3">
+            <div style="
                   width: 25% !important;
                   text-align: center !important;
                   padding-top: 0.5rem !important;
                 ">
-            <div class="h-50 m-auto imgDiv">
-                <img class="position-relative img-profile p-0" src="../../../assets/images/test.jpeg" />
+                <div class="h-50 m-auto imgDiv">
+                    <img class="position-relative img-profile p-0" width="100" [src]="selectedPrisoner?.Photo"
+                        *ngIf="selectedPrisoner?.Photo && selectedPrisoner?.Photo !=''" />
+                </div>
+            </div>
+            <div class="w-75 text-start d-grid">
+                <div class="row my-auto">
+                    <label class="m-auto my-2 fontBold" style="font-size: 25px;">{{selectedPrisoner?.Name}}</label>
+
+                    <label class="m-auto  my-2  fontBold"
+                        style=" font-size: 25px; letter-spacing: 3px !important;">{{selectedPrisoner?.civilID}}</label>
+                </div>
+
+
             </div>
         </div>
-        <div class="w-75 text-start d-grid">
-            <div class="row my-auto">
-                <label class="m-auto my-2 fontBold" style="font-size: 25px;">أحمد محمد عبدالعزيز</label>
-
-                <label class="m-auto  my-2  fontBold"
-                    style=" font-size: 25px; letter-spacing: 3px !important;">2891111200769</label>
-            </div>
-
-
-        </div>
-    </div>
-    <div class="d-flex">
-        <div style="
-                          width: 25% !important;
-                          text-align: center !important;
-                          padding-top: 0.5rem !important;
-                        "></div>
-        <div class="w-75">
-            <div class="card border mb-3">
-                <div class="card-header p-4 border-bottom bg-body">
-                    <div class="row g-3 justify-content-between align-items-center">
-                        <div class="col-12 col-md">
-                            <h4 class="mb-0" data-anchor="data-anchor" id="alerts-with-icon">
-                                بيانات السجين
-                            </h4>
+        <div>
+            <div style="width: 100% !important;">
+                <div class="card shadow-none border mb-3">
+                    <div class="card-header p-4 border-bottom bg-body">
+                        <div class="row g-3 justify-content-between align-items-center">
+                            <div class="col-12 col-md">
+                                <h4 class="mb-0" data-anchor="data-anchor" id="alerts-with-icon">
+                                    بيانات السجين
+                                </h4>
+                            </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <table class="table fs--1 mb-0 overflow-hidden">
+                            <tbody class="col-12">
+
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">رقم المرجع</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.nationalNumber}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">الجنسية</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.nationality}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">التهمة</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.crimeDesciption}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">القضية</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.caseNumber}} - {{selectedPrisoner?.caseTypeDescription}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">سجن</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.jailName}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">رقم الجناح</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.wardName}}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-truncate fontRegular prisonDashboardtd">تاريخ السجن</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.startDate |datetimeFormat}}
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="selectedPrisoner?.DurationYears && selectedPrisoner?.DurationYears !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">المدة</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.DurationYears}} سنة - {{selectedPrisoner?.DurationMonths}}
+                                        شهر -
+                                        {{selectedPrisoner?.DurationDays}} يوم
+
+                                    </td>
+                                </tr>
+                                <tr *ngIf="selectedPrisoner?.SuspensionYears && selectedPrisoner?.SuspensionYears !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">مدة الحجز</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.SuspensionYears}} سنة -
+                                        {{selectedPrisoner?.SuspensionMonths}}
+                                        شهر -
+                                        {{selectedPrisoner?.SuspensionDays}} يوم
+
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="selectedPrisoner?.expectedEndDate && selectedPrisoner?.expectedEndDate !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">تاريخ الخروج المتوقع</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{selectedPrisoner?.expectedEndDate |datetimeFormat}}
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="selectedPrisoner?.Period && selectedPrisoner?.Period !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">مدة</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{ selectedPrisoner?.Period }}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="selectedPrisoner?.ReasonHeld && selectedPrisoner?.ReasonHeld !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">سبب الحجز</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{ selectedPrisoner?.ReasonHeld}}
+                                    </td>
+                                </tr>
+                                <tr *ngIf="selectedPrisoner?.ReasonReleased && selectedPrisoner?.ReasonReleased !=''">
+                                    <td class="text-truncate fontRegular prisonDashboardtd">سبب الافراج</td>
+                                    <td class="text-black fontSemiBold text-wrap">
+                                        {{ selectedPrisoner?.ReasonReleased}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <table class="table fs--1 mb-0 overflow-hidden">
-                        <tbody class="col-12">
 
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">رقم المرجع</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    <!-- {{ selectedPrisonerData?.RowsJeWork.Number }} -->
-                                    101111980
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">التهمة</td>
-                                <td class="text-black fontSemiBold text-wrap">مخدرات: حيازةاوشراءاوبيعاوترويج
-                                    موادمخدرهبقصدالاتجار
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">رقم القضية</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    236
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">تفاصيل القضية</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">سجن</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    السجن المركزي (2)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">رقم القطاع </td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    20
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">رقم الجناح</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    20
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">الجنسية</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    سوري
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">تاريخ السجن</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    20-10-2015
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">المدة</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    5 سنة -
-                                    3 شهر -
-                                    0يوم
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-truncate fontRegular prisonDashboardtd">تاريخ الخروج المتوقع</td>
-                                <td class="text-black fontSemiBold text-wrap">
-                                    20-10-2020
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
-
         </div>
-    </div>
 
-</div>
+    </div>

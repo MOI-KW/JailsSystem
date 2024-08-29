@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataTableConstants } from 'src/app/Globals/datatable';
+import { JailService } from 'src/app/Services/JailData/jail.service';
+
 
 
 @Component({
@@ -12,109 +14,95 @@ import { DataTableConstants } from 'src/app/Globals/datatable';
   styleUrls: ['./prison-data.component.scss'],
 })
 export class PrisonDataComponent implements OnInit {
-  data = [];
-  tableData = [];
-  filterTableData = [];
-  @Input() selectedData: any
-  showPrisonerCard = false
 
+  tableData = [];
+
+  @Input() selectedData: any
+  @Input() prisoner_Type: string
+
+  showPrisonerCard = false
+  selectedPrisoner
   isLoading = false;
   tblHeadArr: any[string] = [
     'CivilId',
-    'Name',
+    'ArabicName',
     // 'CaseNumber',
     'Crime',
     'Nationality',
-    'Cell',
-    'View',
+    'startDate',
+    'Action',
   ];
 
-  dataSource!: MatTableDataSource<any>;
+  tblHeadArabic: any[string] = [
+    'الرقم المدني',
+    'الإسم',
+    'التهمة',
+    'الجنسية',
+    'تاريخ السجن',
+    '',
+  ];
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  itemPerPage = DataTableConstants.ItemPerPage;
-  pageSize = DataTableConstants.PageSize;
-  pageSizeOptions: number[] = [10, 25, 50];
-  selectedPrisoner: any
-  activeModalRef: any;
-  constructor(private router: Router, private changeDetector: ChangeDetectorRef) {
-    // this.tableData = JSON.parse(
-    //   localStorage.getItem('selectedData')
-    // )?.tableData;
-
+  constructor(private router: Router, private changeDetector: ChangeDetectorRef, private jailService: JailService) {
   }
 
   ngOnInit(): void {
-    console.log("selected", this.selectedData)
     this.tableData = this.selectedData
-    this.dataSource = new MatTableDataSource(this.tableData);
-    this.dataSource.sort = this.sort;
-    this.paginator._intl.itemsPerPageLabel = "عدد السجناء في الصفحة"
-    this.dataSource.paginator = this.paginator;
-
-    this.filterTableData = this.tableData;
+    if (this.prisoner_Type === 'custody') {
+      this.mapData_forCustody()
+    }
+    else {
+      this.mapData_forjail()
+    }
   }
 
   ngAfterViewInit() {
-    const paginatorIntl = this.paginator._intl;
-    paginatorIntl.nextPageLabel = 'التالي';
-    paginatorIntl.previousPageLabel = 'السابقة';
-    paginatorIntl.firstPageLabel = 'الأولى';
-    paginatorIntl.lastPageLabel = 'الأخيرة';
-    paginatorIntl.itemsPerPageLabel = '';
-    paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number): string => {
-      if (length === 0 || pageSize === 0) {
-        return "0 (" + length + ")";
-      }
-      length = Math.max(length, 0);
-      const startIndex = page * pageSize > length ? (Math.ceil(length / pageSize) - 1) * pageSize : page * pageSize;
-      const endIndex = Math.min(startIndex + pageSize, length);
-      return (startIndex + 1) + " - " + endIndex + " (" + length + ") ";
-    };
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
-    this.dataSource.paginator = this.paginator;
-  }
-  searchStudent(value: any) {
-    const filteredData = this.filterTableData.filter((e) => {
-      return e?.RowsJeWork?.CivilId?.toString()
-        .toUpperCase()
-        .includes(value.target.value.toString().toUpperCase());
-    });
-    console.log(filteredData);
-    this.dataSource = new MatTableDataSource(filteredData);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
   onView(event: any) {
     this.showPrisonerCard = false
-    // localStorage.setItem(
-    //   'selectedData',
-    //   JSON.stringify({
-    //     selectedPrisonerData: event,
-    //     tableData: this.tableData,
-    //   })
-    // );
-    // this.router.navigate(['prisoner-details'], {
-    //   state: {
-    //     data: {
-    //       selectedPrisonerData: event,
-    //       tableData: this.tableData,
-    //     },
-    //   },
-    // });
-    setTimeout(() => {
-      this.selectedPrisoner = event
+    if (this.prisoner_Type == 'custody') {
+      console.log("custody", event)
+      this.selectedPrisoner = this.jailService.setPrisonerData_from_JP004(event)
+    }
+    else {
+      this.selectedPrisoner = this.jailService.setPrisonerData_from_JE009(event)
+    }
+
+    this.jailService.getBiometricPhoto(this.selectedPrisoner.personType, this.selectedPrisoner.nationalNumber).subscribe(resultPhoto => {
+      this.selectedPrisoner.Photo = resultPhoto
       this.showPrisonerCard = true
-    }, 500)
+    }
+    )
+
 
     this.changeDetector.detectChanges()
   }
   goBack() {
     this.router.navigateByUrl('home');
   }
+  mapData_forCustody() {
+
+    this.tableData.map(element => {
+      console.log("ele", element)
+      element.CivilId = element?.ExportGrpPrisonWorkArea?.CivilId
+      element.ArabicName = element?.ExportGrpPrisonWorkArea?.NameAr
+      element.Crime = element?.ExportGrpCrimeType?.Description
+      element.Nationality = element?.ExportGrpPrisonWorkArea?.NationalityAr
+      element.startDate = element?.ExportGrpCustody?.StartDate
+      element.Action = 'eye'
+
+    })
+  }
+  mapData_forjail() {
+    this.tableData.map(element => {
+      element.CivilId = element?.RowsJeWork?.CivilId
+      element.ArabicName = element?.RowsJeWork?.ConcatArabicName
+      element.Crime = element?.RowsCrimeType?.Description
+      element.Nationality = element?.RowsNationality?.ArabicDescription
+      element.startDate = element?.RowsJailSentence?.StartDate
+      element.Action = 'eye'
+
+    })
+  }
+
 }

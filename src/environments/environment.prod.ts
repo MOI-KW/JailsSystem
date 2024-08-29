@@ -33,9 +33,10 @@ export const environment = {
 
 
 
-  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
+  GetPersonCustodyInfo: "/moi/JP004/Jp004GetPersonCustodyInfo",
   custodyListInPrison: "/moi/JP003/Jp003CustodyListInPrison",
-  searchByName: "/moi/GQBC/GqbcSearchByName",
+  custodyStatsInPrison: "/moi/JP002/Jp002CustodyStatsInPrison",
+  getPersonJailInfo: "/moi/JP001/Jp001GetPersonJailInfo",
 
   AppTitle: "لوحة بيانات السجون",
   system_name: 'JAILDASHBORD',
