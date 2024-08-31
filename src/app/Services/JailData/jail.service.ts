@@ -293,23 +293,24 @@ export class JailService {
     p_details.civilID = result?.ExportPersonDetails?.CivilId
     p_details.nationality = result?.ExportPersonDetails?.PersonNationality
 
-    p_details.caseNumber = result?.ExportGroupCustody?.row[1]?.ExportGrpCase?.CaseNumber
-    p_details.caseYearIdent = result?.ExportGroupCustody?.row[1]?.ExportGrpCase?.CaseYearIdent
-    p_details.caseTypeDescription = result?.ExportGroupCustody?.row[1]?.ExportGrpCaseType?.Description
+    let row_length = result?.ExportGroupCustody?.row.length - 1
+    p_details.caseNumber = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCase?.CaseNumber
+    p_details.caseYearIdent = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCase?.CaseYearIdent
+    p_details.caseTypeDescription = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCaseType?.Description
 
-    p_details.jailCode = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.SectionNumber
+    p_details.jailCode = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.SectionNumber
     console.log(p_details.jailCode)
-    p_details.jailName = jailsDetails.get(result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.SectionNumber?.toString())?.j_name
-    p_details.wardNumber = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.WardSectionNumber
+    p_details.jailName = jailsDetails.get(result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.SectionNumber?.toString())?.j_name
+    p_details.wardNumber = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.WardSectionNumber
 
     p_details.wardName = this.getWardName(p_details.jailCode, p_details.wardNumber)
 
-    p_details.crimeDesciption = result?.ExportGroupCustody?.row[1]?.ExportGrpCrimeType?.Description
-    p_details.startDate = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.StartDate
+    p_details.crimeDesciption = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCrimeType?.Description
+    p_details.startDate = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.StartDate
 
-    p_details.Period = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.Period
-    p_details.ReasonHeld = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.ReasonHeld
-    p_details.ReasonReleased = result?.ExportGroupCustody?.row[1]?.ExportGrpCustody?.ReasonReleased
+    p_details.Period = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.Period
+    p_details.ReasonHeld = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.ReasonHeld
+    p_details.ReasonReleased = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.ReasonReleased
 
     return p_details
   }

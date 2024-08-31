@@ -7,17 +7,17 @@ export const environment = {
 
   /* ***** MIDDLEWARE URLS ***** */
 
-  //test
-  clientPrefix: 'ZIT',
-  baseURL: 'https://apptest.moi.gov.kw',
-  digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
-  sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
+  // //test
+  // clientPrefix: 'ZIT',
+  // baseURL: 'https://apptest.moi.gov.kw',
+  // digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
+  // sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
 
-  // //production
-  // clientPrefix: 'ZCS',
-  // baseURL: 'https://app.moi.gov.kw',
-  // digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
-  // sahlURL: 'https://app.moi.gov.kw/sahl/notification',
+  //production
+  clientPrefix: 'ZCS',
+  baseURL: 'https://app.moi.gov.kw',
+  digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
+  sahlURL: 'https://app.moi.gov.kw/sahl/notification',
 
 
 

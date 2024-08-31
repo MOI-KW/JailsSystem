@@ -21,7 +21,6 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PrisonDataComponent } from '../Forms/prison-data/prison-data.component';
-import { PrisonCardComponent } from '../Forms/prison-card/prison-card.component';
 import { PrisonerDetailComponent } from '../Forms/prisoner-detail/prisoner-detail.component';
 import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -45,7 +44,6 @@ import { PrintPrisonerDetailsComponent } from '../Forms/print-prisoner-details/p
     RasedDatePipe,
     GetAgePipe,
     PrisonDataComponent,
-    PrisonCardComponent,
     PrisonerDetailComponent,
     DynamicTableComponent,
     PrintPrisonerDetailsComponent
@@ -90,7 +88,6 @@ import { PrintPrisonerDetailsComponent } from '../Forms/print-prisoner-details/p
     MatFormFieldModule,
     MatInputModule,
     PrisonDataComponent,
-    PrisonCardComponent,
     PrisonerDetailComponent,
     DynamicTableComponent,
     MatTabsModule,

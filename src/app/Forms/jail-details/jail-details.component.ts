@@ -84,7 +84,7 @@ export class JailDetailsComponent implements OnInit {
             borderWidth: 1
           },
           type: 'pie',
-          radius: ['40%', '70%'],
+          radius: ['30%', '60%'],
           avoidLabelOverlap: false,
           label: {
             fontSize: '16',

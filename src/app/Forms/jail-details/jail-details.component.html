@@ -1,8 +1,8 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
-<div class="card-body d-flex border-0 ">
-    <div class="row m-0 p-0 w-75 ">
-        <div class="my-4" *ngFor="let section of sectionList; let i = index">
+<div class="card-body p-0 d-flex border-0 ">
+    <div class="row m-0 p-0" style="width:70% !important">
+        <div class="my-4 p-0" *ngFor="let section of sectionList; let i = index">
             <div class="card border-0   shadow-none h-100  w-100">
                 <div class="card-body">
                     <!-- <div class="d-flex align-items-center">
@@ -92,14 +92,14 @@
             </div>
         </div>
     </div>
-    <div class="w-25 border-dashed-righ m-auto pt-5 ">
+    <div class=" border-dashed-righ m-auto pt-5 " style="width:35% !important">
         <div class="d-flex align-items-center ">
 
             <p class="fontExtraBold  text-truncate m-auto" style="font-size: 25px !important;">
                 توزيع السجناء على الأجنحة
             </p>
         </div>
-        <div class="e-chart-wrapper w-100 h-100 m-0 p-0">
+        <div class="e-chart-wrapper w-100 h-100 my-0 mx-auto p-0">
             <div echarts [options]="sectionsChartOptions" style="min-height: 600px;" data-echart-responsive="true">
             </div>
         </div>
