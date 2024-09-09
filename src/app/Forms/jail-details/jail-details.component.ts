@@ -129,7 +129,10 @@ export class JailDetailsComponent implements OnInit {
   getPrograssClass(value, totalValue) {
     let percentage = this.getPercentage(value, totalValue)
     let percentage_class = ""
-    if (Number(percentage) <= 25) {
+    if (totalValue == 0) {
+      percentage_class = "bg-secondary"
+    }
+    else if (Number(percentage) <= 25) {
       percentage_class = "bg-defult"
     }
     else if (Number(percentage) > 25 && Number(percentage) <= 50) {
@@ -141,13 +144,17 @@ export class JailDetailsComponent implements OnInit {
     else if (Number(percentage) > 75) {
       percentage_class = "bg-danger"
     }
+
     return percentage_class
   }
 
   getPrograssColor(value, totalValue) {
     let percentage = this.getPercentage(value, totalValue)
     let percentage_class = ""
-    if (Number(percentage) <= 25) {
+    if (totalValue == 0) {
+      percentage_class = ""
+    }
+    else if (Number(percentage) <= 25) {
       percentage_class = "bg-defult"
     }
     else if (Number(percentage) > 25 && Number(percentage) <= 50) {

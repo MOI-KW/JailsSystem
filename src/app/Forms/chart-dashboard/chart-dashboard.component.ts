@@ -33,7 +33,7 @@ export class ChartDashboardComponent implements OnInit {
 
   dataSource!: MatTableDataSource<any>;
   JaildisplayList = []
-
+  showCustody = false
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -288,17 +288,23 @@ export class ChartDashboardComponent implements OnInit {
   }
 
   setChart() {
-
     this.JaildisplayList?.forEach(element => {
       let E = { id: element?.jailNumber, value: element.total_count, name: element.jailName }
       this.resJailData.push(E)
     })
     this.setPieChartOptions(this.resJailData)
 
-    this.JaildisplayList
-  }
 
+  }
+  checkCustody(jail_code) {
+    let jail = this.JaildisplayList.find(x => { if (x.jailNumber == jail_code?.toString()) return x })
+    if (jail.custodyCount > 0) {
+      return false
+    }
+    else return true
+  }
 }
+
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

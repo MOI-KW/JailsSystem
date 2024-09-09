@@ -131,8 +131,11 @@
                 <app-jail-details class="w-100 my-5" [jailID]="selectedjailID"
                     [jailName]="selectedjailName"></app-jail-details>
             </mat-tab>
-            <mat-tab label="الموقوفين"> <app-custody-details class="w-100 my-5" [jailID]="selectedjailID"
-                    [jailName]="selectedjailName"></app-custody-details> </mat-tab>
+
+            <mat-tab label="الموقوفين" [disabled]="checkCustody(selectedjailID)"> <app-custody-details
+                    *ngIf="showCustody" class="w-100 my-5" [jailID]="selectedjailID"
+                    [jailName]="selectedjailName"></app-custody-details>
+            </mat-tab>
         </mat-tab-group>
 
     </div>

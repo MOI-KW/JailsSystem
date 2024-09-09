@@ -129,6 +129,13 @@ export const jails_wards = new Map<string, any>([
         capacity: 32
     },
     {
+        ward_name: "2 جناح الابعاد",
+        ward_name_DB: "2 جناح الابعاد",
+        ward_code: "117",
+        desc: "",
+        capacity: 0
+    },
+    {
         ward_name: "جناح الامن",
         ward_name_DB: "الامن",
         ward_code: "102",
@@ -136,6 +143,39 @@ export const jails_wards = new Map<string, any>([
         capacity: 33
     }
     ]],
+    ["3281", [{
+        ward_name: "جناح 1",
+        ward_name_DB: "جناح 1",
+        ward_code: "113",
+        desc: "مالية واسرية",
+        capacity: 28
+    },
+    {
+        ward_name: "جناح 2",
+        ward_name_DB: "جناح 2",
+        ward_code: "114",
+        desc: "صغار السن",
+        capacity: 34
+    },
+    {
+        ward_name: "جناح 3",
+        ward_name_DB: "جناح 3",
+        ward_code: "115",
+        desc: "الصندوق الماليزي \n مجموعة الميموني",
+        capacity: 50
+    }, {
+        ward_name: "جناح 4",
+        ward_name_DB: "جناح 4",
+        ward_code: "120",
+        desc: " طب نفسي وتحفظات أمنية",
+        capacity: 56
+    }, {
+        ward_name: "2 جناح الابعاد",
+        ward_name_DB: "2 جناح الابعاد",
+        ward_code: "117",
+        desc: "",
+        capacity: 0
+    },]],
     ["3280", [{
         ward_name: "جناح 1",
         ward_name_DB: "جناح 1",
@@ -162,7 +202,13 @@ export const jails_wards = new Map<string, any>([
         ward_code: "120",
         desc: "أسود الجزيرة والدواعش",
         capacity: 56
-    }]],
+    }, {
+        ward_name: "2 جناح الابعاد",
+        ward_name_DB: "2 جناح الابعاد",
+        ward_code: "117",
+        desc: "",
+        capacity: 0
+    },]],
     ["6755", [{
         ward_name: "جناح 1",
         ward_name_DB: "جناح 1",
@@ -283,7 +329,13 @@ export const jails_wards = new Map<string, any>([
         ward_name: "مستشفى",
         ward_name_DB: "داخلي",
         ward_code: "118"
-    }
+    }, {
+        ward_name: "2 جناح الابعاد",
+        ward_name_DB: "2 جناح الابعاد",
+        ward_code: "117",
+        desc: "",
+        capacity: 0
+    },
     ]],
     ["6756", [{
         ward_name: "جناح 1",
