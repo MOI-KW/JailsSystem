@@ -17,7 +17,7 @@
                                     العدد
                                     الحالي
                                     <span class="fontBlack ms-4" style="font-size: 30px !important;"
-                                        [style]="'color:'+getPrograssColor(jailInfromation[section].totalCount,getJailCapacity(section))">{{jailInfromation[section].totalCount}}</span>
+                                        [style]="'color:'+jailService.getPrograssColor(jailInfromation[section].totalCount,getJailCapacity(section))">{{jailInfromation[section].totalCount}}</span>
                                 </p>
                             </div>
 
@@ -27,7 +27,7 @@
                                 <p class="fontExtraBold mb-0 text-truncate lh-1 w-100"
                                     style="font-size: 25px !important;">
                                     <i class="bi bi-speedometer  me-4 smallnum" style="font-size: 30px !important;"></i>
-                                    الطاقة الاستعابية <span class="ms-4  text-primary fontBlack"
+                                    الطاقة الإستيعابية<span class="ms-4  text-primary fontBlack"
                                         style="font-size: 30px !important;">{{getJailCapacity(section)}}</span>
                                 </p>
 
@@ -67,14 +67,13 @@
                                         aria-label="Basic example" style="height:30px">
                                         <div class="progress-bar rounded-pill animated-progress-bar"
                                             style="font-size: 20px !important;"
-                                            [class]="getPrograssClass(jailInfromation[section].wards[ward],getWardCapacity(section,ward))"
-                                            [style]="getPrograssbarStyle(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
+                                            [class]="jailService.getPrograssClass(jailInfromation[section].wards[ward],getWardCapacity(section,ward))"
+                                            [style]="jailService.getPrograssbarStyle(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
                                         </div>
                                     </div>
                                     <label class="w-100 text-center fontBold mt-4" style="font-size: 30px;"
-                                        [style]="'color:'+getPrograssColor(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
-                                        {{getPercentage(jailInfromation[section].wards[ward],getWardCapacity(section,ward))
-                                        +'%'}}</label>
+                                        [style]="'color:'+jailService.getPrograssColor(jailInfromation[section].wards[ward],getWardCapacity(section,ward))">
+                                        {{jailService.getPercentage(jailInfromation[section].wards[ward],getWardCapacity(section,ward))}}</label>
                                 </div>
                             </div>
 
@@ -92,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div class="w-25 border-dashed-righ m-auto pt-5 ">
+    <div class="w-25 border-dashed-righ mx-auto pt-5 text-center">
         <div class="d-flex align-items-center ">
 
             <p class="fontExtraBold  text-truncate m-auto" style="font-size: 25px !important;">

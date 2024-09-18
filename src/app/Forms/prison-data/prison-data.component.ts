@@ -88,7 +88,7 @@ export class PrisonDataComponent implements OnInit {
       element.ArabicName = element?.ExportGrpPrisonWorkArea?.NameAr
       element.Crime = element?.ExportGrpCrimeType?.Description
       element.Nationality = element?.ExportGrpPrisonWorkArea?.NationalityAr
-      element.startDate = element?.ExportGrpCustody?.StartDate
+      element.startDate = this.jailService.formatMOIDate(element?.ExportGrpCustody?.StartDate)
       element.Action = 'eye'
 
     })
@@ -99,7 +99,7 @@ export class PrisonDataComponent implements OnInit {
       element.ArabicName = element?.RowsJeWork?.ConcatArabicName
       element.Crime = element?.RowsCrimeType?.Description
       element.Nationality = element?.RowsNationality?.ArabicDescription
-      element.startDate = element?.RowsJailSentence?.StartDate
+      element.startDate = this.jailService.formatMOIDate(element?.RowsJailSentence?.StartDate)
       element.Action = 'eye'
 
     })

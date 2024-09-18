@@ -7,13 +7,13 @@ export const environment = {
 
   /* ***** MIDDLEWARE URLS ***** */
 
-  //test
+  //  test
   // clientPrefix: 'ZIT',
   // baseURL: 'https://apptest.moi.gov.kw',
   // digitalDocsURL: 'https://apptest.moi.gov.kw/digitalDocs/',
   // sahlURL: 'https://apptest.moi.gov.kw/sahl/notification',
 
-  //production
+  // // //production
   clientPrefix: 'ZCS',
   baseURL: 'https://app.moi.gov.kw',
   digitalDocsURL: 'https://app.moi.gov.kw/digitalDocs/',
@@ -34,6 +34,17 @@ export const environment = {
   jailIdrl: '/moi/JE008/JudgementStatInJail',
   prisonerData: '/moi/JE009/JudgementListInJail',
 
+  //--------------------------------------------------------------
+  getSectionList: "/api/jailDashboard/getSectionList",
+  jailListBody: "je008response",
+  custodyListBody: "jp003response",
+
+  getJailDetails: "/api/jailDashboard/getSectionDetails",
+  custodyKey: "jp003/Jp003CustodyListInPrison",
+  jailKey: "JE009/JudgementListInJail",
+
+  runtheJob: "/api/jailDashboard/callJp002",
+  //------------------------------------------------------------------
 
 
   GetPersonCustodyInfo: "/moi/JP004/Jp004GetPersonCustodyInfo",
@@ -46,4 +57,6 @@ export const environment = {
   AppTitle: 'لوحة بيانات السجون',
   system_name: 'JAILDASHBORD',
   clearCookies: '/moi/clear-all-cookies',
+
+
 };

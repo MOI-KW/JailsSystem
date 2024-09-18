@@ -4,7 +4,7 @@ import { MiddlewareService } from '../middleware.service';
 import { AlertService } from 'src/app/Shared/alert/alert.service';
 import { BehaviorSubject, map, of, switchMap } from 'rxjs';
 import { MOIprisoner } from 'src/app/Models/prisenorDetails';
-import { jails_wards, jailsDetails } from 'src/app/Models/Jails';
+import { general_wardsList, jails_wards, jailsDetails } from 'src/app/Models/Jails';
 
 @Injectable({
   providedIn: 'root'
@@ -23,101 +23,215 @@ export class JailService {
   public groupedData: any[] = [];
   constructor(private middleWareService: MiddlewareService, private alertService: AlertService) { }
 
+  //================================================================================================
+  //================================================================================================
+  //================dinil update call from the cashe==============================
+  getJailData() {
+    console.log("getJailData")
+    let body = {
+      "cacheKey": environment.jailListBody
+    }
+    return this.middleWareService
+      .callPostJailMiddleware(`${environment.getSectionList}`, body)
+      .pipe(switchMap((result: any) => {
+        if (result && result.status == "Success") {
+          let res = result.firstApiResponse
+          if (res?.OutputParameters?.ReturnCode == 1) {
+            return of(res?.Array)
+          }
+          else {
+            this.alertService.error("حدث خطأ")
+            return of(null)
+          }
+        }
+        else {
+          // this.alertService.error("حدث خطأ")
+          // return null
+          let body = {};
+          return this.middleWareService
+            .callMiddleware(`${environment.jailIdrl}`, body).pipe(switchMap((jail_res: any) => {
+              if (jail_res && jail_res?.OutputParameters?.ReturnCode == "1") {
+                return of(jail_res?.Array?.row)
+              }
+              else {
+                this.alertService.error(jail_res.OutputParameters?.Message)
+                return of(null)
+              }
+            }))
+
+        }
+      }))
+
+  }
+
+  getJailDetails(jailId: number) {
+    let body = {
+      "sectionNumber": jailId,
+      "cacheKey": environment.jailKey
+    }
+    return this.middleWareService
+      .callPostJailMiddleware(`${environment.getJailDetails}`, body)
+      .pipe(switchMap((result: any) => {
+        if (result && result?.status == "Success") {
+          let res = result.cachedResponse
+          console.log("res", res.ExportReturnMessage?.Code)
+          if (res?.OutputParameters?.ReturnCode == 1) {
+            return of(res.Array);
+          }
+
+          else {
+            this.alertService.error(res.ExportReturnMessage?.MessageEn)
+            return of(null)
+          }
+        }
+        else {
+          // this.alertService.error("حدث خطأ")
+          // return null
+          let body = {
+            ImportJailSections: {
+              SectionNumber: jailId
+            },
+            ImportPublicOrganisation: {
+              Number: "",
+            },
+          };
+
+          return this.middleWareService
+            .callMiddleware(`${environment.prisonerData}`, body)
+            .pipe(switchMap((res: any) => {
+              if (res) {
+                if (res.OutputParameters?.ReturnCode == 1) {
+                  return of(res.Array.row);
+                }
+                else {
+                  this.alertService.error(res.OutputParameters?.Message)
+                  return null
+                }
+              }
+              else {
+                this.alertService.error("حدث خطأ")
+                return null
+              }
+            }));
+        }
+      }));
+  }
+
+  //================================================================================================
+  //================================================================================================
+
   getCustodyDetails() {
     let body = {
-      command: "GET"
+      "cacheKey": environment.custodyListBody
     }
-
     return this.middleWareService
-      .callMiddleware(`${environment.custodyStatsInPrison}`, body)
-      .pipe(map((res: any) => {
-        if (res) {
+      .callPostJailMiddleware(`${environment.getSectionList}`, body)
+      .pipe(switchMap((result: any) => {
+        if (result && result?.status == "Success") {
+          let res = result.firstApiResponse
           if (res.ExportReturnMessage?.Code == 1) {
-            let custodyList = res.ExportGroupStats?.row.map(jail => {
+            let custodyList = res.ExportGroupStats?.map(jail => {
               let x: any = {}
               x.jailNumber = jail.ExportGrpJailSections?.SectionNumber
               x.CustodyCount = jail.ExportGrpCountIefSupplied?.Count
               return x
 
             })
-            return custodyList;
+            return of(custodyList);
           }
           else {
             this.alertService.error(res.ExportReturnMessage?.MessageEn)
-            return null
+            return of(null)
           }
         }
         else {
-          this.alertService.error("حدث خطأ")
-          return null
+          // this.alertService.error("حدث خطأ")
+          // return null
+          let body = {
+            command: "GET"
+          }
+
+          return this.middleWareService
+            .callMiddleware(`${environment.custodyStatsInPrison}`, body)
+            .pipe(switchMap((res: any) => {
+              if (res) {
+                if (res.ExportReturnMessage?.Code == 1) {
+                  let custodyList = res.ExportGroupStats?.row.map(jail => {
+                    let x: any = {}
+                    x.jailNumber = jail.ExportGrpJailSections?.SectionNumber
+                    x.CustodyCount = jail.ExportGrpCountIefSupplied?.Count
+                    return x
+
+                  })
+                  return of(custodyList);
+                }
+                else {
+                  this.alertService.error(res.ExportReturnMessage?.MessageEn)
+                  return of(null)
+                }
+              }
+              else {
+                this.alertService.error("حدث خطأ")
+                return of(null)
+              }
+            }));
         }
       }));
   }
+
 
   getCustodyListDetails(jailId: number) {
     let body = {
-      ImportJailSections: {
-        SectionNumber: jailId
-      }
-    };
-
+      "sectionNumber": jailId,
+      "cacheKey": environment.custodyKey
+    }
     return this.middleWareService
-      .callMiddleware(`${environment.custodyListInPrison}`, body)
-      .pipe(map((res: any) => {
-        if (res) {
-          if (res.ExportReturnMessage?.Code == 1) {
-            return res.ExportGroup.row;
+      .callPostJailMiddleware(`${environment.getJailDetails}`, body)
+      .pipe(switchMap((result: any) => {
+        if (result && result?.status == "Success") {
+          let res = result.cachedResponse
+          console.log("res", res.ExportReturnMessage?.Code)
+          if (res?.ExportReturnMessage?.Code == 1) {
+            return of(res.ExportGroup);
           }
+
           else {
             this.alertService.error(res.ExportReturnMessage?.MessageEn)
-            return null
+            return of(null)
           }
         }
         else {
-          this.alertService.error("حدث خطأ")
-          return null
+          let body = {
+            ImportJailSections: {
+              SectionNumber: jailId
+            }
+          };
+
+          return this.middleWareService
+            .callMiddleware(`${environment.custodyListInPrison}`, body)
+            .pipe(switchMap((res: any) => {
+              if (res) {
+                if (res.ExportReturnMessage?.Code == 1) {
+                  return of(res.ExportGroup.row);
+                }
+                else {
+                  this.alertService.error(res.ExportReturnMessage?.MessageEn)
+                  return of(null)
+                }
+              }
+              else {
+                this.alertService.error("حدث خطأ")
+                return of(null)
+              }
+            }));
+          // this.alertService.error("حدث خطأ")
+          // return null
         }
       }));
   }
-  //======================================================================================================================================================
+  //=======================================================================================
 
-  getJailData() {
-    let body = {};
-    return this.middleWareService
-      .callMiddleware(`${environment.jailIdrl}`, body).pipe()
-
-  }
-
-
-  getJailDetails(jailId: number) {
-    let body = {
-      ImportJailSections: {
-        SectionNumber: jailId
-      },
-      ImportPublicOrganisation: {
-        Number: "",
-      },
-    };
-
-    return this.middleWareService
-      .callMiddleware(`${environment.prisonerData}`, body)
-      .pipe(map((res: any) => {
-        if (res) {
-          if (res.OutputParameters?.ReturnCode == 1) {
-            return res.Array.row;
-          }
-          else {
-            this.alertService.error(res.OutputParameters?.Message)
-            return null
-          }
-        }
-        else {
-          this.alertService.error("حدث خطأ")
-          return null
-        }
-      }));
-  }
-
+  //==================================================================================================================
   groupData(data: any) {
     const groupedSection = data.reduce((acc, current) => {
       const sectionNumber = current.RowsJailSentence.SectionNumber;
@@ -198,7 +312,7 @@ export class JailService {
       if (new Date() > new Date(formattedDate))
         expiredList.push(x)
     })
-    console.log(jailID, expiredList)
+    //console.log(jailID, expiredList)
   }
   //================================================================
   getPersonJailInfo(personType, CivilIdNumber) {
@@ -299,7 +413,7 @@ export class JailService {
     p_details.caseTypeDescription = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCaseType?.Description
 
     p_details.jailCode = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.SectionNumber
-    console.log(p_details.jailCode)
+    // console.log(p_details.jailCode)
     p_details.jailName = jailsDetails.get(result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.SectionNumber?.toString())?.j_name
     p_details.wardNumber = result?.ExportGroupCustody?.row[row_length]?.ExportGrpCustody?.WardSectionNumber
 
@@ -341,7 +455,7 @@ export class JailService {
     p_details.jailCode = result?.RowsJailSentence?.SectionNumber
     p_details.jailName = jailsDetails.get(result?.RowsJailSentence?.SectionNumber?.toString())?.j_name
     p_details.wardNumber = result?.RowsJailSentence?.WardSectionNumber
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", result?.RowsJailSentence?.SectionNumber)
+    //console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", result?.RowsJailSentence?.SectionNumber)
 
     p_details.wardName = this.getWardName(p_details.jailCode, p_details.wardNumber)
 
@@ -361,7 +475,6 @@ export class JailService {
 
 
   setPrisonerData_from_JP004(result) {
-    console.log("setPrisonerData_from_JP004", result)
     let p_details = new MOIprisoner()
     p_details.Name = result?.ExportGrpPrisonWorkArea?.NameAr
     p_details.personType = result?.ExportGrpPrisonWorkArea?.PersonType
@@ -401,11 +514,89 @@ export class JailService {
   getWardName(j_code, w_code) {
     let wardsList: Array<any> = jails_wards.get(j_code.toString())
     if (wardsList) {
+
       let w = wardsList.find((obj: any) => { return obj.ward_code == w_code })
-      return w ? w.ward_name : "البيانات غير متوفرة"
+      console.log("ww", w)
+      console.log("ss", general_wardsList.get(w_code.toString()))
+      if (w && w.ward_name) {
+
+        return w.ward_name
+      }
+      else if (general_wardsList.get(w_code.toString())) {
+        console.log("v", general_wardsList.get(w_code.toString()))
+
+        return general_wardsList.get(w_code.toString())
+      }
+      else
+        return "البيانات غير متوفرة"
     }
     else
       return "البيانات غير متوفرة"
   }
 
+  getPrograssbarStyle(value, totalValue) {
+    let percentage = this.getPercentage(value, totalValue)
+
+    return '--falcon-progressbar-width:' + percentage
+  }
+  getPrograssClass(value, totalValue) {
+    let percentage = totalValue != 0 ? ((value / totalValue) * 100).toFixed(2) : 0
+    let percentage_class = ""
+    if (totalValue == 0) {
+      percentage_class = "bg-secondary"
+    }
+    else if (Number(percentage) <= 25) {
+      percentage_class = "bg-defult"
+    }
+    else if (Number(percentage) > 25 && Number(percentage) <= 50) {
+      percentage_class = "bg-success"
+    }
+    else if (Number(percentage) > 50 && Number(percentage) <= 75) {
+      percentage_class = "bg-warning"
+    }
+    else if (Number(percentage) > 75) {
+      percentage_class = "bg-danger"
+    }
+
+    return percentage_class
+  }
+
+  getPrograssColor(value, totalValue) {
+
+    let percentage = totalValue != 0 ? ((value / totalValue) * 100).toFixed(2) : 0
+    let percentage_class = ""
+    if (totalValue == 0) {
+      percentage_class = ""
+    }
+    else if (Number(percentage) <= 25) {
+      percentage_class = "bg-defult"
+    }
+    else if (Number(percentage) > 25 && Number(percentage) <= 50) {
+      percentage_class = "#25B003"
+    }
+    else if (Number(percentage) > 50 && Number(percentage) <= 75) {
+      percentage_class = "#f5803e"
+    }
+    else if (Number(percentage) > 75) {
+      percentage_class = "#EC1F00"
+    }
+    return percentage_class
+  }
+  getPercentage(value, totalValue) {
+
+    return totalValue != 0 ? ((value / totalValue) * 100).toFixed(2) + '%' : ""
+
+  }
+  formatMOIDate(date: string) {
+    if (date != null && date != '') {
+      if (typeof date === 'string') {
+        var parsedDate = new Date(parseInt(date.substr(0, 4)),
+          parseInt(date.substr(4, 2)) - 1,
+          parseInt(date.substr(6, 2)));
+        return new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0]
+      } else {
+        return ''
+      }
+    }
+  }
 }

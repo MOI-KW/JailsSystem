@@ -35,6 +35,10 @@ export const jailsDetails = new Map<string, any>([['3278', {
     seqNo: 9,
     j_name: "سجن النساء",
     capacity: 250
+}], ['0', {
+    seqNo: 10,
+    j_name: "بيانات غير متوفرة",
+    capacity: 0
 }]])
 
 
@@ -129,8 +133,8 @@ export const jails_wards = new Map<string, any>([
         capacity: 32
     },
     {
-        ward_name: "2 جناح الابعاد",
-        ward_name_DB: "2 جناح الابعاد",
+        ward_name: "جناح الإبعاد 2",
+        ward_name_DB: "جناح الإبعاد 2",
         ward_code: "117",
         desc: "",
         capacity: 0
@@ -170,8 +174,8 @@ export const jails_wards = new Map<string, any>([
         desc: " طب نفسي وتحفظات أمنية",
         capacity: 56
     }, {
-        ward_name: "2 جناح الابعاد",
-        ward_name_DB: "2 جناح الابعاد",
+        ward_name: "جناح الإبعاد 2",
+        ward_name_DB: "جناح الإبعاد 2",
         ward_code: "117",
         desc: "",
         capacity: 0
@@ -203,8 +207,8 @@ export const jails_wards = new Map<string, any>([
         desc: "أسود الجزيرة والدواعش",
         capacity: 56
     }, {
-        ward_name: "2 جناح الابعاد",
-        ward_name_DB: "2 جناح الابعاد",
+        ward_name: "جناح الإبعاد 2",
+        ward_name_DB: "جناح الإبعاد 2",
         ward_code: "117",
         desc: "",
         capacity: 0
@@ -330,8 +334,8 @@ export const jails_wards = new Map<string, any>([
         ward_name_DB: "داخلي",
         ward_code: "118"
     }, {
-        ward_name: "2 جناح الابعاد",
-        ward_name_DB: "2 جناح الابعاد",
+        ward_name: "جناح الإبعاد 2",
+        ward_name_DB: "جناح الإبعاد 2",
         ward_code: "117",
         desc: "",
         capacity: 0
@@ -496,3 +500,32 @@ export const jails_wards = new Map<string, any>([
         capacity: 39
     }]]
 ])
+
+
+
+
+export const general_wardsList = new Map<string, string>([
+    ["101", "الإيراد"],
+    ["102", "الأمن"],
+    ["103", "عزل جناح 1"],
+    ["104", "عزل جناح 2"],
+    ["105", "عزل جناح 3"],
+    ["106", "عزل جناح 4"],
+    ["107", "عزل جناح 5"],
+    ["108", "عزل جناح 6"],
+    ["109", "عزل جناح 7"],
+    ["110", "عزل جناح 8"],
+    ["113", "جناح 1"],
+    ["114", "جناح 2"],
+    ["115", "جناح 3"],
+    ["117", "جناح الإبعاد 2"],
+    ["118", "مستشفى داخلي"],
+    ["119", "مستشفى خارجي"],
+    ["120", "جناح 4"],
+    ["121", "جناح 5"],
+    ["122", "جناح 6"],
+    ["123", "جناح 7"],
+    ["124", "جناح 8"],
+    ["125", "جناح 9"],
+    ["126", "جناح 10"],
+    ["127", "جناح 11"]]) 

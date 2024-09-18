@@ -38,7 +38,10 @@
                                         </button> -->
                                     </div>
                                     <ng-container *ngIf="column != 'Action'" class="m-auto">
-                                        {{ element[column] }}
+                                        <div class="m-0 p-0" (click)="onView(element)">
+                                            {{ element[column] }}
+                                        </div>
+
                                     </ng-container>
                                 </ng-container>
                             </td>

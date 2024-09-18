@@ -7,8 +7,8 @@ import { DataTableConstants } from 'src/app/Globals/datatable';
 import { jailsDetails } from 'src/app/Models/Jails';
 import { JailService } from 'src/app/Services/JailData/jail.service';
 import { MiddlewareService } from 'src/app/Services/middleware.service';
-
-
+import { AlertService } from 'src/app/Shared/alert/alert.service';
+import * as XLSX from 'xlsx';
 
 declare const utils: any;
 @Component({
@@ -19,7 +19,7 @@ declare const utils: any;
 
 export class ChartDashboardComponent implements OnInit {
 
-  constructor(private middleWareService: MiddlewareService, private changeDetector: ChangeDetectorRef, private jailService: JailService) { }
+  constructor(private alertService: AlertService, private changeDetector: ChangeDetectorRef, public jailService: JailService) { }
   tblHeadArr: any[string] = [
     'sNo',
     'jailName',
@@ -100,15 +100,21 @@ export class ChartDashboardComponent implements OnInit {
   }
 
   showtable() {
+    this.isLoading = true
     let custodyList = []
-    this.jailService.getJailData().subscribe(res => {
-      this.jailService.getCustodyDetails().subscribe(custodyResult => {
-        custodyList = custodyResult
-      }, () => { }, () => {
-        this.settable(res.Array.row, custodyList)
+    this.jailService.getJailData().subscribe((res: any) => {
+      if (res != null) {
 
-      })
+        console.log(res);
 
+        this.jailService.getCustodyDetails().subscribe(custodyResult => {
+          custodyList = custodyResult
+        }, () => { }, () => {
+          this.settable(res, custodyList)
+
+        })
+      }
+      this.isLoading = false
 
     }, (err) => { console.log('err', err) }, () => { this.isLoading = false });
   }
@@ -123,6 +129,8 @@ export class ChartDashboardComponent implements OnInit {
 
   }
   resJailData = []
+
+
 
 
   setPieChartOptions(data: any = []) {
@@ -205,17 +213,89 @@ export class ChartDashboardComponent implements OnInit {
     this.getJailDetails(e.data.id, e.data.name)
   }
 
+  printCol = [
+    "slNo",
+    'civilID',
+    'nationalNumber',
+    'personType',
+    'Name',
+    'crimeDesciption',
+    'caseNumber',
+    'caseYearIdent',
+    'caseTypeDescription',
+    'jailCode',
+    'jailName',
+    'wardName',
+    'wardNumber',
+    'nationality',
+    'startDate',
+    'expectedEndDate',
+    'DurationYears',
+    'DurationMonths',
+    'DurationDays',
+    'SuspensionYears',
+    'SuspensionMonths',
+    'SuspensionDays',
+    'Period', 'ReasonHeld', 'ReasonReleased']
   getJailDetails(j_id, j_name) {
-    this.showDetails = false
-    this.selectedjailID = ''
-    this.selectedjailName = ""
+    if (j_id != 0) {
+      this.showDetails = false
+      this.selectedjailID = ''
+      this.selectedjailName = ""
 
-    setTimeout(() => {
-      this.selectedjailID = j_id
-      this.selectedjailName = j_name
-      this.showDetails = true
-    }, 500)
-    this.changeDetector.detectChanges()
+      setTimeout(() => {
+        this.selectedjailID = j_id
+        this.selectedjailName = j_name
+        this.showDetails = true
+      }, 500)
+      this.changeDetector.detectChanges()
+    }
+
+    else {
+      this.alertService.error("حدث خطأ في عرض بيانات السجن")
+    }
+
+
+    //if the jail code is zero 
+    // else {
+    //   let arr: any[][] = [];
+    //   arr.push(this.printCol);
+    //   this.jailService.getCustodyListDetails(999999999).subscribe(res => {
+    //     if (res) {
+    //       res.forEach((l: any, index: number) => {
+
+    //         let valArr: any = [];
+    //         let MOIprisonerData = this.jailService.setPrisonerData_from_JP004(l)
+    //         this.printCol.forEach((e: any) => {
+    //           if (e == 'slNo') {
+    //             valArr.push(index)
+    //           }
+    //           else {
+    //             valArr.push(MOIprisonerData?.[e]);
+    //           }
+    //         });
+    //         arr.push(valArr);
+    //       });
+    //     }
+    //   }, () => { }, () => {
+    //     this.export(arr)
+    //   })
+    //   //  
+    // }
+  }
+
+  export(excelData): void {
+
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(excelData);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    let fileName = 'custody_NoSectionNumber.xlsx';
+    XLSX.writeFile(wb, fileName);
   }
 
   getJailCapacity(jail_code) {
@@ -225,52 +305,44 @@ export class ChartDashboardComponent implements OnInit {
 
   }
 
-  getPrograssbarStyle(value, totalValue) {
-    let percentage = this.getPercentage(value, totalValue)
-
-    return '--falcon-progressbar-width:' + percentage + "%"
-  }
-  getPrograssClass(value, totalValue) {
-    let percentage = this.getPercentage(value, totalValue)
-    let percentage_class = ""
-    if (Number(percentage) <= 25) {
-      percentage_class = "bg-defult"
-    }
-    else if (Number(percentage) > 25 && Number(percentage) <= 50) {
-      percentage_class = "bg-success"
-    }
-    else if (Number(percentage) > 50 && Number(percentage) <= 75) {
-      percentage_class = "bg-warning"
-    }
-    else if (Number(percentage) > 75) {
-      percentage_class = "bg-danger"
-    }
-    return percentage_class
-  }
-  getPercentage(value, totalValue) {
-    totalValue = totalValue != 0 ? totalValue : 1
-    return ((value / totalValue) * 100).toFixed(2)
-
-  }
-
   total_prisonersCount = 0
   total_custodyCount = 0
   total_total_count = 0
 
   settable(jailData, custodyData) {
-    this.JaildisplayList = jailData.map((details: any, i) => {
+    console.log("jailData", jailData, "custodyData", custodyData)
+
+    this.JaildisplayList = jailData?.map((details: any, i) => {
 
       let displayData: any = {}
       displayData.sNo = jailsDetails.get(details?.RowsJailSections?.SectionNumber.toString())?.seqNo
       displayData.jailNumber = details?.RowsJailSections?.SectionNumber
       displayData.jailName = jailsDetails.get(details?.RowsJailSections?.SectionNumber.toString())?.j_name
       displayData.prisonersCount = details?.RowsIefSupplied?.Count
-      let custodyD = custodyData?.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
-      displayData.custodyCount = custodyD ? custodyD.CustodyCount : 0
-      displayData.total_count = displayData.prisonersCount + displayData.custodyCount
+      if (custodyData) {
+        let custodyD = custodyData?.find(cu => { if (cu.jailNumber?.toString() === details?.RowsJailSections?.SectionNumber?.toString()) return cu })
+        displayData.custodyCount = custodyD ? custodyD.CustodyCount : 0
+        displayData.total_count = displayData.prisonersCount + displayData.custodyCount
+      }
+
 
       return displayData
     })
+    //if want to show all the jails and the section 0 
+    // this.JaildisplayList = custodyData.map((details: any, i) => {
+
+    //   let displayData: any = {}
+    //   displayData.sNo = jailsDetails.get(details?.jailNumber.toString())?.seqNo
+    //   displayData.jailNumber = details?.jailNumber
+    //   displayData.jailName = jailsDetails.get(details?.jailNumber.toString())?.j_name
+
+    //   displayData.custodyCount = details.CustodyCount
+    //   let custodyD = jailData?.find(cu => { if (details?.jailNumber?.toString() === cu?.RowsJailSections?.SectionNumber?.toString()) return cu })
+    //   displayData.prisonersCount = custodyD ? custodyD?.RowsIefSupplied?.Count : 0
+    //   displayData.total_count = displayData.prisonersCount + displayData.custodyCount
+
+    //   return displayData
+    // })
     let data = this.JaildisplayList?.sort((a, b) => {
       return compare(a.sNo, b.sNo, true);
     });

@@ -56,21 +56,36 @@ export class MiddlewareService {
       )
     );
   }
-  callPostMiddleware(url: string, form: any) {
 
-    let path = `${environment.baseURL}` + url;
-    return this.http.post(path, form).pipe(
-      map(
-        (response: any) => {
-          return response;
+
+  callPostJailMiddleware(url: string, form: any) {
+    let path = `${environment.baseURL}` + url
+    let bearerAuth = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaSIsInBhc3N3b3JkIjoibW9pMzIxIiwiaWF0IjoxNzI2MTQxMDgxfQ.HXHpJIIuFbnFSrQkcGAb-2cUOoeQzZwju6vvkxxB6Zg'
+    return this.http
+      .post<any>(path, form, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${bearerAuth}`,
         },
-        catchError((err, caught) => {
-          this.alertService.error('حدث خطأ');
-          console.log(err);
-          return '';
-        })
-      )
-    );
+        withCredentials: true,
+      }).pipe(
+        map(
+          (response: any) => {
+            if (response?.statusCode != 500) {
+              return response;
+            }
+            else {
+              this.alertService.error('حدث خطأ');
+              return null
+            }
+          },
+          catchError((err, caught) => {
+            this.alertService.error('حدث خطأ');
+            console.log(err);
+            return '';
+          })
+        )
+      );
   }
 
   callMiddleware(url: string, form: any) {
